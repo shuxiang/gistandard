@@ -56,8 +56,8 @@ class LoginView(View):
 
     def get(self, request):
         if not request.user.is_authenticated():
-            # ret = (SystemSetup.getSystemSetupLastData())
-            return render(request, 'system/users/login.html')
+            ret = (SystemSetup.getSystemSetupLastData())
+            return render(request, 'system/users/login.html', ret)
         else:
             return HttpResponseRedirect(reverse('/'))
 
