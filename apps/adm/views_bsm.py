@@ -12,6 +12,7 @@ from system.models import SystemSetup
 from .models import Supplier, AssetType
 from .forms import SupplierForm, AssetTypeForm
 
+
 class SupplierView(LoginRequiredMixin, View):
     """
     供应商管理

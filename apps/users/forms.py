@@ -33,7 +33,8 @@ class UserCreateForm(forms.ModelForm):
         min_length=6,
         max_length=20,
         error_messages={
-            "required": u"密码不能为空"
+            "required": u"密码不能为空",
+            "min_length": "密码长度最少6位数",
         })
 
     confirm_password = forms.CharField(
@@ -41,7 +42,8 @@ class UserCreateForm(forms.ModelForm):
         min_length=6,
         max_length=20,
         error_messages={
-            "required": u"确认密码不能为空"
+            "required": u"确认密码不能为空",
+            "min_length": "密码长度最少6位数",
         })
 
     class Meta:
@@ -53,6 +55,7 @@ class UserCreateForm(forms.ModelForm):
         error_messages = {
             "name": {"required": "姓名不能为空"},
             "username": {"required": "用户名不能为空"},
+            "email": {"required": "邮箱不能为空"},
             "mobile": {
                     "required": "手机号码不能为空",
                     "max_length": "输入有效的手机号码",

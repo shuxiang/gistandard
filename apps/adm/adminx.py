@@ -5,7 +5,7 @@
 import xadmin
 from xadmin import views
 
-from .models import Supplier, AssetType
+from .models import Supplier, AssetType, Customer
 
 
 
@@ -21,5 +21,12 @@ class AssetTypeAdmin(object):
     list_filter = ['id', 'name', 'parent', 'level', 'status', 'desc']
     list_editable = ['status']
 
+
+class CustomerAdmin(object):
+    list_display = ['id', 'unit', 'address', 'name', 'phone', 'belongs_to', 'status', 'add_time']
+    list_filter = ['id', 'unit', 'address', 'name', 'phone', 'belongs_to', 'status']
+
+
 xadmin.site.register(Supplier, SupplierAdmin)
 xadmin.site.register(AssetType, AssetTypeAdmin)
+xadmin.site.register(Customer, CustomerAdmin)

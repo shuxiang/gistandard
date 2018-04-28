@@ -1,5 +1,8 @@
 
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User= get_user_model()
 
 
 class Supplier(models.Model):
@@ -20,6 +23,27 @@ class Supplier(models.Model):
 
     def __str__(self):
         return self.company
+
+
+class Customer(models.Model):
+    """
+    供应商管理
+    """
+    unit = models.CharField(max_length=30, verbose_name="客户单位")
+    address = models.CharField(max_length=100, verbose_name="地址")
+    name = models.CharField(max_length=20, verbose_name="联系人")
+    phone = models.CharField(max_length=20, verbose_name="联系电话")
+    belongs_to = models.ForeignKey(User, verbose_name="责任人")
+    status = models.BooleanField(default=True, verbose_name="状态")
+    desc = models.TextField(blank=True, null=True, verbose_name="备注")
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
+
+    class Meta:
+        verbose_name = "客户管理"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.unit
 
 
 class AssetType(models.Model):

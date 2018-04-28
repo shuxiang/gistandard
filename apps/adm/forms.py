@@ -3,7 +3,7 @@
 # __data__  : 2017/12/20
 
 from django import forms
-from .models import Supplier, AssetType
+from .models import Supplier, AssetType, Customer
 
 
 class SupplierForm(forms.ModelForm):
@@ -17,3 +17,8 @@ class AssetTypeForm(forms.ModelForm):
         model = AssetType
         fields = '__all__'
 
+
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['unit', 'address', 'name', 'phone', 'belongs_to']
