@@ -47,11 +47,12 @@
                     <tr valign="middle">
                         <th><input type="checkbox" id="checkAll"></th>
                         <th>ID</th>
-                        <th>公司名称</th>
-                        <th>地址</th>
+                        <th>客户单位</th>
+                        <th>通信地址</th>
                         <th>联系人</th>
                         <th>联系电话</th>
                         <th>状态</th>
+                        <th>负责人</th>
                         <th>添加时间</th>
                         <th>操作</th>
                     </tr>
@@ -78,7 +79,7 @@
   <script type="text/javascript">
 	$(function() {
 	    $('#ADM-BSM').addClass('active');
-		$('#ADM-BSM-SUPPLIER').addClass('active');
+		$('#ADM-BSM-CUSTOMER').addClass('active');
 
 	});
   </script>
@@ -92,7 +93,7 @@ $(function() {
 						DATATABLES_CONSTANT.DATA_TABLES.DEFAULT_OPTION,
 						{
 							ajax : {
-								"url":"{% url 'adm-bsm:supplier-list' %}",
+								"url":"{% url 'adm-bsm:customer-list' %}",
 								"data":function ( d ) {
 									d.select=$("#select").val();
 								}
@@ -104,7 +105,7 @@ $(function() {
 									width : "5%",
 								},
 								{
-									data : "company",//parent
+									data : "unit",//parent
 									width : "20%",
 								},
 								{
@@ -112,8 +113,8 @@ $(function() {
 									width : "20%",
 								},
 								{
-									data : "linkname",//parent
-									width : "8%",
+									data : "name",//parent
+									width : "10%",
 								},
 								{
 									data : "phone",//parent
@@ -131,10 +132,14 @@ $(function() {
 									}
 								},
                                 {
+									data : "belongs_to__name",
+								},
+                                {
 									data : "add_time",
                                     render : function(data, type, full, meta) {
                                          return  moment(data).format("YYYY-MM-DD");}
 								},
+
 
 								{
 									data : "id",
@@ -172,7 +177,7 @@ $(function() {
 			shadeClose : false,
 			maxmin : true,
 			area : [ '800px', '500px' ],
-			content : "{% url 'adm-bsm:supplier-detail' %}",
+			content : "{% url 'adm-bsm:customer-detail' %}",
 			end : function() {
 				//关闭时做的事情
 				oDataTable.ajax.reload();
@@ -208,7 +213,7 @@ $(function() {
 			 	layer.close(index);
 			 	$.ajax({
 					type: "POST",
-					url : "{% url 'adm-bsm:supplier-delete' %}",
+					url : "{% url 'adm-bsm:customer-delete' %}",
 					data : {"id":sId, csrfmiddlewaretoken: '{{ csrf_token }}'},
 					cache: false,
 					success : function(msg) {
@@ -236,7 +241,7 @@ function doUpdate(id){
 		shadeClose : false,
     	maxmin : true,
 		area : [ '800px', '500px' ],
-		content : [ "{% url 'adm-bsm:supplier-detail' %}"+'?id='+id, 'no' ],
+		content : [ "{% url 'adm-bsm:customer-detail' %}"+'?id='+id, 'no' ],
 		end : function() {
 			oDataTable.ajax.reload();
 		}
@@ -246,7 +251,7 @@ function doUpdate(id){
 
 //删除单个数据
 function doDelete(id){
-    layer.alert('当前组内用户也会被删除，确定删除吗？', {
+    layer.alert('确定删除吗？', {
         title:'提示'
         ,icon: 3 //0:感叹号 1：对号 2：差号 3：问号 4：小锁 5：哭脸 6：笑脸
         ,time: 0 //不自动关闭
@@ -255,7 +260,7 @@ function doDelete(id){
             layer.close(index);
             $.ajax({
                 type: "POST",
-                url : "{% url 'adm-bsm:supplier-delete' %}",
+                url : "{% url 'adm-bsm:customer-delete' %}",
                 data : {"id":id, csrfmiddlewaretoken: '{{ csrf_token }}'},  //防止post数据时报 csrf_token 403
                 cache: false,
                 success : function(msg) {

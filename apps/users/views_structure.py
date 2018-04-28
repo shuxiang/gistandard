@@ -110,3 +110,4 @@ class Structure2UserView(LoginRequiredMixin, View):
                 structure.userprofile_set.add(user)
         res['result'] = True
         return HttpResponse(json.dumps(res), content_type='application/json')
+

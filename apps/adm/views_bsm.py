@@ -5,13 +5,15 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.base import View
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
+from django.contrib.auth import get_user_model
 
 from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
 from system.models import SystemSetup
-from .models import Supplier, AssetType
-from .forms import SupplierForm, AssetTypeForm
+from .models import Supplier, AssetType, Customer
+from .forms import SupplierForm, AssetTypeForm, CustomerForm
 
+User = get_user_model()
 
 class SupplierView(LoginRequiredMixin, View):
     """
@@ -118,5 +120,65 @@ class AssetTypeDeleteView(LoginRequiredMixin, View):
         if 'id' in request.POST and request.POST['id']:
             id_list = map(int, request.POST.get('id').split(','))
             AssetType.objects.filter(id__in=id_list).delete()
+            ret['result'] = True
+        return HttpResponse(json.dumps(ret), content_type='application/json')
+
+
+class CustomerView(LoginRequiredMixin, View):
+    """
+    客户信息
+    """
+    def get(self, request):
+        ret = Menu.getMenuByRequestUrl(url=request.path_info)
+        ret.update(SystemSetup.getSystemSetupLastData())
+        return render(request, 'adm/bsm/customer.html', ret)
+
+
+class CustomerListView(LoginRequiredMixin, View):
+    """
+    获取客户信息列表
+    """
+    def get(self, request):
+        fields = ['id', 'unit', 'address', 'name', 'phone', 'status', 'belongs_to__name', 'add_time', 'desc']
+        filters = dict()
+        ret = dict(data=list(Customer.objects.values(*fields)))
+        return HttpResponse(json.dumps(ret, cls=DjangoJSONEncoder), content_type='application/json')
+
+
+class CustomerDetailView(LoginRequiredMixin, View):
+    """
+    客户详情页：查看、修改、新建数据
+    """
+    def get(self, request):
+        ret = dict()
+        if 'id' in request.GET and request.GET['id']:
+            customer = get_object_or_404(Customer, pk=request.GET.get('id'))
+            users = User.objects.exclude(id=customer.belongs_to.id)
+            ret['customer'] = customer
+        else:
+            users = User.objects.exclude(id=request.user.id)
+        ret['users'] = users
+        return render(request, 'adm/bsm/customer_detail.html', ret)
+
+    def post(self, request):
+        res = dict(result=False)
+        if 'id' in request.POST and request.POST['id']:
+            customer = get_object_or_404(Customer, pk=request.POST.get('id'))
+        else:
+            customer = Customer()
+        customer_form = CustomerForm(request.POST, instance=customer)
+        if customer_form.is_valid():
+            customer_form.save()
+            res['result'] = True
+        return HttpResponse(json.dumps(res), content_type='application/json')
+
+
+class CustomerDeleteView(LoginRequiredMixin, View):
+
+    def post(self, request):
+        ret = dict(result=False)
+        if 'id' in request.POST and request.POST['id']:
+            id_list = map(int, request.POST.get('id').split(','))
+            Customer.objects.filter(id__in=id_list).delete()
             ret['result'] = True
         return HttpResponse(json.dumps(ret), content_type='application/json')

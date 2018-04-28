@@ -11,6 +11,7 @@ User = get_user_model()
 
 from apps.users.models import Structure
 
+
 class LoginForm(forms.Form):
     username = forms.CharField(required=True, error_messages={"required": "请填写用户名"})
     password = forms.CharField(required=True, error_messages={"required": u"请填写密码"})
@@ -92,7 +93,7 @@ class UserCreateForm(forms.ModelForm):
 
 class AdminPasswdChangeForm(forms.Form):
     """
-    管理员用户修改用户列表中的普通用户密码
+    管理员用户修改用户列表中的用户密码
     """
     # def __init__(self, *args, **kwargs):
     #     super(AdminPasswdChangeForm, self).__init__(*args, **kwargs)

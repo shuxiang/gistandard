@@ -19,4 +19,9 @@ urlpatterns = [
     url(r'^assettype/detail', views_bsm.AssetTypeDetailView.as_view(), name="assettype-detail"),
     url(r'^assettype/delete', views_bsm.AssetTypeDeleteView.as_view(), name='assettype-delete'),
 
+    url(r'^customer/$', views_bsm.CustomerView.as_view(), name='customer'),
+    url(r'^customer/list', views_bsm.CustomerListView.as_view(), name="customer-list"),
+    url(r'^customer/detail', views_bsm.CustomerDetailView.as_view(), name="customer-detail"),
+    url(r'^customer/delete', views_bsm.CustomerDeleteView.as_view(), name='customer-delete'),
+
 ]

@@ -75,7 +75,7 @@
 
                                 <p>
                                     <!--gender字段定义的choices类型，想要获取字段的value,使用get_gender_display-->
-                                    {{ request.user.name }} - {{ request.user.get_gender_display }}
+                                    {{ request.user.name }} - {{ request.user.department.title }}
                                     <small>{{ request.user.email }}</small>
                                 </p>
                             </li>

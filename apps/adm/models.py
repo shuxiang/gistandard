@@ -27,7 +27,7 @@ class Supplier(models.Model):
 
 class Customer(models.Model):
     """
-    供应商管理
+    客户信息
     """
     unit = models.CharField(max_length=30, verbose_name="客户单位")
     address = models.CharField(max_length=100, verbose_name="地址")
