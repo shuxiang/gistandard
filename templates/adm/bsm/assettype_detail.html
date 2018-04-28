@@ -1,0 +1,111 @@
+{% extends 'base-layer.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'js/plugins/layer/skin/layer.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="box box-danger">
+	<form class="form-horizontal" id="addForm" method="post">
+		{% csrf_token %}
+		<input type="hidden" name='id' value="{{ assettype.id }}" />
+		<div class="box-body">
+          <fieldset>
+            <legend>
+              <h4>供应商管理</h4>
+            </legend>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">类型名称</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="name" type="text" value="{{ assettype.name }}"/>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">所属</label>
+                <div class="col-sm-8">
+                  <select class="form-control" name="parent">
+                  <option value="{{ assettype.parent.id }}">{{ assettype.parent.name|default:"--所属--"}}</option>
+                  {% for type in assettypes %}
+                  <option value="{{ type.id }}">{{ type.name }}</option>
+                  {% endfor %}
+                 </select>
+                 </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">级别</label>
+                <div class="col-sm-8">
+                  <select class="form-control" name="level">
+                  <option value="{{ assettype.level }}">{{ assettype.get_level_display|default:"--级别--"}}</option>
+                  <option value="1">一级</option>
+                  <option value="2">二级</option>
+                 </select>
+                 </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-6">
+                    <label class="control-label">
+                      <input type="radio" class="minimal" name="status"  value="True" {% ifequal assettype.status True %}checked{% endifequal %}>启用
+                    </label>
+                    <label class="control-label">
+                      <input type="radio" class="minimal" name="status"  value="False" {% ifequal assettype.status False %}checked{% endifequal %}>禁用
+                    </label>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" name="desc" rows="5">{{ assettype.desc }}</textarea>
+                </div>
+            </div>
+          </fieldset>
+
+		</div>
+		<div class="box-footer ">
+			<div class="row span7 text-center ">
+              <button type="button" id="btnCancel" class="btn btn-default margin-right " >重置</button>
+              <button type="button" id="btnSave" class="btn btn-info margin-right " >保存</button>
+			</div>
+		</div>
+
+	</form>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+
+	$("#btnSave").click(function(){
+		var data = $("#addForm").serialize();
+		$.ajax({
+			type: $("#addForm").attr('method'),
+			url : "{% url 'adm-bsm:assettype-detail' %}",
+			data : data,
+			cache: false,
+			success : function(msg) {
+				if (msg.result){
+					layer.alert('数据保存成功！', {icon: 1},function(index){
+					    parent.layer.closeAll(); //关闭所有弹窗
+                    });
+				}else{
+					layer.alert('数据保存失败', {icon: 5});
+                    //$('errorMessage').html(msg.message)
+				}
+				return ;
+			}
+		});
+	});
+
+
+	/*点取消刷新新页面*/
+    $("#btnCancel").click(function () {
+	    window.location.reload();
+
+    });
+
+
+</script>
+
+{% endblock %}
