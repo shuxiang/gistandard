@@ -52,7 +52,7 @@ class SupplierDetailView(LoginRequiredMixin, View):
         else:
             supplier = Supplier()
         supplier_form = SupplierForm(request.POST, instance=supplier)
-        if supplier_form.is_valid():
+        if supplier_form.is_valid(): 
             supplier_form.save()
             res['result'] = True
         return HttpResponse(json.dumps(res), content_type='application/json')
