@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^user/enable$', views_user.UserEnableView.as_view(), name="user-enable"),
     url(r'^user/disable$', views_user.UserDisableView.as_view(), name="user-disable"),
     url(r'^user/adminpasswdchange$', views_user.AdminPasswdChangeView.as_view(), name="user-adminpasswdchange"),
+    url(r'^user/passwdchange$', views_user.PasswdChangeView.as_view(), name="user-passwdchange"),
 
     # 组织架构的改删查操作
     url(r'^structure/$', views_structure.StructureView.as_view(), name="structure"),

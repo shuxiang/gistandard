@@ -208,7 +208,7 @@ class UserDeleteView(LoginRequiredMixin, View):
 
     def post(self, request):
         id_nums = request.POST.get('id')
-        User.objects.extra(where=["id IN ("+id_nums+")"]).delete()
+        User.objects.extra(where=["id IN (" + id_nums + ")"]).delete()
         ret = {
             'result': 'true',
             'message': '数据删除成功！'
@@ -224,7 +224,7 @@ class UserEnableView(LoginRequiredMixin, View):
     def post(self, request):
         if 'id' in request.POST and request.POST['id']:
             id_nums = request.POST.get('id')
-            queryset = User.objects.extra(where=["id IN("+id_nums+")"])
+            queryset = User.objects.extra(where=["id IN(" + id_nums + ")"])
             queryset.filter(is_active=False).update(is_active=True)
             ret = {'result': 'True'}
         return HttpResponse(json.dumps(ret), content_type='application/json')
@@ -238,7 +238,7 @@ class UserDisableView(LoginRequiredMixin, View):
     def post(self, request):
         if 'id' in request.POST and request.POST['id']:
             id_nums = request.POST.get('id')
-            queryset = User.objects.extra(where=["id IN("+id_nums+")"])
+            queryset = User.objects.extra(where=["id IN(" + id_nums + ")"])
             queryset.filter(is_active=True).update(is_active=False)
             ret = {'result': 'True'}
         return HttpResponse(json.dumps(ret), content_type='application/json')
@@ -248,12 +248,13 @@ class AdminPasswdChangeView(LoginRequiredMixin, View):
     """
     管理员修改用户列表中的用户密码
     """
+
     def get(self, request):
         ret = dict()
         if 'id' in request.GET and request.GET['id']:
             user = get_object_or_404(User, pk=int(request.GET.get('id')))
             ret['user'] = user
-        return render(request, 'system/users/passwd-change.html', ret)
+        return render(request, 'system/users/adminpasswd-change.html', ret)
 
     def post(self, request):
         if 'id' in request.POST and request.POST['id']:
@@ -272,4 +273,35 @@ class AdminPasswdChangeView(LoginRequiredMixin, View):
                     'status': 'fail',
                     'admin_passwd_change_form_errors': admin_passwd_change_form_errors[0]
                 }
+        return HttpResponse(json.dumps(ret), content_type='application/json')
+
+
+class PasswdChangeView(LoginRequiredMixin, View):
+    """
+    登陆用户修改个人密码
+    """
+
+    def get(self, request):
+        ret = dict()
+        user = get_object_or_404(User, pk=int(request.user.id))
+        ret['user'] = user
+        return render(request, 'system/users/passwd-change.html', ret)
+
+    def post(self, request):
+
+        user = get_object_or_404(User, pk=int(request.user.id))
+        form = AdminPasswdChangeForm(request.POST)
+        if form.is_valid():
+            new_password = request.POST.get('password')
+            user.set_password(new_password)
+            user.save()
+            ret = {'status': 'success'}
+        else:
+            pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
+            errors = str(form.errors)
+            admin_passwd_change_form_errors = re.findall(pattern, errors)
+            ret = {
+                'status': 'fail',
+                'admin_passwd_change_form_errors': admin_passwd_change_form_errors[0]
+            }
         return HttpResponse(json.dumps(ret), content_type='application/json')
