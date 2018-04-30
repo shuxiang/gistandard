@@ -89,13 +89,20 @@ class EquipmentType(models.Model):
 
 
 class Asset(models.Model):
+    asset_status = (
+        (1, "闲置"),
+        (2, "在用"),
+        (3, "维修"),
+        (4, "报废"),
+    )
     assetNum = models.CharField(max_length=128, default="", verbose_name="资产编号")
     assetType = models.ForeignKey(AssetType, verbose_name="资产类型")
     brand = models.CharField(max_length=20, blank=True, null=True, verbose_name="品牌")
     config = models.CharField(max_length=128, default="", verbose_name="配置")
     supplier = models.ForeignKey(Supplier, verbose_name="供应商")
     buyDate = models.DateField(verbose_name="购买日期")
-    warrantyDate = models.DateField(verbose_name="质保日期")
+    warrantyDate = models.DateField(verbose_name="到保日期")
+    status = models.IntegerField(choices=asset_status, default=1, verbose_name="资产状态")
     owner = models.ForeignKey(User, verbose_name="使用人")
     desc = models.TextField(default="")
 
@@ -112,6 +119,6 @@ class Equipment(models.Model):
     equipment_type = models.ForeignKey(EquipmentType, verbose_name="设备类型")
     equipment_model = models.CharField(max_length=20, default="", verbose_name="设备型号")
     buy_date = models.DateField(verbose_name="购买日期")
-    warranty_date = models.DateField(verbose_name="质保日期")
+    warranty_date = models.DateField(verbose_name="到保日期")
     config_desc = models.TextField(default="", verbose_name="配置说明")
     customer = models.ForeignKey(Customer, verbose_name="客户信息")

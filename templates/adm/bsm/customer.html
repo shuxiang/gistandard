@@ -240,7 +240,7 @@ function doUpdate(id){
 		title : '编辑-详情',
 		shadeClose : false,
     	maxmin : true,
-		area : [ '800px', '500px' ],
+		area : [ '800px', '520px' ],
 		content : [ "{% url 'adm-bsm:customer-detail' %}"+'?id='+id, 'no' ],
 		end : function() {
 			oDataTable.ajax.reload();
