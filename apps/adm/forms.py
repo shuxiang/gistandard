@@ -3,7 +3,7 @@
 # __data__  : 2017/12/20
 
 from django import forms
-from .models import Supplier, AssetType, Customer, EquipmentType
+from .models import Supplier, AssetType, Customer, EquipmentType, Equipment
 
 
 class SupplierForm(forms.ModelForm):
@@ -28,3 +28,11 @@ class EquipmentTypeForm(forms.ModelForm):
     class Meta:
         model = EquipmentType
         fields = '__all__'
+
+
+class EquipmentForm(forms.ModelForm):
+    class Meta:
+        model = Equipment
+        fields = '__all__'
+
+

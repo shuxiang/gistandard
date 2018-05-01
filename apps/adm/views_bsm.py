@@ -10,7 +10,7 @@ from django.contrib.auth import get_user_model
 from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
 from system.models import SystemSetup
-from .models import Supplier, AssetType, Customer, EquipmentType, Equipment
+from .models import Supplier, AssetType, Customer, EquipmentType
 from .forms import SupplierForm, AssetTypeForm, CustomerForm, EquipmentTypeForm
 
 User = get_user_model()

@@ -36,7 +36,8 @@ urlpatterns = [
     url(r'^system/rbac/', include('rbac.urls', namespace='system-rbac')),
     url(r'^system/tools/', include('system.urls', namespace='system-tools')),
 
-    url(r'^adm/$', AdmView.as_view(), name="adm"),
+    url(r'^adm/$', AdmView.as_view(), name="adm-main"),
     url(r'^adm/bsm/', include('adm.urls', namespace='adm-bsm')),
+    url(r'^adm/equipment/',include('adm.urls_equipment', namespace='adm-equipment')),
 
 ]

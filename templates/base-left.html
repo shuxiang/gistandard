@@ -25,7 +25,7 @@
         <!-- Optionally, you can add icons to the links -->
 
       {% for menu in request.reveal_menu %}
-        {% if menu.sub_menu %}
+        {% if not menu.url %}
         <li class="treeview" id="{{ menu.code }}">
           <a href=""><i class="{{ menu.icon }}"></i> <span>{{ menu.title }}</span>
             <span class="pull-right-container">
@@ -41,7 +41,7 @@
         </li>
         {% else %}
           <li id="{{ menu.code }}">
-          <a href=""><i class="{{ menu.icon }}"></i> <span>{{ menu.title }}</span>
+          <a href="{{ menu.url }}"><i class="{{ menu.icon }}"></i> <span>{{ menu.title }}</span>
           </a>
         </li>
         {% endif %}

@@ -1,0 +1,147 @@
+{% extends 'base-layer.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'plugins/combo-select/combo.select.css' %}">
+<link rel="stylesheet" href="{% static 'js/plugins/layer/skin/layer.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datetimepicker.min.css' %}">
+{% endblock %}
+    config_desc = models.TextField(default="", verbose_name="配置说明")
+{% block main %}
+<div class="box box-danger">
+	<form class="form-horizontal" id="addForm" method="post">
+		{% csrf_token %}
+		<input type="hidden" name='id' value="{{ equipment.id }}" />
+		<div class="box-body">
+          <fieldset>
+            <legend>
+              <h4>设备管理</h4>
+            </legend>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">设备编号</label>
+                <div class="col-sm-3">
+                    <input class="form-control" name="number" type="text" value="{{ equipment.number }}"/>
+                </div>
+                <label class="col-sm-2 control-label">类型</label>
+                <div class="col-sm-3">
+                  <select class="form-control" name="equipment_type">
+                  <option value={{ equipment.equipment_type.id }}> {{ equipment.equipment_type.name|default:"" }} </option>
+                  {% for type in equipment_type %}
+                  <option value="{{ type.id }}">{{ type.name }}</option>
+                  {% endfor %}
+                 </select>
+                 </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">设备型号</label>
+                <div class="col-sm-3">
+                    <input class="form-control" name="equipment_model" type="text" value="{{ equipment.equipment_model }}"/>
+                </div>
+                <label class="col-sm-2 control-label">购买日期</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control pull-right form_datetime" name="buy_date" value="{{ equipment.buy_date |date:"Y-m-d" }}"/>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">质保日期</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control pull-right form_datetime" name="warranty_date" value="{{ equipment.warranty_date |date:"Y-m-d"}}"/>
+                </div>
+                <label class="col-sm-2 control-label">购买单位</label>
+                <div class="col-sm-3">
+                  <select class="form-control" name="customer">
+                  <option value={{ equipment.customer_id }}> {{ equipment.customer.unit|default:"" }} </option>
+                  {% for cus in customer %}
+                  <option value="{{ cus.id}}">{{ cus.unit }}</option>
+                  {% endfor %}
+                 </select>
+                 </div>
+
+            </div>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">配置说明</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" name="config_desc" rows="5" >{{ equipment.config_desc }}</textarea>
+                </div>
+            </div>
+
+          </fieldset>
+
+		</div>
+		<div class="box-footer ">
+			<div class="row span7 text-center ">
+              <button type="button" id="btnCancel" class="btn btn-default margin-right " >重置</button>
+              <button type="button" id="btnSave" class="btn btn-info margin-right " >保存</button>
+			</div>
+		</div>
+
+	</form>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="{% static 'plugins/combo-select/jquery.combo.select.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap-datetimepicker.js' %}"></script>
+<script type="text/javascript">
+
+	$("#btnSave").click(function(){
+		var data = $("#addForm").serialize();
+		$.ajax({
+			type: $("#addForm").attr('method'),
+			url : "{% url 'adm-equipment:create' %}",
+			data : data,
+			cache: false,
+			success : function(msg) {
+				if (msg.result){
+					layer.alert('数据保存成功！', {icon: 1},function(index){
+					    parent.layer.closeAll(); //关闭所有弹窗
+                    });
+				}else{
+					layer.alert('数据保存失败', {icon: 5});
+                    //$('errorMessage').html(msg.message)
+				}
+				return ;
+			}
+		});
+	});
+
+
+	/*点取消刷新新页面*/
+    $("#btnCancel").click(function () {
+	    window.location.reload();
+
+    })
+
+/*通过按钮关闭弹layer弹出的页面窗口*/
+{#    $(document).ready(function(){#}
+{#        $("#btnCancel").click(function(){#}
+{#            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引#}
+{#            parent.layer.close(index);//关闭窗口#}
+{#        });#}
+{#    });#}
+
+/*input 时间输入选择*/
+    $(".form_datetime").datetimepicker({
+            language:  'zh',
+            minView: 'month', //选择范围知道日期，不选择时分
+            //weekStart: 1,
+            //todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            //startView: 2,
+            forceParse: 0,
+            showMeridian: 1,
+            format: 'yyyy-mm-dd'
+        }).on('changeDate', function (ev) {
+            $(this).datetimepicker('hide');
+    });
+
+/*select 支持输入检索*/
+  $(function() {
+    $('select').comboSelect();
+ });
+
+</script>
+
+{% endblock %}

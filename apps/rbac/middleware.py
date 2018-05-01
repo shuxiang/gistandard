@@ -6,7 +6,7 @@ import re
 
 from django.conf import settings
 from django.utils.deprecation import MiddlewareMixin
-from django.shortcuts import HttpResponse
+from django.shortcuts import render
 
 
 class RbacMiddleware(MiddlewareMixin):
@@ -24,7 +24,6 @@ class RbacMiddleware(MiddlewareMixin):
             if request_url in permission_url:
                 return None
             else:
-                url = [url for url in permission_url if url is not None]
-                return HttpResponse(
-                    "<font color='#FF0000'> 警告：你无权访问{}</font><br/>你可访问的授权URL有：{}".format(request_url, url)
-                )
+                ret = dict(url=[url for url in permission_url if url is not None])
+                ret['request_url'] = request_url
+                return render(request, 'page404.html', ret)

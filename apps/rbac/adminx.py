@@ -9,8 +9,8 @@ from .models import Menu, Role
 
 
 class GlobalSettings(object):
-    site_title = "通用供应链后台管理系统"
-    site_footer = "Copyright © 2016-2017 通用供应链技术及系统（南京）有限公司. Version1.0.0"
+    site_title = "江苏沙盒科技协同办公平台后台管理系统"
+    site_footer = "Copyright © 2016-2017 江苏沙盒科技. Version1.0.0"
     menu_style = "accordion"  # 导航菜单折叠
 
 

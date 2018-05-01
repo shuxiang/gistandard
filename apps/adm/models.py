@@ -118,6 +118,6 @@ class Equipment(models.Model):
     equipment_type = models.ForeignKey(EquipmentType, verbose_name="设备类型")
     equipment_model = models.CharField(max_length=20, default="", verbose_name="设备型号")
     buy_date = models.DateField(verbose_name="购买日期")
-    warranty_date = models.DateField(verbose_name="到保日期")
-    config_desc = models.TextField(default="", verbose_name="配置说明")
+    warranty_date = models.DateField(verbose_name="质保日期")
+    config_desc = models.TextField(blank=True, null=True, verbose_name="配置说明")
     customer = models.ForeignKey(Customer, verbose_name="客户信息")
