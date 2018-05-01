@@ -10,8 +10,8 @@ from django.contrib.auth import get_user_model
 from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
 from system.models import SystemSetup
-from .models import Supplier, AssetType, Customer
-from .forms import SupplierForm, AssetTypeForm, CustomerForm
+from .models import Supplier, AssetType, Customer, EquipmentType, Equipment
+from .forms import SupplierForm, AssetTypeForm, CustomerForm, EquipmentTypeForm
 
 User = get_user_model()
 
@@ -180,5 +180,60 @@ class CustomerDeleteView(LoginRequiredMixin, View):
         if 'id' in request.POST and request.POST['id']:
             id_list = map(int, request.POST.get('id').split(','))
             Customer.objects.filter(id__in=id_list).delete()
+            ret['result'] = True
+        return HttpResponse(json.dumps(ret), content_type='application/json')
+
+
+class EquipmentTypeView(LoginRequiredMixin, View):
+    """
+    设备类型
+    """
+    def get(self, request):
+        ret = Menu.getMenuByRequestUrl(url=request.path_info)
+        ret.update(SystemSetup.getSystemSetupLastData())
+        return render(request, 'adm/bsm/equipmenttype.html', ret)
+
+
+class EquipmentTypeListView(LoginRequiredMixin, View):
+    """
+    设备类型列表
+    """
+    def get(self, request):
+        fields = ['id', 'name', 'desc']
+        ret = dict(data=list(EquipmentType.objects.values(*fields)))
+        return HttpResponse(json.dumps(ret), content_type='application/json')
+
+
+class EquipmentTypeDetailView(LoginRequiredMixin, View):
+    """
+    资产类型：查看、修改、新建数据
+    """
+    def get(self, request):
+        ret = dict()
+        if 'id' in request.GET and request.GET['id']:
+            equipment_type = get_object_or_404(EquipmentType, pk=request.GET.get('id'))
+            ret['equipment_type'] = equipment_type
+        return render(request, 'adm/bsm/equipmenttype_detail.html', ret)
+
+    def post(self, request):
+        res = dict(result=False)
+        if 'id' in request.POST and request.POST['id']:
+            equipment_type = get_object_or_404(EquipmentType, pk=request.POST.get('id'))
+        else:
+            equipment_type = EquipmentType()
+        equipment_type_form = EquipmentTypeForm(request.POST, instance=equipment_type)
+        if equipment_type_form.is_valid():
+            equipment_type_form.save()
+            res['result'] = True
+        return HttpResponse(json.dumps(res), content_type='application/json')
+
+
+class EquipmentTypeDeleteView(LoginRequiredMixin, View):
+
+    def post(self, request):
+        ret = dict(result=False)
+        if 'id' in request.POST and request.POST['id']:
+            id_list = map(int, request.POST.get('id').split(','))
+            EquipmentType.objects.filter(id__in=id_list).delete()
             ret['result'] = True
         return HttpResponse(json.dumps(ret), content_type='application/json')

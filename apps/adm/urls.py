@@ -24,4 +24,8 @@ urlpatterns = [
     url(r'^customer/detail', views_bsm.CustomerDetailView.as_view(), name="customer-detail"),
     url(r'^customer/delete', views_bsm.CustomerDeleteView.as_view(), name='customer-delete'),
 
+    url(r'^equipmenttype/$', views_bsm.EquipmentTypeView.as_view(), name='equipmenttype'),
+    url(r'^equipmenttype/list', views_bsm.EquipmentTypeListView.as_view(), name="equipmenttype-list"),
+    url(r'^equipmenttype/detail', views_bsm.EquipmentTypeDetailView.as_view(), name="equipmenttype-detail"),
+    url(r'^equipmenttype/delete', views_bsm.EquipmentTypeDeleteView.as_view(), name='equipmenttype-delete'),
 ]

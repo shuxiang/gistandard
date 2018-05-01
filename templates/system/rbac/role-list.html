@@ -208,9 +208,6 @@ function doUpdate(id){
     	maxmin : true,
 		area : [ '800px', '400px' ],
 		content : [ "{% url 'system-rbac:role-detail' %}"+'?id='+id, 'no' ],
-		end : function() {
-			oDataTable.ajax.reload();
-		}
 	});
 }
 
@@ -253,9 +250,6 @@ function doUpdateMenu(id){
 		maxmin : true,
 		area : [ '600px', '480px' ],
 		content : [ "{% url 'system-rbac:role-role_menu' %}"+'?id='+id, 'no' ],
-		end : function() {
-			window.location.reload();
-		}
 	});
 }
 
@@ -269,9 +263,6 @@ function doUpdateUser(id){
 		maxmin : true,
 		area : [ '800px', '600px' ],
 		content : [ "{% url 'system-rbac:role-role_user' %}"+'?id='+id, 'no' ],
-		end : function() {
-			window.location.reload();
-		}
 	});
 }
 

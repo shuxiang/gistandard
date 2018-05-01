@@ -76,7 +76,6 @@ class EquipmentType(models.Model):
     设备类型
     """
     name = models.CharField(max_length=30, verbose_name="类型名称", help_text="类型名称")
-    status = models.BooleanField(default=True, verbose_name="状态", help_text="状态")
     desc = models.TextField(blank=True, null=True, verbose_name="备注")
 
     class Meta:

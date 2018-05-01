@@ -47,10 +47,7 @@
                     <tr valign="middle">
                         <th><input type="checkbox" id="checkAll"></th>
                         <th>ID</th>
-                        <th>资产类型</th>
-                        <th>所属</th>
-                        <th>类型级别</th>
-                        <th>状态</th>
+                        <th>设备类型</th>
                         <th>备注</th>
                         <th>操作</th>
                     </tr>
@@ -77,7 +74,7 @@
   <script type="text/javascript">
 	$(function() {
 	    $('#ADM-BSM').addClass('active');
-		$('#ADM-BSM-ASSETTYPE').addClass('active');
+		$('#ADM-BSM-EQUIPMENTTYPE').addClass('active');
 
 	});
   </script>
@@ -91,7 +88,7 @@ $(function() {
 						DATATABLES_CONSTANT.DATA_TABLES.DEFAULT_OPTION,
 						{
 							ajax : {
-								"url":"{% url 'adm-bsm:assettype-list' %}",
+								"url":"{% url 'adm-bsm:equipmenttype-list' %}",
 								"data":function ( d ) {
 									d.select=$("#select").val();
 								}
@@ -106,32 +103,8 @@ $(function() {
 									data : "name",
 									width : "20%",
 								},
-								{
-									data : "parent__name",
-									width : "20%",
-								},
-								{
-									data : "level",
-									width : "10%",
-                                    render : function(data, type, row, meta) {
-										if (data==1){
-											return "一级";
-										}else if(data==2) {
-											return "二级";
-										}
-									}
-								},
 
-								{
-									data : "status",
-                                    render : function(data, type, row, meta) {
-										if (data==true){
-											return "启用";
-										}else {
-											return "禁用";
-										}
-									}
-								},
+
                                 {
 									data : "desc",
 								},
@@ -171,8 +144,8 @@ $(function() {
 			title : '新增',
 			shadeClose : false,
 			maxmin : true,
-			area : [ '800px', '500px' ],
-			content : "{% url 'adm-bsm:assettype-detail' %}",
+			area : [ '800px', '400px' ],
+			content : "{% url 'adm-bsm:equipmenttype-detail' %}",
 			end : function() {
 				//关闭时做的事情
 				oDataTable.ajax.reload();
@@ -208,7 +181,7 @@ $(function() {
 			 	layer.close(index);
 			 	$.ajax({
 					type: "POST",
-					url : "{% url 'adm-bsm:assettype-delete' %}",
+					url : "{% url 'adm-bsm:equipmenttype-delete' %}",
 					data : {"id":sId, csrfmiddlewaretoken: '{{ csrf_token }}'},
 					cache: false,
 					success : function(msg) {
@@ -235,8 +208,8 @@ function doUpdate(id){
 		title : '编辑-详情',
 		shadeClose : false,
     	maxmin : true,
-		area : [ '800px', '500px' ],
-		content : [ "{% url 'adm-bsm:assettype-detail' %}"+'?id='+id, 'no' ],
+		area : [ '800px', '400px' ],
+		content : [ "{% url 'adm-bsm:equipmenttype-detail' %}"+'?id='+id, 'no' ],
 		end : function() {
 			oDataTable.ajax.reload();
 		}
@@ -246,7 +219,7 @@ function doUpdate(id){
 
 //删除单个数据
 function doDelete(id){
-    layer.alert('当前组内用户也会被删除，确定删除吗？', {
+    layer.alert('确定删除吗？', {
         title:'提示'
         ,icon: 3 //0:感叹号 1：对号 2：差号 3：问号 4：小锁 5：哭脸 6：笑脸
         ,time: 0 //不自动关闭
@@ -255,7 +228,7 @@ function doDelete(id){
             layer.close(index);
             $.ajax({
                 type: "POST",
-                url : "{% url 'adm-bsm:assettype-delete' %}",
+                url : "{% url 'adm-bsm:equipmenttype-delete' %}",
                 data : {"id":id, csrfmiddlewaretoken: '{{ csrf_token }}'},  //防止post数据时报 csrf_token 403
                 cache: false,
                 success : function(msg) {
