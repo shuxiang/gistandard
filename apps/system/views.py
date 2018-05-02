@@ -16,7 +16,7 @@ class SystemView(LoginRequiredMixin, View):
     系统模块入口
     """
     def get(self, request):
-        return render(request, 'index.html')
+        return render(request, 'system/system_index.html')
 
 
 class SystemSetupView(LoginRequiredMixin, View):

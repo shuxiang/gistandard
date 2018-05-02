@@ -89,3 +89,8 @@
     border-color: #ccc;
     text-decoration: none
 }
+
+/* 列表页查询form样式 */
+.searchArea{width:250px}
+.searchArea label{width:80px}
+.searchArea .inputText{width:160px}

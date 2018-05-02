@@ -20,9 +20,14 @@ class EquipmentView(LoginRequiredMixin, View):
     """
     设备管理
     """
+
     def get(self, request):
         ret = Menu.getMenuByRequestUrl(url=request.path_info)
         ret.update(SystemSetup.getSystemSetupLastData())
+        equipment_types = EquipmentType.objects.all()
+        customers = Customer.objects.all()
+        ret['equipment_types'] = equipment_types
+        ret['customers'] = customers
         return render(request, 'adm/equipment/equipment.html', ret)
 
 
@@ -30,10 +35,20 @@ class EquipmentListView(LoginRequiredMixin, View):
     """
     设备管理：设备列表
     """
+
     def get(self, request):
-        fields = ['id', 'number', 'equipment_type__name', 'equipment_model', 'buy_date', 'warranty_date', 'customer__unit']
+        fields = ['id', 'number', 'equipment_type__name', 'equipment_model', 'buy_date', 'warranty_date',
+                  'customer__unit', 'customer__belongs_to__name']
         filters = dict()
-        ret = dict(data=list(Equipment.objects.values(*fields)))
+        if 'number' in request.GET and request.GET['number']:
+            filters['number__icontains'] = request.GET['number']
+        if 'equipment_type' in request.GET and request.GET['equipment_type']:
+            filters['equipment_type'] = request.GET['equipment_type']
+        if 'equipment_model' in request.GET and request.GET['equipment_model']:
+            filters['equipment_model__icontains'] = request.GET['equipment_model']
+        if 'customer' in request.GET and request.GET['customer']:
+            filters['customer'] = request.GET['customer']
+        ret = dict(data=list(Equipment.objects.filter(**filters).values(*fields)))
         return HttpResponse(json.dumps(ret, cls=DjangoJSONEncoder), content_type='application/json')
 
 
@@ -41,6 +56,7 @@ class EquipmentCreateView(LoginRequiredMixin, View):
     """
     设备管理：新建和修改资产数据
     """
+
     def get(self, request):
         ret = dict()
         if 'id' in request.GET and request.GET['id']:
@@ -69,6 +85,7 @@ class EquipmentDetailView(LoginRequiredMixin, View):
     """
     设备管理：详情页面
     """
+
     def get(self, request):
         ret = dict()
         if 'id' in request.GET and request.GET['id']:

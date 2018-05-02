@@ -4,7 +4,7 @@
 
 from django.conf.urls import url
 
-from adm import views_bsm, views_equipment
+from adm import views_equipment
 
 urlpatterns = [
 

@@ -38,6 +38,7 @@ urlpatterns = [
 
     url(r'^adm/$', AdmView.as_view(), name="adm-main"),
     url(r'^adm/bsm/', include('adm.urls', namespace='adm-bsm')),
-    url(r'^adm/equipment/',include('adm.urls_equipment', namespace='adm-equipment')),
+    url(r'^adm/equipment/', include('adm.urls_equipment', namespace='adm-equipment')),
+    url(r'^adm/asset/', include('adm.urls_asset', namespace='adm-asset')),
 
 ]
