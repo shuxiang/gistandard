@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta
 
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
@@ -40,6 +41,15 @@ class EquipmentListView(LoginRequiredMixin, View):
         fields = ['id', 'number', 'equipment_type__name', 'equipment_model', 'buy_date', 'warranty_date',
                   'customer__unit', 'customer__belongs_to__name']
         filters = dict()
+        if 'select' in request.GET and request.GET['select']:
+            select = int(request.GET['select'])
+            if select == 0:
+                date_time = datetime.today()
+                filters['warranty_date__lte'] = date_time
+            if select == 3:
+                now = datetime.today()
+                date_time = now + timedelta(days=90)
+                filters['warranty_date__range'] = (now, date_time)
         if 'number' in request.GET and request.GET['number']:
             filters['number__icontains'] = request.GET['number']
         if 'equipment_type' in request.GET and request.GET['equipment_type']:

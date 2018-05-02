@@ -42,6 +42,18 @@
                         <i class="glyphicon glyphicon-trash"></i>删除
                     </button>
                 </div>
+                <div class="btn-group pull-right">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label>质保状态：</label>
+                            <select id="select" name="select" class="form-control">
+                                <option style="text-align:center" value="">-----所有-----</option>
+                                <option value="0">已过质保期</option>
+                                <option value="3">质保期小于三个月</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="box-header">
               <form class="form-inline" id="queryForm">
@@ -184,10 +196,17 @@ $(function() {
 		return oTable;
 	}
 
-   //刷新页面post查询请求
+   //刷新页面GET查询请求
     $("#btnEquipmentSearch").click(function(){
             oDataTable.ajax.reload();
         });
+
+
+	//select选择后刷新页面GET请求
+    $("#select").change(function(){
+		//alert($("#select").val())
+		oDataTable.ajax.reload();
+	});
 	//checkbox全选
     $("#checkAll").on("click", function () {
         if ($(this).prop("checked") === true) {
