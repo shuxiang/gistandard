@@ -65,6 +65,18 @@ class EquipmentCreateView(LoginRequiredMixin, View):
         return HttpResponse(json.dumps(res), content_type='application/json')
 
 
+class EquipmentDetailView(LoginRequiredMixin, View):
+    """
+    设备管理：详情页面
+    """
+    def get(self, request):
+        ret = dict()
+        if 'id' in request.GET and request.GET['id']:
+            equipment = get_object_or_404(Equipment, pk=request.GET.get('id'))
+            ret['equipment'] = equipment
+        return render(request, 'adm/equipment/equipment_detail.html', ret)
+
+
 class EquipmentDeleteView(LoginRequiredMixin, View):
 
     def post(self, request):

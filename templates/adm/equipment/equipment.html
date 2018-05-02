@@ -13,7 +13,9 @@
 <section class="content-header margin-bottom">
   <ol class="breadcrumb">
     <li><a href=""><i class="fa fa-dashboard"></i>办公平台</a></li>
+    {% if menu.parent.parent %}
     <li class="active"><a href="{{ menu.parent.parent.url }}">{{ menu.parent.parent.title }}</a></li>
+    {% endif %}
     <li class="active"><a href="{{ menu.url }}">{{ menu.title }}</a></li>
   </ol>
 </section>
@@ -128,8 +130,9 @@ $(function() {
 									width : "10%",
 									bSortable : "false",
 									render : function(data, type, row, meta) {
-										var ret="";
-										var ret="<button title='详情-编辑' onclick='doUpdate("
+										var ret="<button title='详情' onclick='doDetail("
+										+ data + ")'><i class='glyphicon glyphicon-list-alt'></i></button>";
+                                        ret=ret+"<button title='编辑' onclick='doUpdate("
 										+ data + ")'><i class='glyphicon glyphicon-pencil'></i></button>";
 										 ret=ret+"<button title='删除' onclick='doDelete("
                                             + data + ")'><i class='glyphicon glyphicon-trash'></i></button>";
@@ -215,6 +218,10 @@ $(function() {
 
 
 });
+
+function doDetail(id){
+    window.location.href="/adm/equipment/detail?id="+id;
+}
 
 function doUpdate(id){
 	var div=layer.open({
