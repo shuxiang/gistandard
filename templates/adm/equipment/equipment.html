@@ -220,7 +220,7 @@ $(function() {
 
 
 	$("#btnCreate").click(function() {
-		layer.open({
+		var div=layer.open({
 			type : 2,
 			title : '新增',
 			shadeClose : false,
@@ -232,6 +232,7 @@ $(function() {
 				oDataTable.ajax.reload();
 			}
 		});
+           layer.full(div)
 	});
 
 	$("#btnRefresh").click(function(){

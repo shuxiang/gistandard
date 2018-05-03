@@ -122,6 +122,6 @@ class Equipment(models.Model):
     config_desc = models.TextField(blank=True, null=True, verbose_name="配置说明")
     customer = models.ForeignKey(Customer, verbose_name="客户信息")
     distributors = models.CharField(max_length=30, blank=True, verbose_name="分销商")
-    dist_name = models.CharField(max_length=30, blank=True, null=True, verbose_name="分销商联系人")
-    dist_phone = models.CharField(max_length=30, blank=True, null=True, verbose_name="分销商联系电话")
+    dist_name = models.CharField(max_length=30, blank=True, verbose_name="分销商联系人")
+    dist_phone = models.CharField(max_length=30, blank=True, verbose_name="分销商联系电话")
 

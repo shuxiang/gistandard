@@ -113,15 +113,15 @@
                   <table class="table table-striped"><tbody>
                     <tr>
                       <td style="width: 30%">分销商</td>
-                      <td>{{ equipment.distributors }}</td>
+                      <td>{{ equipment.distributors |default:""}}</td>
                     </tr>
                     <tr>
                       <td>联系人</td>
-                      <td>{{ equipment.dist_name }}</td>
+                      <td>{{ equipment.dist_name|default:"" }}</td>
                     </tr>
                     <tr>
                       <td>联系电话</td>
-                      <td>{{ equipment.dist_phone }}</td>
+                      <td>{{ equipment.dist_phone|default_if_none:"" }}</td>
                     </tr>
                   </tbody></table>
                 </div>
@@ -133,7 +133,7 @@
                   <!-- timeline time label -->
                   <li class="time-label">
                         <span class="bg-red">
-                          10 Feb. 2014
+                          2018-5-1
                         </span>
                   </li>
                   <!-- /.timeline-label -->
@@ -142,20 +142,39 @@
                     <i class="fa fa-envelope bg-blue"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                      <span class="time"><i class="fa fa-clock-o"></i> 23:32</span>
 
-                      <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                      <h3 class="timeline-header"><a href="#">韩洪乾</a> 维保服务进度更新</h3>
 
                       <div class="timeline-body">
-                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                        quora plaxo ideeli hulu weebly balihoo...
+                        今天联系客户负责人，和客户谈了设备续保事宜，明天去现场做次设备巡检，同时和客户介绍下公司的服务项目。
                       </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs">Read more</a>
-                        <a class="btn btn-danger btn-xs">Delete</a>
+{#                      <div class="timeline-footer">#}
+{#                        <a class="btn btn-primary btn-xs">Read more</a>#}
+{#                        <a class="btn btn-danger btn-xs">Delete</a>#}
+{#                      </div>#}
+                    </div>
+                  </li>
+                  <li class="time-label">
+                        <span class="bg-red">
+                          2018-5-2
+                        </span>
+                  </li>
+                  <li>
+                    <i class="fa fa-envelope bg-blue"></i>
+
+                    <div class="timeline-item">
+                      <span class="time"><i class="fa fa-clock-o"></i> 20:32</span>
+
+                      <h3 class="timeline-header"><a href="#">韩洪乾</a> 维保服务进度更新</h3>
+
+                      <div class="timeline-body">
+                        今天去客户现场做的巡检服务,提供了巡检报告,向客户介绍了公司的服务项目.
                       </div>
+{#                      <div class="timeline-footer">#}
+{#                        <a class="btn btn-primary btn-xs">Read more</a>#}
+{#                        <a class="btn btn-danger btn-xs">Delete</a>#}
+{#                      </div>#}
                     </div>
                   </li>
                   <!-- END timeline item -->

@@ -355,7 +355,7 @@ $(function() {
 });
 // 跳转到用户详情页面
 function doUpdate(id){
-	layer.open({
+	var div=layer.open({
 		type : 2,
 		title : '编辑',
 		shadeClose : false,
@@ -366,6 +366,7 @@ function doUpdate(id){
 			oDataTable.ajax.reload();
 		}
 	});
+    layer.full(div)
 }
 
 // 跳转到用户密码修改
