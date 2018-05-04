@@ -12,4 +12,4 @@ class AdmView(LoginRequiredMixin, View):
     def get(self, request):
         ret = Menu.getMenuByRequestUrl(url=request.path_info)
         ret.update(SystemSetup.getSystemSetupLastData())
-        return render(request, 'index.html', ret)
+        return render(request, 'adm/adm_index.html', ret)
