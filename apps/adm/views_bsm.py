@@ -43,6 +43,8 @@ class SupplierDetailView(LoginRequiredMixin, View):
         if 'id' in request.GET and request.GET['id']:
             supplier = get_object_or_404(Supplier, pk=request.GET.get('id'))
             ret['supplier'] = supplier
+        users = User.objects.exclude(id=request.user.id)
+        ret['users'] = users
         return render(request, 'adm/bsm/supplier_detail.html', ret)
 
     def post(self, request):

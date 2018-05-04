@@ -39,13 +39,22 @@
             </div>
             <div class="form-group has-feedback">
                 <label class="col-sm-2 control-label">状态</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     <label class="control-label">
                       <input type="radio" class="minimal" name="status"  value="True" {% ifequal supplier.status True %}checked{% endifequal %}>启用
                     </label>
                     <label class="control-label">
                       <input type="radio" class="minimal" name="status"  value="False" {% ifequal supplier.status False %}checked{% endifequal %}>禁用
                     </label>
+                </div>
+                <label class="col-sm-2 control-label">负责人</label>
+                  <div class="col-sm-3">
+                    <select class="form-control" name="belongs_to">
+                    <option value={{ customer.belongs_to.id| default:request.user.id }}> {{ customer.belongs_to.name| default:request.user.name }} </option>
+                    {% for user in users %}
+                    <option value={{ user.id }}> {{ user.name}} </option>
+                    {% endfor %}
+                  </select>
                 </div>
             </div>
             <div class="form-group has-feedback">

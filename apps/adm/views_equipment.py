@@ -11,7 +11,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
 from system.models import SystemSetup
-from .models import Equipment, EquipmentType, Customer
+from .models import Equipment, EquipmentType, Customer, Supplier
 from .forms import EquipmentForm
 
 User = get_user_model()
@@ -74,8 +74,10 @@ class EquipmentCreateView(LoginRequiredMixin, View):
             ret['equipment'] = equipment
         equipment_type = EquipmentType.objects.values()
         customer = Customer.objects.values()
+        suppliers = Supplier.objects.values()
         ret['equipment_type'] = equipment_type
         ret['customer'] = customer
+        ret['suppliers'] = suppliers
         return render(request, 'adm/equipment/equipment_create.html', ret)
 
     def post(self, request):

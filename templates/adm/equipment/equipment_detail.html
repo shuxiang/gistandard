@@ -113,15 +113,15 @@
                   <table class="table table-striped"><tbody>
                     <tr>
                       <td style="width: 30%">分销商</td>
-                      <td>{{ equipment.distributors |default:""}}</td>
+                      <td>{{ equipment.supplier.company }}</td>
                     </tr>
                     <tr>
                       <td>联系人</td>
-                      <td>{{ equipment.dist_name|default:"" }}</td>
+                      <td>{{ equipment.supplier.linkname }}</td>
                     </tr>
                     <tr>
                       <td>联系电话</td>
-                      <td>{{ equipment.dist_phone|default_if_none:"" }}</td>
+                      <td>{{ equipment.supplier.phone }}</td>
                     </tr>
                   </tbody></table>
                 </div>

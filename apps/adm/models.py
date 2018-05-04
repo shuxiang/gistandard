@@ -2,18 +2,19 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-User= get_user_model()
+User = get_user_model()
 
 
 class Supplier(models.Model):
     """
-    供应商管理
+    分销商管理
     """
     company = models.CharField(max_length=30, verbose_name="公司名称")
     address = models.CharField(max_length=100, verbose_name="地址")
     linkname = models.CharField(max_length=20, verbose_name="联系人")
     phone = models.CharField(max_length=20, verbose_name="联系电话")
     status = models.BooleanField(default=True, verbose_name="状态")
+    belongs_to = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="责任人")
     desc = models.TextField(blank=True, null=True, verbose_name="备注")
     add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
 
@@ -33,7 +34,7 @@ class Customer(models.Model):
     address = models.CharField(max_length=100, verbose_name="地址")
     name = models.CharField(max_length=20, verbose_name="联系人")
     phone = models.CharField(max_length=20, verbose_name="联系电话")
-    belongs_to = models.ForeignKey(User, verbose_name="责任人")
+    belongs_to = models.ForeignKey(User, blank=True, null=True , on_delete=models.SET_NULL, verbose_name="责任人")
     status = models.BooleanField(default=True, verbose_name="状态")
     desc = models.TextField(blank=True, null=True, verbose_name="备注")
     add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
@@ -115,13 +116,11 @@ class Asset(models.Model):
 
 class Equipment(models.Model):
     number = models.CharField(max_length=20, default="", verbose_name="设备编号")
-    equipment_type = models.ForeignKey(EquipmentType, verbose_name="设备类型")
+    equipment_type = models.ForeignKey(EquipmentType, blank=True, null=True , on_delete=models.SET_NULL, verbose_name="设备类型")
     equipment_model = models.CharField(max_length=20, default="", verbose_name="设备型号")
     buy_date = models.DateField(verbose_name="购买日期")
     warranty_date = models.DateField(verbose_name="质保日期")
     config_desc = models.TextField(blank=True, null=True, verbose_name="配置说明")
-    customer = models.ForeignKey(Customer, verbose_name="客户信息")
-    distributors = models.CharField(max_length=30, blank=True, verbose_name="分销商")
-    dist_name = models.CharField(max_length=30, blank=True, verbose_name="分销商联系人")
-    dist_phone = models.CharField(max_length=30, blank=True, verbose_name="分销商联系电话")
+    customer = models.ForeignKey(Customer, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="客户信息")
+    supplier = models.ForeignKey(Supplier, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="分销商")
 

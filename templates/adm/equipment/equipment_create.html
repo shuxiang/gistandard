@@ -56,34 +56,22 @@
                   {% endfor %}
                  </select>
                  </div>
-
+            </div>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">分销商</label>
+                <div class="col-sm-3">
+                  <select class="form-control" name="supplier">
+                  <option value={{ equipment.supplier_id }}> {{ equipment.supplier.company|default:"" }} </option>
+                  {% for supplier in suppliers %}
+                  <option value="{{ supplier.id}}">{{ supplier.company }}</option>
+                  {% endfor %}
+                 </select>
+                 </div>
             </div>
             <div class="form-group has-feedback">
                 <label class="col-sm-2 control-label">配置说明</label>
                 <div class="col-sm-8">
                     <textarea class="form-control" name="config_desc" rows="5" >{{ equipment.config_desc }}</textarea>
-                </div>
-            </div>
-
-          </fieldset>
-          <fieldset>
-            <legend>
-              <h4>分销商信息</h4>
-            </legend>
-            <div class="form-group has-feedback">
-                <label class="col-sm-2 control-label">分销商</label>
-                <div class="col-sm-3">
-                    <input class="form-control" name="distributors" type="text" value="{{ equipment.distributors}}"/>
-                </div>
-                <label class="col-sm-2 control-label">联系人</label>
-                <div class="col-sm-3">
-                    <input class="form-control" name="dist_name" type="text" value="{{ equipment.dist_name}}"/>
-                </div>
-            </div>
-            <div class="form-group has-feedback">
-                <label class="col-sm-2 control-label">联系电话</label>
-                <div class="col-sm-3">
-                    <input class="form-control" name="dist_phone" type="text" value="{{ equipment.dist_phone}}"/>
                 </div>
             </div>
 
