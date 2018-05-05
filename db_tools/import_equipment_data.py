@@ -14,38 +14,30 @@ from adm.models import Customer, EquipmentType, Equipment
 
 User = get_user_model()
 
-# with open('data/equipment_data.csv') as f:
-#     f_csv = csv.reader(f)
-#     headers = next(f_csv)
-#     for row in f_csv:
-#         equipment_type = EquipmentType.objects.get(name=row[2])
-#         customer = Customer.objects.filter(unit=row[3])
-#         print(customer)
+equipments = []
+with open('data/equipment_data.csv') as f:
+    f_csv = csv.reader(f)
+    headers = next(f_csv)
+    for row in f_csv:
 
-
-
-# customers_list = []
-# with open('data/customer_data.csv') as f:
-#     f_csv = csv.reader(f)
-#     headers = next(f_csv)
-#     for row in f_csv:
-#         belongs_to = User.objects.get(name=row[1])
-#         data = {
-#             "unit": row[0],
-#             "address": "未添加",
-#             "name": "未添加",
-#             "phone": "未添加",
-#             "belongs_to": belongs_to,
-#             "status": True
-#         }
-#         customers_list.append(data)
-#
-# for customer in customers_list:
-#     cus_intance = Customer()
-#     cus_intance.unit = customer["unit"]
-#     cus_intance.address = customer["address"]
-#     cus_intance.name = customer["address"]
-#     cus_intance.phone = customer["phone"]
-#     cus_intance.belongs_to = customer["belongs_to"]
-#     cus_intance.status = customer["status"]
+        equipment_type = EquipmentType.objects.filter(name=row[2])
+        customer = Customer.objects.filter(unit=row[3])
+        data = {
+            "number": row[0],
+            "equipment_type": equipment_type[0],
+            "equipment_model": row[1],
+            "buy_date": row[5],
+            "warranty_date": row[6],
+            "customer": customer[0]
+        }
+        equipments.append(data)
+for equipment in equipments:
+    equ_intance = Equipment()
+    equ_intance.number = equipment["number"]
+    equ_intance.equipment_type = equipment["equipment_type"]
+    equ_intance.equipment_model = equipment["equipment_model"]
+    equ_intance.buy_date = equipment["buy_date"]
+    equ_intance.warranty_date = equipment["warranty_date"]
+    equ_intance.customer = equipment["customer"]
+    equ_intance.save()
 

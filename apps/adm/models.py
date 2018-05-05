@@ -30,10 +30,10 @@ class Customer(models.Model):
     """
     客户信息
     """
-    unit = models.CharField(max_length=30, verbose_name="客户单位")
+    unit = models.CharField(max_length=50, verbose_name="客户单位")
     address = models.CharField(max_length=100, verbose_name="地址")
     name = models.CharField(max_length=20, verbose_name="联系人")
-    phone = models.CharField(max_length=20, verbose_name="联系电话")
+    phone = models.CharField(max_length=30, verbose_name="联系电话")
     belongs_to = models.ForeignKey(User, blank=True, null=True , on_delete=models.SET_NULL, verbose_name="责任人")
     status = models.BooleanField(default=True, verbose_name="状态")
     desc = models.TextField(blank=True, null=True, verbose_name="备注")
@@ -115,9 +115,9 @@ class Asset(models.Model):
 
 
 class Equipment(models.Model):
-    number = models.CharField(max_length=20, default="", verbose_name="设备编号")
-    equipment_type = models.ForeignKey(EquipmentType, blank=True, null=True , on_delete=models.SET_NULL, verbose_name="设备类型")
-    equipment_model = models.CharField(max_length=20, default="", verbose_name="设备型号")
+    number = models.CharField(max_length=30, default="", verbose_name="设备编号")
+    equipment_type = models.ForeignKey(EquipmentType, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="设备类型")
+    equipment_model = models.CharField(max_length=50, default="", verbose_name="设备型号")
     buy_date = models.DateField(verbose_name="购买日期")
     warranty_date = models.DateField(verbose_name="质保日期")
     config_desc = models.TextField(blank=True, null=True, verbose_name="配置说明")

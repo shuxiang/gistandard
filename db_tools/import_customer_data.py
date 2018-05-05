@@ -41,4 +41,4 @@ for customer in customers_list:
     cus_intance.phone = customer["phone"]
     cus_intance.belongs_to = customer["belongs_to"]
     cus_intance.status = customer["status"]
-
+    cus_intance.save()

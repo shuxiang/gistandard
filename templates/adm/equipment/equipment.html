@@ -97,10 +97,10 @@
                         <th>设备编号</th>
                         <th>类型</th>
                         <th>型号</th>
-                        <th>购买日期</th>
-                        <th>质保日期</th>
                         <th>购买单位</th>
                         <th>销售</th>
+                        <th>购买日期</th>
+                        <th>质保日期</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -167,17 +167,18 @@ $(function() {
 									data : "equipment_model",
 								},
                                 {
-									data : "buy_date",
-								},
-                                {
-									data : "warranty_date",
-								},
-                                {
 									data : "customer__unit",
 								},
                                 {
                                     data: "customer__belongs_to__name",
                                 },
+                                {
+									data : "buy_date",
+								},
+                                {
+									data : "warranty_date",
+								},
+
 								{
 									data : "id",
 									width : "10%",

@@ -6,6 +6,7 @@ from django.views.generic.base import View
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 
 from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
@@ -155,10 +156,10 @@ class CustomerDetailView(LoginRequiredMixin, View):
         ret = dict()
         if 'id' in request.GET and request.GET['id']:
             customer = get_object_or_404(Customer, pk=request.GET.get('id'))
-            users = User.objects.exclude(id=customer.belongs_to.id)
+            users = User.objects.exclude(Q(id=customer.belongs_to.id) | Q(is_active=False))
             ret['customer'] = customer
         else:
-            users = User.objects.exclude(id=request.user.id)
+            users = User.objects.exclude(Q(id=request.user.id) | Q(is_active=False))
         ret['users'] = users
         return render(request, 'adm/bsm/customer_detail.html', ret)
 
