@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block css %}
-<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="{% static 'js/plugins/layer/skin/layer.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -129,25 +129,43 @@
               <!-- /.tab-pane -->
               <div class="tab-pane" id="timeline">
                 <!-- The timeline -->
+                  <div class="box-header">
+                    <div class="btn-group pull-left">
+                           <p>设备维保服务进度更新记录</p>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <button type="button" id="btnUpdate" class="btn btn-default" onclick="doRefresh()">
+                            <i class="glyphicon glyphicon-repeat"></i>刷新
+                        </button>
+                        <div class="btn-group pull-left">&nbsp;</div>
+                        </button>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <button type="button" id="btnUpdate" class="btn btn-default" onclick="doUpdate({{ equipment.id }})">
+                            <i class="fa fa-spinner"></i>更新
+                        </button>
+                        <div class="btn-group pull-left">&nbsp;</div>
+                    </div>
+                  </div>
                 <ul class="timeline timeline-inverse">
                   <!-- timeline time label -->
+                  {% for service_info in services %}
                   <li class="time-label">
                         <span class="bg-red">
-                          2018-5-1
+                         {{ service_info.date|date:'Y年m月d日'}}
                         </span>
                   </li>
-                  <!-- /.timeline-label -->
-                  <!-- timeline item -->
+                    {% for info in service_info.content %}
                   <li>
-                    <i class="fa fa-envelope bg-blue"></i>
+                    <i class="fa fa-file-text bg-blue"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 23:32</span>
+                      <span class="time"><i class="fa fa-clock-o"></i> {{ info.add_time|date:'H:m' }}</span>
 
-                      <h3 class="timeline-header"><a href="#">韩洪乾</a> 维保服务进度更新</h3>
+                      <h3 class="timeline-header"><a href="#">{{ info.writer.name }}</a> <small>维保记录</small></h3>
 
                       <div class="timeline-body">
-                        今天联系客户负责人，和客户谈了设备续保事宜，明天去现场做次设备巡检，同时和客户介绍下公司的服务项目。
+                        {{ info.content }}
                       </div>
 {#                      <div class="timeline-footer">#}
 {#                        <a class="btn btn-primary btn-xs">Read more</a>#}
@@ -155,34 +173,15 @@
 {#                      </div>#}
                     </div>
                   </li>
-                  <li class="time-label">
-                        <span class="bg-red">
-                          2018-5-2
-                        </span>
-                  </li>
-                  <li>
-                    <i class="fa fa-envelope bg-blue"></i>
-
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 20:32</span>
-
-                      <h3 class="timeline-header"><a href="#">韩洪乾</a> 维保服务进度更新</h3>
-
-                      <div class="timeline-body">
-                        今天去客户现场做的巡检服务,提供了巡检报告,向客户介绍了公司的服务项目.
-                      </div>
-{#                      <div class="timeline-footer">#}
-{#                        <a class="btn btn-primary btn-xs">Read more</a>#}
-{#                        <a class="btn btn-danger btn-xs">Delete</a>#}
-{#                      </div>#}
-                    </div>
-                  </li>
+                   {% endfor %}
+                  {% endfor %}
                   <!-- END timeline item -->
                   <li>
                     <i class="fa fa-clock-o bg-gray"></i>
                   </li>
                 </ul>
               </div>
+
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->
@@ -199,7 +198,7 @@
 {% endblock %}
 
 {% block javascripts %}
-  <!-- iCheck 1.0.1 -->
+  <script src="{% static 'js/plugins/layer/layer.js' %}"></script>
   <script type="text/javascript">
 	$(function() {
 	    $('#ADM-EQUIPMENT').addClass('active');
@@ -209,6 +208,23 @@
     $("#btnReturn").click(function(){
 		history.back();
 	});
+
+	function doUpdate(id) {
+		    layer.open({
+			type : 2,
+			title : '更新维保记录',
+			shadeClose : false,
+			maxmin : true,
+			area : [ '800px', '300px' ],
+			content : "{% url 'adm-equipment:service-info-update' %}"+'?id='+id,
+
+		});
+	}
+
+	function doRefresh(){
+        window.location.reload();
+
+    }
   </script>
 
 {% endblock %}

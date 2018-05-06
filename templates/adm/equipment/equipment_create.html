@@ -102,19 +102,40 @@
 			data : data,
 			cache: false,
 			success : function(msg) {
-				if (msg.result){
+				if (msg.status == 'success'){
 					layer.alert('数据保存成功！', {icon: 1},function(index){
 					    parent.layer.closeAll(); //关闭所有弹窗
                     });
-				}else{
-					layer.alert('数据保存失败', {icon: 5});
+				}else if (msg.status == 'fail'){
+					layer.alert(msg.equipment_form_errors, {icon: 5});
                     //$('errorMessage').html(msg.message)
 				}
 				return ;
 			}
 		});
 	});
-
+/*
+	$("#btnSave").click(function(){
+		var data = $("#addForm").serialize();
+		$.ajax({
+			type: $("#addForm").attr('method'),
+			url : "/system/basic/user/create",
+			data : data,
+			cache: false,
+			success : function(msg) {
+				if (msg.status == 'success'){
+					layer.alert('用户添加成功！', {icon: 1},function(index){
+					    parent.layer.closeAll(); //关闭所有弹窗
+                    });
+				}else if (msg.status == 'fail'){
+					layer.alert(msg.user_create_form_errors, {icon: 5});
+                    //$('errorMessage').html(msg.message)
+				}
+				return ;
+			}
+		});
+	});
+* */
 
 	/*点取消刷新新页面*/
     $("#btnCancel").click(function () {

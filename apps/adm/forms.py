@@ -3,7 +3,7 @@
 # __data__  : 2017/12/20
 
 from django import forms
-from .models import Supplier, AssetType, Customer, EquipmentType, Equipment
+from .models import Supplier, AssetType, Customer, EquipmentType, Equipment, ServiceInfo
 
 
 class SupplierForm(forms.ModelForm):
@@ -34,5 +34,18 @@ class EquipmentForm(forms.ModelForm):
     class Meta:
         model = Equipment
         fields = '__all__'
+        error_messages = {
+            "number": {"required": "设备编号不能为空"},
+            "equipment_model": {"required": "请输入设备型号"},
+            "buy_date": {"required": "请输入购买日期"},
+            "warranty_date": {"required": "请输入质保日期"}
+        }
+
+    def clean(self):
+        cleaned_data = super(EquipmentForm, self).clean()
+        number = cleaned_data.get("number")
+
+        if Equipment.objects.filter(number=number).count():
+            raise forms.ValidationError('设备编号：{}已存在'.format(number))
 
 

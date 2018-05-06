@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^create', views_equipment.EquipmentCreateView.as_view(), name="create"),
     url(r'^detail', views_equipment.EquipmentDetailView.as_view(), name="equipment-detail"),
     url(r'^delete', views_equipment.EquipmentDeleteView.as_view(), name='delete'),
+    url(r'^serviceinfoupdate', views_equipment.ServiceInfoUpdateView.as_view(), name='service-info-update'),
 ]

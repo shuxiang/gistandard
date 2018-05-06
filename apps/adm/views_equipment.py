@@ -1,4 +1,5 @@
 import json
+import re
 from datetime import datetime, timedelta
 
 from django.shortcuts import render
@@ -11,7 +12,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
 from system.models import SystemSetup
-from .models import Equipment, EquipmentType, Customer, Supplier
+from .models import Equipment, EquipmentType, Customer, Supplier, ServiceInfo
 from .forms import EquipmentForm
 
 User = get_user_model()
@@ -29,6 +30,7 @@ class EquipmentView(LoginRequiredMixin, View):
         customers = Customer.objects.all()
         ret['equipment_types'] = equipment_types
         ret['customers'] = customers
+
         return render(request, 'adm/equipment/equipment.html', ret)
 
 
@@ -81,7 +83,7 @@ class EquipmentCreateView(LoginRequiredMixin, View):
         return render(request, 'adm/equipment/equipment_create.html', ret)
 
     def post(self, request):
-        res = dict(result=False)
+        res = {}
         if 'id' in request.POST and request.POST['id']:
             equipment = get_object_or_404(Equipment, pk=request.POST.get('id'))
         else:
@@ -89,7 +91,15 @@ class EquipmentCreateView(LoginRequiredMixin, View):
         equipment_form = EquipmentForm(request.POST, instance=equipment)
         if equipment_form.is_valid():
             equipment_form.save()
-            res['result'] = True
+            res['status'] = 'success'
+        else:
+            pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
+            errors = str(equipment_form.errors)
+            equipment_form_errors = re.findall(pattern, errors)
+            res = {
+                'status': 'fail',
+                'equipment_form_errors': equipment_form_errors[0]
+            }
         return HttpResponse(json.dumps(res), content_type='application/json')
 
 
@@ -103,6 +113,20 @@ class EquipmentDetailView(LoginRequiredMixin, View):
         if 'id' in request.GET and request.GET['id']:
             equipment = get_object_or_404(Equipment, pk=request.GET.get('id'))
             ret['equipment'] = equipment
+        service_info_all = ServiceInfo.objects.all()
+        dates = service_info_all.datetimes('add_time', 'day')
+        services = []
+        for date in dates:
+            start = date
+            end = date + timedelta(days=1)
+            service_info = service_info_all.filter(add_time__range=(start, end))
+            service_info_dict = {
+                "date": date,
+                "content": service_info
+            }
+
+            services.append(service_info_dict)
+        ret['services'] = services
         return render(request, 'adm/equipment/equipment_detail.html', ret)
 
 
@@ -115,3 +139,29 @@ class EquipmentDeleteView(LoginRequiredMixin, View):
             Equipment.objects.filter(id__in=id_list).delete()
             ret['result'] = True
         return HttpResponse(json.dumps(ret), content_type='application/json')
+
+
+class ServiceInfoUpdateView(LoginRequiredMixin, View):
+    """
+    设备维保更新记录
+    """
+
+    def get(self, request):
+        ret = dict()
+        if 'id' in request.GET and request.GET['id']:
+            equipment_id = request.GET['id']
+            ret['equipment_id'] = equipment_id
+        return render(request, 'adm/equipment/service_info_update.html', ret)
+
+    def post(self, request):
+        res = dict(result=False)
+        if 'id' in request.POST and request.POST['id']:
+            equipment = get_object_or_404(Equipment, pk=request.POST.get('id'))
+            if 'content' in request.POST and request.POST['content']:
+                content = request.POST['content']
+                writer_id = request.user.id
+                service_info = ServiceInfo(content=content, writer_id=writer_id)
+                service_info.save()
+                equipment.service_info.add(service_info)
+                res['result'] = True
+        return HttpResponse(json.dumps(res), content_type='application/json')

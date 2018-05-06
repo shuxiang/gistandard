@@ -114,6 +114,20 @@ class Asset(models.Model):
         return self.assetNum
 
 
+class ServiceInfo(models.Model):
+    content = models.TextField(verbose_name="记录内容")
+    writer = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="记录人")
+    is_reminding = models.BooleanField(default=False, verbose_name="邮件消息提醒")
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
+
+    class Mate:
+        verbose_name = "服务记录"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.content
+
+
 class Equipment(models.Model):
     number = models.CharField(max_length=30, default="", verbose_name="设备编号")
     equipment_type = models.ForeignKey(EquipmentType, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="设备类型")
@@ -123,4 +137,15 @@ class Equipment(models.Model):
     config_desc = models.TextField(blank=True, null=True, verbose_name="配置说明")
     customer = models.ForeignKey(Customer, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="客户信息")
     supplier = models.ForeignKey(Supplier, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="分销商")
+    service_info = models.ManyToManyField(ServiceInfo, blank=True, verbose_name="服务记录")
+
+    class Meta:
+        verbose_name = "设备管理"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.number
+id
+
+
 
