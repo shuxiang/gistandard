@@ -181,7 +181,7 @@ $(function() {
 
 								{
 									data : "id",
-									width : "10%",
+									{#width : "10%",#}
 									bSortable : "false",
 									render : function(data, type, row, meta) {
 										var ret="<button title='详情' onclick='doDetail("
@@ -237,7 +237,8 @@ $(function() {
 	});
 
 	$("#btnRefresh").click(function(){
-		oDataTable.ajax.reload();
+		//oDataTable.ajax.reload();
+        window.location.reload();
 	});
 
 	//批量删除

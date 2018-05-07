@@ -22,6 +22,8 @@ import xadmin
 from users.views_user import LoginView, IndexView, LogoutView
 from system.views import SystemView
 from adm.views import AdmView
+from personal import views as personal_views
+
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
@@ -40,5 +42,11 @@ urlpatterns = [
     url(r'^adm/bsm/', include('adm.urls', namespace='adm-bsm')),
     url(r'^adm/equipment/', include('adm.urls_equipment', namespace='adm-equipment')),
     url(r'^adm/asset/', include('adm.urls_asset', namespace='adm-asset')),
+
+    url(r'^personal/$', personal_views.PersonalView.as_view(), name="personal"),
+    url(r'^personal/userinfo', personal_views.UserInfoView.as_view(), name="personal-user_info"),
+    url(r'^personal/uploadimage', personal_views.UploadImageView.as_view(), name="personal-uploadimage"),
+    url(r'^personal/passwordchange', personal_views.PasswdChangeView.as_view(), name="personal-passwordchange"),
+    url(r'^personal/phonebook', personal_views.PhoneBookView.as_view(), name="personal-phonebook"),
 
 ]

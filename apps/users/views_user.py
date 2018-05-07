@@ -59,10 +59,13 @@ class LoginView(View):
             ret = (SystemSetup.getSystemSetupLastData())
             return render(request, 'system/users/login.html', ret)
         else:
-            return HttpResponseRedirect(reverse('/'))
+            return HttpResponseRedirect(reverse('/personal/'))
 
     def post(self, request):
-        redirect_to = request.GET.get('next', '/')
+        if request.GET.get('next') == '/':
+            redirect_to = '/personal/'
+        else:
+            redirect_to = request.GET.get('next', '/personal/')
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
             user_name = request.POST.get("username", "")
@@ -273,35 +276,4 @@ class AdminPasswdChangeView(LoginRequiredMixin, View):
                     'status': 'fail',
                     'admin_passwd_change_form_errors': admin_passwd_change_form_errors[0]
                 }
-        return HttpResponse(json.dumps(ret), content_type='application/json')
-
-
-class PasswdChangeView(LoginRequiredMixin, View):
-    """
-    登陆用户修改个人密码
-    """
-
-    def get(self, request):
-        ret = dict()
-        user = get_object_or_404(User, pk=int(request.user.id))
-        ret['user'] = user
-        return render(request, 'system/users/passwd-change.html', ret)
-
-    def post(self, request):
-
-        user = get_object_or_404(User, pk=int(request.user.id))
-        form = AdminPasswdChangeForm(request.POST)
-        if form.is_valid():
-            new_password = request.POST.get('password')
-            user.set_password(new_password)
-            user.save()
-            ret = {'status': 'success'}
-        else:
-            pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
-            errors = str(form.errors)
-            admin_passwd_change_form_errors = re.findall(pattern, errors)
-            ret = {
-                'status': 'fail',
-                'admin_passwd_change_form_errors': admin_passwd_change_form_errors[0]
-            }
         return HttpResponse(json.dumps(ret), content_type='application/json')

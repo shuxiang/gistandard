@@ -91,6 +91,6 @@
 }
 
 /* 列表页查询form样式 */
-.searchArea{width:250px}
+.searchArea{width:240px}
 .searchArea label{width:80px}
-.searchArea .inputText{width:160px}
+.searchArea .inputText{width:150px}
