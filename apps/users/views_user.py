@@ -46,8 +46,7 @@ class IndexView(LoginRequiredMixin, View):
         #     return render(request, 'index.html')
         # else:
         #     return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-        return render(request, 'index.html')
-
+        return HttpResponseRedirect('/personal/')
 
 class LoginView(View):
     '''
@@ -59,13 +58,10 @@ class LoginView(View):
             ret = (SystemSetup.getSystemSetupLastData())
             return render(request, 'system/users/login.html', ret)
         else:
-            return HttpResponseRedirect(reverse('/personal/'))
+            return HttpResponseRedirect('/personal/')
 
     def post(self, request):
-        if request.GET.get('next') == '/':
-            redirect_to = '/personal/'
-        else:
-            redirect_to = request.GET.get('next', '/personal/')
+        redirect_to = request.GET.get('next', '/personal/')
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
             user_name = request.POST.get("username", "")

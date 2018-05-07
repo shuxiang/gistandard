@@ -12,10 +12,8 @@
 <section class="content-header margin-bottom">
   <ol class="breadcrumb">
     <li><a href=""><i class="fa fa-dashboard"></i>办公平台</a></li>
-    {% if menu.parent.parent %}
-    <li class="active"><a href="{{ menu.parent.parent.url }}">{{ menu.parent.parent.title }}</a></li>
-    {% endif %}
-    <li class="active"><a href="{{ menu.url }}">{{ menu.title }}</a></li>
+    <li class="active"><a href="{% url 'personal' %}">我的工作台</a></li>
+    <li class="active"><a href="{% url 'personal-user_info' %}">个人中心</a></li>
   </ol>
 </section>
     <!-- Main content -->
@@ -42,7 +40,7 @@
             </li>
           </ul>
 				<div class="text-center">
-					<button type="button" id="btnImport"  class="btn btn-default" data-toggle="modal" data-target="#exampleModal">
+					<button type="button" id="btnImport"  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 						修改头像
 					</button>
                     <button type="button" id="btnChangePWD" onclick="doChangepasswd()" class="btn btn-danger">

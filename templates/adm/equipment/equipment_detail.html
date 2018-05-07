@@ -76,51 +76,55 @@
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
                 <div class="box-header">
-                    <h3 class="box-title">设备信息：</h3>
+                    <h3 class="box-title text-bold">设备信息：</h3>
                 </div>
                 <div class="box-body no-padding">
                   <table class="table table-striped"><tbody>
                     <tr>
-                      <td style="width: 30%">设备编号</td>
+                        <td style="width: 30%"><strong>设备编号</strong></td>
                       <td>{{ equipment.number }}</td>
                     </tr>
                     <tr>
-                      <td>设备类型</td>
+                      <td><strong>设备类型</strong></td>
                       <td>{{ equipment.equipment_type }}</td>
                     </tr>
                     <tr>
-                      <td>设备型号</td>
+                      <td><strong>设备型号</strong></td>
                       <td>{{ equipment.equipment_model }}</td>
                     </tr>
                     <tr>
-                      <td>购买日期</td>
+                      <td><strong>购买日期</strong></td>
                       <td>{{ equipment.buy_date }}</td>
                     </tr>
                     <tr>
-                      <td>质保日期</td>
+                      <td><strong>质保日期</strong></td>
                       <td>{{ equipment.warranty_date }}</td>
                     </tr>
                     <tr>
-                      <td>配置说明</td>
+                      <td><strong>费用核算</strong></td>
+                      <td>{% if equipment.accounting is True %}已核算{% else %}未核算{% endif %}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>配置说明</strong></td>
                       <td>{{ equipment.config_desc }}</td>
                     </tr>
                   </tbody></table>
                 </div>
                 <div class="box-header">
-                    <h3 class="box-title">分销商信息:</h3>
+                    <h3 class="box-title text-bold">分销商信息:</h3>
                 </div>
                 <div class="box-body no-padding">
                   <table class="table table-striped"><tbody>
                     <tr>
-                      <td style="width: 30%">分销商</td>
+                      <td style="width: 30%"><strong>分销商</strong></td>
                       <td>{{ equipment.supplier.company }}</td>
                     </tr>
                     <tr>
-                      <td>联系人</td>
+                      <td><strong>联系人</strong></td>
                       <td>{{ equipment.supplier.linkname }}</td>
                     </tr>
                     <tr>
-                      <td>联系电话</td>
+                      <td><strong>联系电话</strong></td>
                       <td>{{ equipment.supplier.phone }}</td>
                     </tr>
                   </tbody></table>

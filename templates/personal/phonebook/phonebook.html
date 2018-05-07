@@ -5,10 +5,8 @@
 <section class="content-header margin-bottom">
   <ol class="breadcrumb">
     <li><a href=""><i class="fa fa-dashboard"></i>办公平台</a></li>
-    {% if menu.parent.parent %}
-    <li class="active"><a href="{{ menu.parent.parent.url }}">{{ menu.parent.parent.title }}</a></li>
-    {% endif %}
-    <li class="active"><a href="{{ menu.url }}">{{ menu.title }}</a></li>
+    <li class="active"><a href="{% url 'personal' %}">我的工作台</a></li>
+    <li class="active"><a href="{% url 'personal-phonebook' %}">内部通信</a></li>
   </ol>
 </section>
     <!-- Main content -->
@@ -16,7 +14,7 @@
   <div class="row">
   {% for linkman in linkmans %}
      <div class="col-md-3">
-        <div class="box box-primary">
+        <div class="box box-danger">
         <div class="box-body box-profile">
           <img class="profile-user-img img-responsive img-circle" src="/media/{{linkman.image }}" alt="User profile picture">
 

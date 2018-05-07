@@ -134,6 +134,7 @@ class Equipment(models.Model):
     equipment_model = models.CharField(max_length=50, default="", verbose_name="设备型号")
     buy_date = models.DateField(verbose_name="购买日期")
     warranty_date = models.DateField(verbose_name="质保日期")
+    accounting = models.BooleanField(default=False, verbose_name="费用核算状态")
     config_desc = models.TextField(blank=True, null=True, verbose_name="配置说明")
     customer = models.ForeignKey(Customer, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="客户信息")
     supplier = models.ForeignKey(Supplier, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="分销商")
@@ -145,7 +146,6 @@ class Equipment(models.Model):
 
     def __str__(self):
         return self.number
-id
 
 
 

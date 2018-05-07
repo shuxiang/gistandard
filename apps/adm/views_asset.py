@@ -11,7 +11,7 @@ from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
 from system.models import SystemSetup
 from .models import Equipment, EquipmentType, Customer
-from .forms import EquipmentForm
+
 
 User = get_user_model()
 

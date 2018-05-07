@@ -13,7 +13,7 @@ from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
 from system.models import SystemSetup
 from .models import Equipment, EquipmentType, Customer, Supplier, ServiceInfo
-from .forms import EquipmentForm
+from .forms import EquipmentCreateForm, EquipmentUpdateForm
 
 User = get_user_model()
 
@@ -80,26 +80,60 @@ class EquipmentCreateView(LoginRequiredMixin, View):
         ret['equipment_type'] = equipment_type
         ret['customer'] = customer
         ret['suppliers'] = suppliers
+
+        # 获取登陆用户的角色组返回给前端，用来控制费用核算的显示状态
+        user_info = User.objects.get(id=request.user.id)
+        roles = user_info.roles.values()
+        role_list = [role['title'] for role in roles if role['title'] == '核算']
+        if role_list:
+            ret['role_list'] = role_list[0]
         return render(request, 'adm/equipment/equipment_create.html', ret)
 
     def post(self, request):
         res = {}
+        # if 'id' in request.POST and request.POST['id']:
+        #     equipment = get_object_or_404(Equipment, pk=request.POST.get('id'))
+        # else:
+        #     equipment = Equipment()
+        # equipment_form = EquipmentForm(request.POST, instance=equipment)
+        # if equipment_form.is_valid():
+        #     equipment_form.save()
+        # else:
+        #     pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
+        #     errors = str(equipment_form.errors)
+        #     equipment_form_errors = re.findall(pattern, errors)
+        #     res = {
+        #         'status': 'fail',
+        #         'equipment_form_errors': equipment_form_errors[0]
+        #     }
         if 'id' in request.POST and request.POST['id']:
             equipment = get_object_or_404(Equipment, pk=request.POST.get('id'))
+            equipment_update_form = EquipmentUpdateForm(request.POST, instance=equipment)
+            if equipment_update_form.is_valid():
+                equipment_update_form.save()
+                res['status'] = 'success'
+            else:
+                pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
+                errors = str(equipment_update_form.errors)
+                equipment_form_errors = re.findall(pattern, errors)
+                res = {
+                    'status': 'fail',
+                    'equipment_form_errors': equipment_form_errors[0]
+                }
         else:
             equipment = Equipment()
-        equipment_form = EquipmentForm(request.POST, instance=equipment)
-        if equipment_form.is_valid():
-            equipment_form.save()
-            res['status'] = 'success'
-        else:
-            pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
-            errors = str(equipment_form.errors)
-            equipment_form_errors = re.findall(pattern, errors)
-            res = {
-                'status': 'fail',
-                'equipment_form_errors': equipment_form_errors[0]
-            }
+            equipment_create_form = EquipmentCreateForm(request.POST, instance=equipment)
+            if equipment_create_form.is_valid():
+                equipment_create_form.save()
+                res['status'] = 'success'
+            else:
+                pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
+                errors = str(equipment_create_form.errors)
+                equipment_form_errors = re.findall(pattern, errors)
+                res = {
+                    'status': 'fail',
+                  'equipment_form_errors': equipment_form_errors[0]
+                }
         return HttpResponse(json.dumps(res), content_type='application/json')
 
 
@@ -113,7 +147,7 @@ class EquipmentDetailView(LoginRequiredMixin, View):
         if 'id' in request.GET and request.GET['id']:
             equipment = get_object_or_404(Equipment, pk=request.GET.get('id'))
             ret['equipment'] = equipment
-        service_info_all = ServiceInfo.objects.all()
+        service_info_all = equipment.service_info.all()
         dates = service_info_all.datetimes('add_time', 'day')
         services = []
         for date in dates:
