@@ -41,3 +41,6 @@ for equipment in equipments:
     equ_intance.customer = equipment["customer"]
     equ_intance.save()
 
+
+
+

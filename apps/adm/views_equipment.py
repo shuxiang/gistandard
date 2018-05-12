@@ -27,7 +27,7 @@ class EquipmentView(LoginRequiredMixin, View):
         ret = Menu.getMenuByRequestUrl(url=request.path_info)
         ret.update(SystemSetup.getSystemSetupLastData())
         equipment_types = EquipmentType.objects.all()
-        customers = Customer.objects.all()
+        customers = Customer.objects.all().order_by('unit')
         ret['equipment_types'] = equipment_types
         ret['customers'] = customers
 
@@ -48,9 +48,9 @@ class EquipmentListView(LoginRequiredMixin, View):
             if select == 0:
                 date_time = datetime.today()
                 filters['warranty_date__lte'] = date_time
-            if select == 3:
+            if select == 1:
                 now = datetime.today()
-                date_time = now + timedelta(days=90)
+                date_time = now + timedelta(days=365)
                 filters['warranty_date__range'] = (now, date_time)
         if 'number' in request.GET and request.GET['number']:
             filters['number__icontains'] = request.GET['number']
@@ -106,6 +106,8 @@ class EquipmentCreateView(LoginRequiredMixin, View):
         #         'status': 'fail',
         #         'equipment_form_errors': equipment_form_errors[0]
         #     }
+
+        #  分别多修建和更新两种行为的forms验证，避免添加重复的NT设备
         if 'id' in request.POST and request.POST['id']:
             equipment = get_object_or_404(Equipment, pk=request.POST.get('id'))
             equipment_update_form = EquipmentUpdateForm(request.POST, instance=equipment)
