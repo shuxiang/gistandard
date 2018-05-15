@@ -150,3 +150,9 @@ SAFE_URL = [r'^/$',
             '/media/',
             '/xadmin/',
             ]
+
+# session过期时间设置
+
+SESSION_COOKIE_AGE = 60 * 30  # 30分钟过期
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # 关闭浏览器，cookie失效
+SESSION_SAVE_EVERY_REQUEST = True

@@ -243,7 +243,8 @@ function doUpdate(id){
 		area : [ '800px', '520px' ],
 		content : [ "{% url 'adm-bsm:customer-detail' %}"+'?id='+id, 'no' ],
 		end : function() {
-			oDataTable.ajax.reload();
+			window.location.reload();
+			//oDataTable.ajax.reload();
 		}
 	});
 }
