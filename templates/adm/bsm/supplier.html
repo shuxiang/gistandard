@@ -171,7 +171,7 @@ $(function() {
 			title : '新增',
 			shadeClose : false,
 			maxmin : true,
-			area : [ '800px', '500px' ],
+			area : [ '800px', '550px' ],
 			content : "{% url 'adm-bsm:supplier-detail' %}",
 			end : function() {
 				//关闭时做的事情
@@ -235,7 +235,7 @@ function doUpdate(id){
 		title : '编辑-详情',
 		shadeClose : false,
     	maxmin : true,
-		area : [ '800px', '500px' ],
+		area : [ '800px', '550px' ],
 		content : [ "{% url 'adm-bsm:supplier-detail' %}"+'?id='+id, 'no' ],
 		end : function() {
 			oDataTable.ajax.reload();

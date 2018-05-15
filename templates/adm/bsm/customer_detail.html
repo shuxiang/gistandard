@@ -91,12 +91,12 @@
 			data : data,
 			cache: false,
 			success : function(msg) {
-				if (msg.result){
+				if (msg.status == 'success'){
 					layer.alert('数据保存成功！', {icon: 1},function(index){
 					    parent.layer.closeAll(); //关闭所有弹窗
                     });
-				}else{
-					layer.alert('数据保存失败', {icon: 5});
+				}else if (msg.status == 'fail'){
+					layer.alert(msg.customer_form_errors, {icon: 5});
                     //$('errorMessage').html(msg.message)
 				}
 				return ;

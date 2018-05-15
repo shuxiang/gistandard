@@ -1,4 +1,5 @@
 import json
+import re
 
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
@@ -12,7 +13,8 @@ from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
 from system.models import SystemSetup
 from .models import Supplier, AssetType, Customer, EquipmentType
-from .forms import SupplierForm, AssetTypeForm, CustomerForm, EquipmentTypeForm
+from .forms import SupplierCreateForm, SupplierUpdateForm, AssetTypeForm, CustomerCreateForm, CustomerUpdateForm, \
+    EquipmentTypeForm
 
 User = get_user_model()
 
@@ -28,7 +30,7 @@ class SupplierView(LoginRequiredMixin, View):
 
 class SupplierListView(LoginRequiredMixin, View):
     """
-    获取供应商列表
+    获取分销商列表
     """
     def get(self, request):
         ret = dict(data=list(Supplier.objects.values()))
@@ -37,7 +39,7 @@ class SupplierListView(LoginRequiredMixin, View):
 
 class SupplierDetailView(LoginRequiredMixin, View):
     """
-    供应商详情页：查看、修改、新建数据
+    分销商详情页：查看、修改、新建数据
     """
     def get(self, request):
         ret = dict()
@@ -49,16 +51,48 @@ class SupplierDetailView(LoginRequiredMixin, View):
         return render(request, 'adm/bsm/supplier_detail.html', ret)
 
     def post(self, request):
-        res = dict(result=False)
+        # res = dict(result=False)
+        # if 'id' in request.POST and request.POST['id']:
+        #     supplier = get_object_or_404(Supplier, pk=request.POST.get('id'))
+        # else:
+        #     supplier = Supplier()
+        # supplier_form = SupplierForm(request.POST, instance=supplier)
+        # if supplier_form.is_valid():
+        #     supplier_form.save()
+        #     res['result'] = True
+        # return HttpResponse(json.dumps(res), content_type='application/json')
+        res = {}
         if 'id' in request.POST and request.POST['id']:
             supplier = get_object_or_404(Supplier, pk=request.POST.get('id'))
+            supplier_update_form = SupplierUpdateForm(request.POST, instance=supplier)
+            if supplier_update_form.is_valid():
+                supplier_update_form.save()
+                res['status'] = 'success'
+            else:
+                pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
+                errors = str(supplier_update_form.errors)
+                supplier_form_errors = re.findall(pattern, errors)
+                res = {
+                    'status': 'fail',
+                    'supplier_form_errors': supplier_form_errors[0]
+                }
+
         else:
             supplier = Supplier()
-        supplier_form = SupplierForm(request.POST, instance=supplier)
-        if supplier_form.is_valid(): 
-            supplier_form.save()
-            res['result'] = True
+            supplier_create_form = SupplierCreateForm(request.POST, instance=supplier)
+            if supplier_create_form.is_valid():
+                supplier_create_form.save()
+                res['status'] = 'success'
+            else:
+                pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
+                errors = str(supplier_create_form.errors)
+                supplier_form_errors = re.findall(pattern, errors)
+                res = {
+                    'status': 'fail',
+                    'supplier_form_errors': supplier_form_errors[0]
+                }
         return HttpResponse(json.dumps(res), content_type='application/json')
+
 
 
 class SupplierDeleteView(LoginRequiredMixin, View):
@@ -164,15 +198,46 @@ class CustomerDetailView(LoginRequiredMixin, View):
         return render(request, 'adm/bsm/customer_detail.html', ret)
 
     def post(self, request):
-        res = dict(result=False)
+        # res = dict(result=False)
+        # if 'id' in request.POST and request.POST['id']:
+        #     customer = get_object_or_404(Customer, pk=request.POST.get('id'))
+        # else:
+        #     customer = Customer()
+        # customer_form = CustomerForm(request.POST, instance=customer)
+        # if customer_form.is_valid():
+        #     customer_form.save()
+        #     res['result'] = True
+        # return HttpResponse(json.dumps(res), content_type='application/json')
+        res = {}
         if 'id' in request.POST and request.POST['id']:
             customer = get_object_or_404(Customer, pk=request.POST.get('id'))
+            customer_update_form = CustomerUpdateForm(request.POST, instance=customer)
+            if customer_update_form.is_valid():
+                customer_update_form.save()
+                res['status'] = 'success'
+            else:
+                pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
+                errors = str(customer_update_form.errors)
+                customer_form_errors = re.findall(pattern, errors)
+                res = {
+                    'status': 'fail',
+                    'customer_form_errors': customer_form_errors[0]
+                }
+
         else:
             customer = Customer()
-        customer_form = CustomerForm(request.POST, instance=customer)
-        if customer_form.is_valid():
-            customer_form.save()
-            res['result'] = True
+            customer_create_form = CustomerCreateForm(request.POST, instance=customer)
+            if customer_create_form.is_valid():
+                customer_create_form.save()
+                res['status'] = 'success'
+            else:
+                pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
+                errors = str(customer_create_form.errors)
+                customer_form_errors = re.findall(pattern, errors)
+                res = {
+                    'status': 'fail',
+                    'customer_form_errors': customer_form_errors[0]
+                }
         return HttpResponse(json.dumps(res), content_type='application/json')
 
 

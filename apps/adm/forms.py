@@ -6,10 +6,34 @@ from django import forms
 from .models import Supplier, AssetType, Customer, EquipmentType, Equipment, ServiceInfo
 
 
-class SupplierForm(forms.ModelForm):
+class SupplierCreateForm(forms.ModelForm):
     class Meta:
         model = Supplier
         fields = '__all__'
+        error_messages = {
+            "company": {"required": "请输入分销商公司名称"},
+            "address": {"required": "请输入分销商公司地址"},
+            "linkname": {"required": "请输入分销商联系人"},
+            "phone": {"required": "请输入分销商联系电话"}
+        }
+
+    def clean(self):
+        cleaned_data = super(SupplierCreateForm, self).clean()
+        company = cleaned_data.get("company")
+        if Supplier.objects.filter(company=company).count():
+            raise forms.ValidationError('分销商："{}"已存在'.format(company))
+
+
+class SupplierUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Supplier
+        fields = '__all__'
+        error_messages = {
+            "company": {"required": "请输入分销商公司名称"},
+            "address": {"required": "请输入分销商公司地址"},
+            "linkname": {"required": "请输入分销商联系人"},
+            "phone": {"required": "请输入分销商联系电话"}
+        }
 
 
 class AssetTypeForm(forms.ModelForm):
@@ -18,10 +42,34 @@ class AssetTypeForm(forms.ModelForm):
         fields = '__all__'
 
 
-class CustomerForm(forms.ModelForm):
+class CustomerCreateForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ['unit', 'address', 'name', 'phone', 'status', 'belongs_to']
+        fields = ['unit', 'address', 'name', 'phone', 'status', 'belongs_to', 'desc']
+        error_messages = {
+            "unit": {"required": "请填写客户单位"},
+            "address": {"required": "请填写客户单位地址"},
+            "name": {"required": "请填写客户联系人"},
+            "phone": {"required": "请填写客户联系电话"}
+        }
+
+    def clean(self):
+        cleaned_data = super(CustomerCreateForm, self).clean()
+        unit = cleaned_data.get("unit")
+        if Customer.objects.filter(unit=unit).count():
+            raise forms.ValidationError('客户单位："{}"已经存在'.format(unit))
+
+
+class CustomerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['unit', 'address', 'name', 'phone', 'status', 'belongs_to', 'desc']
+        error_messages = {
+            "unit": {"required": "请填写客户单位"},
+            "address": {"required": "请填写客户单位地址"},
+            "name": {"required": "请填写客户联系人"},
+            "phone": {"required": "请填写客户联系电话"}
+        }
 
 
 class EquipmentTypeForm(forms.ModelForm):
