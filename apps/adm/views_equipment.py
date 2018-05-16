@@ -113,6 +113,10 @@ class EquipmentCreateView(LoginRequiredMixin, View):
             equipment_update_form = EquipmentUpdateForm(request.POST, instance=equipment)
             if equipment_update_form.is_valid():
                 equipment_update_form.save()
+                # new_equipment = equipment_update_form.save(commit=False)
+                # new_equipment.save()
+                # equipment_update_form.save_m2m()
+
                 res['status'] = 'success'
             else:
                 pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'

@@ -102,7 +102,9 @@ class EquipmentUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Equipment
-        fields = '__all__'
+        # fields = '__all__'
+        # 排除 service_info字段，不然通过modelform更新数据时，m2m数据会丢失
+        exclude = ['service_info', ]
         error_messages = {
             "number": {"required": "设备编号不能为空"},
             "equipment_model": {"required": "请输入设备型号"},
