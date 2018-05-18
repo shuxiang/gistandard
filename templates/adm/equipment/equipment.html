@@ -4,12 +4,14 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'plugins/datatables/jquery.dataTables.min.css' %}">
 <link rel="stylesheet" href="{% static 'js/plugins/layer/skin/layer.css' %}">
+<link rel="stylesheet" href="{%static 'plugins/select2/select2.min.css' %}">
 <!-- iCheck for checkboxes and radio inputs -->
 {% endblock %}
 
 {% block content %}
 
 <!-- Content Header (Page header) -->
+
 <section class="content-header margin-bottom">
   <ol class="breadcrumb">
     <li><a href=""><i class="fa fa-dashboard"></i>办公平台</a></li>
@@ -61,22 +63,22 @@
                     <label>设备编号：</label>
                     <input type="text" name="number" class="form-control inputText" id="number" placeholder="请输入资产编号">
                 </div>
-                <div class="form-group searchArea margin-r-5 margin-top-5">
-                  <label>设备类型：</label>
-                  <select class="form-control inputText" name="equipment_type", id="equipment_type">
+               <div class="form-group searchArea margin-r-5 margin-top-5">
+                <label>设备类型：</label>
+                <select class="form-control inputText select2" name="equipment_type", id="equipment_type">
                     <option></option>
                     {% for type in equipment_types %}
                     <option value={{ type.id }}>{{ type.name }}</option>
                     {% endfor %}
-                  </select>
-                </div>
+                </select>
+              </div>
                 <div class="form-group searchArea margin-r-5 margin-top-5">
                     <label>设备型号：</label>
                     <input type="text" name="equipment_model" class="form-control inputText" id="equipment_model">
                 </div>
                 <div class="form-group searchArea margin-r-5 margin-top-5">
                   <label>购买单位：</label>
-                  <select class="form-control inputText" name="customer" id="customer">
+                  <select class="form-control inputText select2" name="customer" id="customer">
                     <option></option>
                     {% for customer in customers %}
                     <option value="{{ customer.id }}">{{ customer.unit }}</option>
@@ -122,6 +124,7 @@
   <script src="{% static 'plugins/datatables/dataTables.const.js' %}"></script>
   <script src="{% static 'plugins/datatables/moment.min.js' %}"></script>
   <script src="{% static 'js/plugins/layer/layer.js' %}"></script>
+  <script src="{% static 'plugins/select2/select2.full.min.js' %}"></script>
   <!-- iCheck 1.0.1 -->
   <script type="text/javascript">
 	$(function() {
@@ -299,43 +302,19 @@ function doUpdate(id){
 		area : [ '800px', '500px' ],
 		content : [ "{% url 'adm-equipment:create' %}"+'?id='+id, 'no' ],
 		end : function() {
-			oDataTable.ajax.reload();
+			//oDataTable.ajax.reload();
+            window.location.reload();
+
 		}
 	});
     layer.full(div)
 }
 
-
-//删除单个数据
-function doDelete(id){
-    layer.alert('确定删除吗？', {
-        title:'提示'
-        ,icon: 3 //0:感叹号 1：对号 2：差号 3：问号 4：小锁 5：哭脸 6：笑脸
-        ,time: 0 //不自动关闭
-        ,btn: ['YES', 'NO']
-        ,yes: function(index){
-            layer.close(index);
-            $.ajax({
-                type: "POST",
-                url : "{% url 'adm-equipment:delete' %}",
-                data : {"id":id, csrfmiddlewaretoken: '{{ csrf_token }}'},  //防止post数据时报 csrf_token 403
-                cache: false,
-                success : function(msg) {
-                    if (msg.result){
-                        layer.alert('删除成功',{icon: 1});
-                        oDataTable.ajax.reload();
-                    }else{
-                        //alert(msg.message);
-                        layer.alert('删除失败', {icon: 2});
-                    }
-                    return ;
-                }
-            });
-        }
-    });
-
-}
-
-
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+  });
 </script>
 {% endblock %}
