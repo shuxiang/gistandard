@@ -27,7 +27,10 @@ class EquipmentView(LoginRequiredMixin, View):
         ret = Menu.getMenuByRequestUrl(url=request.path_info)
         ret.update(SystemSetup.getSystemSetupLastData())
         equipment_types = EquipmentType.objects.all()
-        customers = Customer.objects.all().order_by('unit')
+        filters = dict()
+        if request.user.department_id == 9:  # 销售部门只能看自己的设备信息
+            filters['belongs_to_id'] = request.user.id
+        customers = Customer.objects.filter(**filters).order_by('unit')
         ret['equipment_types'] = equipment_types
         ret['customers'] = customers
 
@@ -43,6 +46,8 @@ class EquipmentListView(LoginRequiredMixin, View):
         fields = ['id', 'number', 'equipment_type__name', 'equipment_model', 'buy_date', 'warranty_date',
                   'customer__unit', 'customer__belongs_to__name']
         filters = dict()
+        if request.user.department_id == 9:  # 销售部门只能看自己的设备信息
+            filters['customer__belongs_to_id'] = request.user.id
         if 'select' in request.GET and request.GET['select']:
             select = int(request.GET['select'])
             if select == 0:
@@ -52,6 +57,7 @@ class EquipmentListView(LoginRequiredMixin, View):
                 now = datetime.today()
                 date_time = now + timedelta(days=365)
                 filters['warranty_date__range'] = (now, date_time)
+
         if 'number' in request.GET and request.GET['number']:
             filters['number__icontains'] = request.GET['number']
         if 'equipment_type' in request.GET and request.GET['equipment_type']:
@@ -60,7 +66,7 @@ class EquipmentListView(LoginRequiredMixin, View):
             filters['equipment_model__icontains'] = request.GET['equipment_model']
         if 'customer' in request.GET and request.GET['customer']:
             filters['customer'] = request.GET['customer']
-        ret = dict(data=list(Equipment.objects.filter(**filters).values(*fields)))
+        ret = dict(data=list(Equipment.objects.filter(**filters).values(*fields).order_by('-id')))
         return HttpResponse(json.dumps(ret, cls=DjangoJSONEncoder), content_type='application/json')
 
 
@@ -71,12 +77,16 @@ class EquipmentCreateView(LoginRequiredMixin, View):
 
     def get(self, request):
         ret = dict()
+        filters = dict()
         if 'id' in request.GET and request.GET['id']:
             equipment = get_object_or_404(Equipment, pk=request.GET.get('id'))
             ret['equipment'] = equipment
         equipment_type = EquipmentType.objects.values()
-        customer = Customer.objects.values()
-        suppliers = Supplier.objects.values()
+
+        if request.user.department_id == 9:  # 新建设备时销售部门只能选择自己的用户信息
+            filters['belongs_to_id'] = request.user.id
+        customer = Customer.objects.values().filter(**filters)
+        suppliers = Supplier.objects.values().filter(**filters)
         ret['equipment_type'] = equipment_type
         ret['customer'] = customer
         ret['suppliers'] = suppliers

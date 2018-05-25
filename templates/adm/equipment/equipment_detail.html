@@ -138,15 +138,8 @@
                            <p>设备维保服务进度更新记录</p>
                     </div>
                     <div class="btn-group pull-right">
-                        <button type="button" id="btnUpdate" class="btn btn-default" onclick="doRefresh()">
-                            <i class="glyphicon glyphicon-repeat"></i>刷新
-                        </button>
-                        <div class="btn-group pull-left">&nbsp;</div>
-                        </button>
-                    </div>
-                    <div class="btn-group pull-right">
-                        <button type="button" id="btnUpdate" class="btn btn-default" onclick="doUpdate({{ equipment.id }})">
-                            <i class="fa fa-spinner"></i>更新
+                        <button type="button" id="btnUpdate" class="btn btn-info" onclick="doUpdate({{ equipment.id }})">
+                            <i class="glyphicon glyphicon-refresh"></i>更新
                         </button>
                         <div class="btn-group pull-left">&nbsp;</div>
                     </div>
@@ -221,14 +214,14 @@
 			maxmin : true,
 			area : [ '800px', '300px' ],
 			content : "{% url 'adm-equipment:service-info-update' %}"+'?id='+id,
+            end : function() {
+            window.location.reload();
+
+		}
 
 		});
 	}
 
-	function doRefresh(){
-        window.location.reload();
-
-    }
   </script>
 
 {% endblock %}

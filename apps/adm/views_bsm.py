@@ -33,7 +33,10 @@ class SupplierListView(LoginRequiredMixin, View):
     获取分销商列表
     """
     def get(self, request):
-        ret = dict(data=list(Supplier.objects.values()))
+        filters = dict()
+        if request.user.department_id == 9:  # 销售部门只能看自己的分销商信息
+            filters['belongs_to_id'] = request.user.id
+        ret = dict(data=list(Supplier.objects.values().filter(**filters)))
         return HttpResponse(json.dumps(ret, cls=DjangoJSONEncoder), content_type='application/json')
 
 
@@ -178,7 +181,9 @@ class CustomerListView(LoginRequiredMixin, View):
     def get(self, request):
         fields = ['id', 'unit', 'address', 'name', 'phone', 'status', 'belongs_to__name', 'add_time', 'desc']
         filters = dict()
-        ret = dict(data=list(Customer.objects.values(*fields)))
+        if request.user.department_id == 9:
+            filters['belongs_to_id'] = request.user.id
+        ret = dict(data=list(Customer.objects.values(*fields).filter(**filters)))
         return HttpResponse(json.dumps(ret, cls=DjangoJSONEncoder), content_type='application/json')
 
 

@@ -23,7 +23,7 @@ from users.views_user import LoginView, IndexView, LogoutView
 from system.views import SystemView
 from adm.views import AdmView
 from personal import views as personal_views
-
+from personal import views_work_order as order
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
@@ -48,5 +48,10 @@ urlpatterns = [
     url(r'^personal/uploadimage', personal_views.UploadImageView.as_view(), name="personal-uploadimage"),
     url(r'^personal/passwordchange', personal_views.PasswdChangeView.as_view(), name="personal-passwordchange"),
     url(r'^personal/phonebook', personal_views.PhoneBookView.as_view(), name="personal-phonebook"),
-
+    url(r'^personal/workorder_Icrt/$', order.WorkOrderICreatedView.as_view(), name="personal-workorder_Icrt"),
+    url(r'^personal/workorder_Icrt/list', order.WorkOrderListView.as_view(), name="personal-workorder-list"),
+    url(r'^personal/workorder_Icrt/create', order.WorkOrderCreateView.as_view(), name="personal-workorder-create"),
+    url(r'^personal/workorder_Icrt/detail', order.WorkOrderDetailView.as_view(), name="personal-workorder-detail"),
+    url(r'^personal/workorder_Icrt/delete', order.WorkOrderDeleteView.as_view(), name="personal-workorder-delete"),
+    url(r'^personal/workorder_Icrt/update', order.WorkOrderUpdateView.as_view(), name="personal-workorder-update"),
 ]

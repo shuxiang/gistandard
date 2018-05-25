@@ -20,5 +20,5 @@ urlpatterns = [
     # 菜单管理
     url(r'^menu/$', views_menu.MenuView.as_view(), name="menu"),
     url(r'^menu/list$', views_menu.MenuListView.as_view(), name="menu-list"),
-
+    url(r'^menu/detail$', views_menu.MenuListDetailView.as_view(), name="menu-detail"),
 ]
