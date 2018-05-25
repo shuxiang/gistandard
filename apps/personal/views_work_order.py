@@ -19,7 +19,7 @@ from utils.toolkit import ToolKit, SendMessage
 User = get_user_model()
 
 
-class WorkOrderICreatedView(LoginRequiredMixin, View):
+class WorkOrderView(LoginRequiredMixin, View):
     """
     工单创建人视图
     """
@@ -33,7 +33,7 @@ class WorkOrderListView(LoginRequiredMixin, View):
     def get(self, request):
         fields = ['id', 'number', 'title', 'type', 'status', 'do_time', 'customer__unit', 'proposer__name']
         filters = dict()
-        # filters['proposer_id'] = request.user.id
+        filters['proposer_id'] = request.user.id
         if 'number' in request.GET and request.GET['number']:
             filters['number__icontains'] = request.GET['number']
 
