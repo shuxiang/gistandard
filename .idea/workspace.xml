@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a4cc3ce-4e16-4312-a839-79df1b450ff9" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/apps/personal/migrations/0003_auto_20180526_0941.py" />
-      <change beforePath="$PROJECT_DIR$/apps/personal/forms.py" afterPath="$PROJECT_DIR$/apps/personal/forms.py" />
-      <change beforePath="$PROJECT_DIR$/apps/personal/models.py" afterPath="$PROJECT_DIR$/apps/personal/models.py" />
-      <change beforePath="$PROJECT_DIR$/apps/personal/views_work_order.py" afterPath="$PROJECT_DIR$/apps/personal/views_work_order.py" />
-      <change beforePath="$PROJECT_DIR$/apps/utils/toolkit.py" afterPath="$PROJECT_DIR$/apps/utils/toolkit.py" />
-      <change beforePath="$PROJECT_DIR$/gistandard/urls.py" afterPath="$PROJECT_DIR$/gistandard/urls.py" />
-      <change beforePath="$PROJECT_DIR$/templates/adm/equipment/equipment_create.html" afterPath="$PROJECT_DIR$/templates/adm/equipment/equipment_create.html" />
-      <change beforePath="$PROJECT_DIR$/templates/personal/workorder/workorder.html" afterPath="$PROJECT_DIR$/templates/personal/workorder/workorder.html" />
-      <change beforePath="$PROJECT_DIR$/templates/personal/workorder/workorder_detail.html" afterPath="$PROJECT_DIR$/templates/personal/workorder/workorder_detail.html" />
-      <change beforePath="$PROJECT_DIR$/templates/personal/workorder/workorder_return.html" afterPath="$PROJECT_DIR$/templates/personal/workorder/workorder_send.html" />
-      <change beforePath="$PROJECT_DIR$/templates/personal/workorder/workorder_update.html" afterPath="$PROJECT_DIR$/templates/personal/workorder/workorder_update.html" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/templates/personal/workorder/workorder_send.html" afterPath="$PROJECT_DIR$/templates/personal/workorder/workorder_send.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,7 +36,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views_work_order.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views_work_order.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/personal/views_work_order.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="492">
@@ -62,7 +52,17 @@
         <entry file="file://$PROJECT_DIR$/gistandard/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="532">
-              <caret line="165" column="20" lean-forward="true" selection-start-line="165" selection-start-column="20" selection-end-line="165" selection-end-column="20" />
+              <caret line="165" column="20" lean-forward="false" selection-start-line="165" selection-start-column="20" selection-end-line="165" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workorder_send.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder_send.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="88" column="11" lean-forward="true" selection-start-line="88" selection-start-column="11" selection-end-line="88" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -72,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/apps/utils/toolkit.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+              <caret line="4" column="18" lean-forward="false" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -82,7 +82,7 @@
         <entry file="file://$PROJECT_DIR$/apps/personal/forms.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="321">
-              <caret line="59" column="47" lean-forward="true" selection-start-line="59" selection-start-column="47" selection-end-line="59" selection-end-column="47" />
+              <caret line="59" column="47" lean-forward="false" selection-start-line="59" selection-start-column="47" selection-end-line="59" selection-end-column="47" />
               <folding>
                 <element signature="e#72#96#0" expanded="true" />
               </folding>
@@ -93,8 +93,8 @@
       <file leaf-file-name="workorder_update.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder_update.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="967">
-              <caret line="123" column="53" lean-forward="false" selection-start-line="123" selection-start-column="53" selection-end-line="123" selection-end-column="53" />
+            <state relative-caret-position="389">
+              <caret line="119" column="60" lean-forward="false" selection-start-line="119" selection-start-column="59" selection-end-line="119" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -113,7 +113,7 @@
       <file leaf-file-name="workorder.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="-1972">
               <caret line="126" column="75" lean-forward="false" selection-start-line="126" selection-start-column="75" selection-end-line="126" selection-end-column="75" />
               <folding />
             </state>
@@ -235,8 +235,8 @@
         <option value="$PROJECT_DIR$/apps/personal/views_work_order.py" />
         <option value="$PROJECT_DIR$/gistandard/settings.py" />
         <option value="$PROJECT_DIR$/templates/personal/workorder/workorder_create.html" />
-        <option value="$PROJECT_DIR$/templates/personal/workorder/workorder_send.html" />
         <option value="$PROJECT_DIR$/templates/personal/workorder/workorder_update.html" />
+        <option value="$PROJECT_DIR$/templates/personal/workorder/workorder_send.html" />
       </list>
     </option>
   </component>
@@ -275,22 +275,6 @@
           <expand>
             <path>
               <item name="gistandard" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gistandard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gistandard" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gistandard" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gistandard" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gistandard" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gistandard" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gistandard" type="462c0819:PsiDirectoryNode" />
               <item name="gistandard" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -863,7 +847,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527258918562</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="工单审批派发">
+      <created>1527398491884</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1527398491884</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -985,7 +976,8 @@
     <MESSAGE value="修复资产管理更新数据丢失m2m服务信息数据" />
     <MESSAGE value="优化设备查询select2" />
     <MESSAGE value="工单创建、修改、提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="工单创建、修改、提交" />
+    <MESSAGE value="工单审批派发" />
+    <option name="LAST_COMMIT_MESSAGE" value="工单审批派发" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1287,29 +1279,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="126" column="75" lean-forward="false" selection-start-line="126" selection-start-column="75" selection-end-line="126" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Envs/gistandard/Lib/site-packages/django/views/generic/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4422">
-          <caret line="121" column="13" lean-forward="false" selection-start-line="121" selection-start-column="13" selection-end-line="121" selection-end-column="13" />
-          <folding>
-            <element signature="n#if#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1326,57 +1300,25 @@
         <state relative-caret-position="408">
           <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
           <folding>
-            <element signature="e#33#72#0" expanded="true" />
+            <element signature="e#33#72#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/utils/toolkit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder_create.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="109" column="57" lean-forward="true" selection-start-line="109" selection-start-column="57" selection-end-line="109" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder_send.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="84" column="21" lean-forward="false" selection-start-line="84" selection-start-column="21" selection-end-line="84" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/personal/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
-          <caret line="59" column="47" lean-forward="true" selection-start-line="59" selection-start-column="47" selection-end-line="59" selection-end-column="47" />
+          <caret line="59" column="47" lean-forward="false" selection-start-line="59" selection-start-column="47" selection-end-line="59" selection-end-column="47" />
           <folding>
             <element signature="e#72#96#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder_update.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="967">
-          <caret line="123" column="53" lean-forward="false" selection-start-line="123" selection-start-column="53" selection-end-line="123" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gistandard/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="532">
-          <caret line="165" column="20" lean-forward="true" selection-start-line="165" selection-start-column="20" selection-end-line="165" selection-end-column="20" />
+          <caret line="165" column="20" lean-forward="false" selection-start-line="165" selection-start-column="20" selection-end-line="165" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1388,6 +1330,56 @@
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4728">
+          <caret line="121" column="13" lean-forward="false" selection-start-line="121" selection-start-column="13" selection-end-line="121" selection-end-column="13" />
+          <folding>
+            <element signature="n#if#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder_create.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="109" column="57" lean-forward="true" selection-start-line="109" selection-start-column="57" selection-end-line="109" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/utils/toolkit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="18" lean-forward="false" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1972">
+          <caret line="126" column="75" lean-forward="false" selection-start-line="126" selection-start-column="75" selection-end-line="126" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder_update.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="119" column="60" lean-forward="false" selection-start-line="119" selection-start-column="59" selection-end-line="119" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/personal/workorder/workorder_send.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="88" column="11" lean-forward="true" selection-start-line="88" selection-start-column="11" selection-end-line="88" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
