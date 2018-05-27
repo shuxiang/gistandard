@@ -6,7 +6,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
-from .models import WorkOrder
+from .models import WorkOrder, WorkOrderRecord
 
 User = get_user_model()
 
@@ -65,3 +65,10 @@ class WorkOrderUpdateForm(forms.ModelForm):
         approver = cleaned_data.get("approver", "")
         if not approver:
             raise forms.ValidationError("请选择工单审批人")
+
+
+class WorkOrderRecordForm(forms.ModelForm):
+    class Meta:
+        model = WorkOrderRecord
+        fields = '__all__'
+

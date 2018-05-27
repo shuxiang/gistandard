@@ -1,4 +1,3 @@
-from datetime import datetime
 from django.db import models
 
 from django.contrib.auth import get_user_model
@@ -32,14 +31,14 @@ class WorkOrder(models.Model):
         return self.title
 
 
-class WorkListRecord(models.Model):
-    type_choices = ((2, "派发"), (3, "执行"), (4, "确认"), (5, '退回'))
+class WorkOrderRecord(models.Model):
+    type_choices = (('0', '退回'), ('1', "派发"), ('2', "执行"), ('3', "确认"))
     name = models.ForeignKey(User, verbose_name=u"记录人")
     work_order = models.ForeignKey(WorkOrder, verbose_name=u"工单信息")
     record_type = models.CharField(max_length=10, choices=type_choices, verbose_name=u"记录类型")
     content = models.CharField(max_length=500, verbose_name=u"记录内容", default="")
-    file_content = models.FileField(upload_to='file_folder/%Y/%m', default='', verbose_name='实施文档')
-    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"记录时间")
+    file_content = models.FileField(upload_to='file_folder/%Y/%m', blank=True, null=True, verbose_name='实施文档')
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name=u"记录时间")
 
     class Meta:
         verbose_name = u"执行记录"

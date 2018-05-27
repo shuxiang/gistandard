@@ -11,13 +11,35 @@
 <div class="box box-danger">
 	<form class="form-horizontal" id="addForm" method="post">
 		{% csrf_token %}
-        <input type="hidden" name='proposer' value="{{ request.user.id }}" />
+        <input type="hidden" name='work_order' value="{{ work_order.id }}" />
+        <input type="hidden" name='number' value="{{ work_order.number }}" />
+        <input type="hidden" name='name' value="{{ request.user.id }}" />
+        <input type="hidden" name='record_type' value="{{ record_type }}" />
 		<div class="box-body">
           <fieldset>
+            <legend>
+              <h4>工单派发</h4>
+            </legend>
+
             <div class="form-group has-feedback">
-                <label class="col-sm-2 control-label">工单内容</label>
+                <label class="col-sm-2 control-label">接单人</label>
+                <div class="col-sm-3">
+                  <select class="form-control select2" style="width:100%;" name="receiver">
+                  <option value=""></option>
+                  {% for engineer in engineers %}
+                  <option value="{{ engineer.id }}">{{ engineer.name }}</option>
+                  {% endfor %}
+                 </select>
+                 </div>
+                <label class="col-sm-2 control-label">安排时间</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control pull-right form_datetime" name="do_time" value="{{ work_order.do_time |date:'Y-m-d H:m:s'}}"/>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">派发说明</label>
                 <div class="col-sm-8">
-                    <textarea class="form-control" name="content" rows="5" >{{ work_order.content }}</textarea>
+                    <textarea class="form-control" name="content" rows="5" ></textarea>
                 </div>
             </div>
 
@@ -43,18 +65,22 @@
 		var data = $("#addForm").serialize();
 		$.ajax({
 			type: $("#addForm").attr('method'),
-			url : "{% url 'personal-workorder-create' %}",
+			url : "{% url 'personal-workorder-send' %}",
 			data : data,
 			cache: false,
 			success : function(msg) {
 				if (msg.status == 'success'){
-					layer.alert('工单保存成功！', {icon: 1},function(index){
+					layer.alert('工已单派发！邮件发送异常', {icon: 0},function(index){
 					    parent.layer.closeAll(); //关闭所有弹窗
                     });
 				}else if (msg.status == 'fail'){
-					layer.alert(msg.work_order_form_errors, {icon: 5});
-				}else if (msg.status == 'submit'){
-					layer.alert('工单申请已提交！', {icon: 1},function(index){
+					layer.alert('请将信息填写完整！', {icon: 5});
+				}else if (msg.status == 'success_send'){
+					layer.alert('工单已派发，通知邮件发送成功！', {icon: 0},function(index){
+					    parent.layer.closeAll(); //关闭所有弹窗
+                    });
+				}else if (msg.status == 'ban'){
+					layer.alert(' 当前状态禁止派发', {icon: 4},function(index){
 					    parent.layer.closeAll(); //关闭所有弹窗
                     });
 				}
@@ -69,13 +95,6 @@
 
     })
 
-/*通过按钮关闭弹layer弹出的页面窗口*/
-{#    $(document).ready(function(){#}
-{#        $("#btnCancel").click(function(){#}
-{#            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引#}
-{#            parent.layer.close(index);//关闭窗口#}
-{#        });#}
-{#    });#}
 
 /*input 时间输入选择*/
     $(".form_datetime").datetimepicker({

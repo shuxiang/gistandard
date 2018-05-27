@@ -45,18 +45,14 @@
                     <input type="text" name="number" class="form-control inputText" id="number" placeholder="请输入工单号">
                 </div>
                <div class="form-group searchArea margin-r-5 margin-top-5">
-                <label>工单类型：</label>
-                <select class="form-control inputText select2" name="equipment_type", id="equipment_type">
+                <label>工单状态：</label>
+                <select class="form-control inputText select2" name="workorder_status" id="workorder_status">
                     <option></option>
-                    {% for type in equipment_types %}
-                    <option value={{ type.id }}>{{ type.name }}</option>
+                    {% for status in status_list %}
+                    <option value={{ status.item }}>{{ status.value }}</option>
                     {% endfor %}
                 </select>
               </div>
-                <div class="form-group searchArea margin-r-5 margin-top-5">
-                    <label>工单状态：</label>
-                    <input type="text" name="equipment_model" class="form-control inputText" id="equipment_model">
-                </div>
                 <div class="form-group searchArea margin-r-5 margin-top-5">
                   <label>用户单位：</label>
                   <select class="form-control inputText select2" name="customer" id="customer">
@@ -110,7 +106,7 @@
   <script type="text/javascript">
 	$(function() {
 	    $('#PERSONAL-WORKORDER').addClass('active');
-	    $('#PERSONAL-WORKORDER_ICRT').addClass('active');
+	    $('#{{ menu.code }}').addClass('active');
 
 	});
   </script>
@@ -126,10 +122,10 @@
 							ajax : {
 								"url":"{% url 'personal-workorder-list' %}",
 								"data":function ( d ) {
+								    d.main_url="{{ menu.url }}";
 									d.number=$("#number").val();
-									{#d.equipment_type=$("#equipment_type").val();#}
-									{#d.equipment_model=$("#equipment_model").val();#}
-									{#d.customer=$("#customer").val();#}
+									d.workorder_status=$("#workorder_status").val();
+									d.customer=$("#customer").val();
 								}
 						},
 						columns : [

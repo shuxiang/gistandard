@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'plugins/combo-select/combo.select.css' %}">
+<link rel="stylesheet" href="{%static 'plugins/select2/select2.min.css' %}">
 <link rel="stylesheet" href="{% static 'js/plugins/layer/skin/layer.css' %}">
 <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datetimepicker.min.css' %}">
 {% endblock %}
@@ -24,7 +24,7 @@
                 </div>
                 <label class="col-sm-2 control-label">类型</label>
                 <div class="col-sm-3">
-                  <select class="form-control" name="equipment_type">
+                  <select class="form-control select2" style="width:100%;" name="equipment_type">
                   <option value={{ equipment.equipment_type.id }}> {{ equipment.equipment_type.name|default:"" }} </option>
                   {% for type in equipment_type %}
                   <option value="{{ type.id }}">{{ type.name }}</option>
@@ -49,7 +49,7 @@
                 </div>
                 <label class="col-sm-2 control-label">购买单位</label>
                 <div class="col-sm-3">
-                  <select class="form-control" name="customer">
+                  <select class="form-control select2" style="width:100%;" name="customer">
                   <option value={{ equipment.customer_id }}> {{ equipment.customer.unit|default:"" }} </option>
                   {% for cus in customer %}
                   <option value="{{ cus.id}}">{{ cus.unit }}</option>
@@ -60,7 +60,7 @@
             <div class="form-group has-feedback">
                 <label class="col-sm-2 control-label">分销商</label>
                 <div class="col-sm-3">
-                  <select class="form-control" name="supplier">
+                  <select class="form-control select2" style="width:100%;" name="supplier">
                   <option value=""> </option>
                   <option value={{ equipment.supplier_id }}> {{ equipment.supplier.company}} </option>
                   {% for supplier in suppliers %}
@@ -103,7 +103,7 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="{% static 'plugins/combo-select/jquery.combo.select.js' %}"></script>
+<script src="{% static 'plugins/select2/select2.full.min.js' %}"></script>
 <script src="{% static 'bootstrap/js/bootstrap-datetimepicker.js' %}"></script>
 <script type="text/javascript">
 
@@ -180,11 +180,11 @@
             $(this).datetimepicker('hide');
     });
 
-/*select 支持输入检索*/
-  $(function() {
-    $('select').comboSelect();
- });
-
+// select2
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+  });
 </script>
 
 {% endblock %}

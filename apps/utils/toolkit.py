@@ -47,6 +47,24 @@ class SendMessage(object):
                        work_order.customer.address, work_order.content)
             email = [work_order.approver.email]
 
+        elif work_order.status == "3":
+            record = work_order.workorderrecord_set.get(record_type="1").content
+            email_title = "工单派发通知：{0}".format(work_order.title)
+            email_body = """编号为：{0} 的工单已经通过审批，申请人：{1}， 申请时间{2}，安排时间{3}，接单人{4}
+            -----------------------------------------------------
+            联系人：{5}
+            电话 ： {6}
+            单位 ： {7}
+            地址 ： {8}
+            内容 ： {9}
+            派发记录：{10}
+            ----------------------------------------------------
+            """.format(work_order.number, work_order.proposer, work_order.add_time, work_order.do_time, work_order.receiver,
+                       work_order.customer.name, work_order.customer.phone, work_order.customer.unit, work_order.customer.address,
+                       work_order.content, record)
+            email = [work_order.approver.email, work_order.proposer.email, work_order.receiver.email]
+
         send_status = send_mail(email_title, email_body, EMAIL_FROM, email)
         if send_status:
             pass
+
