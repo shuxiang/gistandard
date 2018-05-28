@@ -226,17 +226,17 @@ $(function() {
 	$("#btnCreate").click(function() {
 		var div=layer.open({
 			type : 2,
-			title : '新增',
+			title : '添加设备信息',
 			shadeClose : false,
 			maxmin : true,
-			area : [ '800px', '600px' ],
+			area : [ '800px', '500px' ],
 			content : "{% url 'adm-equipment:create' %}",
 			end : function() {
 				//关闭时做的事情
 				oDataTable.ajax.reload();
 			}
 		});
-           layer.full(div)
+           //layer.full(div)
 	});
 
 	$("#btnRefresh").click(function(){
@@ -296,7 +296,7 @@ function doDetail(id){
 function doUpdate(id){
 	var div=layer.open({
 		type : 2,
-		title : '编辑-详情',
+		title : '修改设备信息',
 		shadeClose : false,
     	maxmin : true,
 		area : [ '800px', '500px' ],
@@ -307,7 +307,6 @@ function doUpdate(id){
 
 		}
 	});
-    layer.full(div)
 }
 
 //删除单个数据

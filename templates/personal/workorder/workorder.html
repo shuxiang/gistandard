@@ -26,7 +26,7 @@
             <div class="box-header">
                 <div class="btn-group pull-left">&nbsp</div>
                 <div class="btn-group pull-left">
-                    <button type="button" id="btnCreate" class="btn btn-primary">
+                    <button type="button" id="btnCreate" class="btn btn-primary ">
                         <i class="glyphicon glyphicon-plus"></i>新增
                     </button>
 
@@ -161,7 +161,7 @@
 									data : "status",
                                     render : function(data, type, row, meta) {
 										if (data==0){
-                                            var ret="<button class='btn btn-danger btn-xs'>退回</button>";
+                                            var ret="<button class='btn btn-danger btn-xs'>工单已退回</button>";
 											return ret;
 										}if(data==1){
 											var ret="<button class='btn btn-info btn-xs'>新建-保存</button>";
@@ -178,7 +178,7 @@
                                             var ret="<button class='btn btn-primary btn-xs'>已执行-等待确认</button>";
 											return ret;
                                         }if(data==5) {
-                                            var ret="<button class='btn btn-default btn-xs'>完成</button>";
+                                            var ret="<button class='btn btn-default btn-xs bg-gray'>工单已完成</button>";
 											return ret;
                                         }
 									}
@@ -227,7 +227,7 @@
 	$("#btnCreate").click(function() {
 		var div=layer.open({
 			type : 2,
-			title : '新增',
+			title : '新增工单',
 			shadeClose : false,
 			maxmin : true,
 			area : [ '800px', '600px' ],
@@ -296,11 +296,11 @@ function doDetail(id){
 function doUpdate(id){
 	var div=layer.open({
 		type : 2,
-		title : '编辑-详情',
+		title : '修改工单',
 		shadeClose : false,
     	maxmin : true,
-		area : [ '800px', '500px' ],
-		content : [ "{% url 'personal-workorder-update' %}"+'?id='+id, 'no' ],
+		area : [ '800px', '600px' ],
+		content : [ "{% url 'personal-workorder-update' %}"+'?id='+id],
 		end : function() {
 			//oDataTable.ajax.reload();
             window.location.reload();

@@ -56,6 +56,8 @@ urlpatterns = [
     url(r'^personal/workorder_Icrt/update', order.WorkOrderUpdateView.as_view(), name="personal-workorder-update"),
     url(r'^personal/workorder_app/$', order.WorkOrderView.as_view(), name="personal-workorder_app"),
     url(r'^personal/workorder_app/send', order.WrokOrderSendView.as_view(), name="personal-workorder-send"),
-    url(r'^personal/workorder_rec/$', order.WorkOrderView.as_view(), name="personal-workorder_app"),
+    url(r'^personal/workorder_rec/$', order.WorkOrderView.as_view(), name="personal-workorder_rec"),
+    url(r'^personal/workorder_rec/execute', order.WorkOrderExecuteView.as_view(), name="personal-workorder-execute"),
+    url(r'^personal/workorder_rec/finish', order.WorkOrderFinishView.as_view(), name="personal-workorder-finish"),
 
 ]

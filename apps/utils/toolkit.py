@@ -34,7 +34,8 @@ class SendMessage(object):
         work_order = WorkOrder.objects.get(number=number)
         if work_order.status == "2":
             email_title = u"工单申请通知：{0}".format(work_order.title)
-            email_body = u""" {0} 提交了一个新的工单申请， 工单编号 ：{1}， 申请时间：{2}， 安排时间：{3}， 请审批！
+            email_body = """
+            {0} 提交了一个新的工单申请， 工单编号 ：{1}， 申请时间：{2}， 安排时间：{3}， 请审批！
             -----------------------------------------------------
             联系人：{4}
             电话 ： {5}
@@ -42,15 +43,17 @@ class SendMessage(object):
             地址 ： {7}
             内容 ： {8}
             -----------------------------------------------------
+            本邮件为系统通知请务回复，工单详细内容请查询工单系统(QQ手机邮箱客户端收取本内容显示格式会乱掉)
             """.format(work_order.proposer.name, work_order.number, work_order.add_time.strftime("%Y-%m-%d %H:%I:%S"), work_order.do_time,
                        work_order.customer.name, work_order.customer.phone, work_order.customer.unit,
                        work_order.customer.address, work_order.content)
-            email = [work_order.approver.email]
+            email = [work_order.approver.email, work_order.proposer.email]
 
         elif work_order.status == "3":
             record = work_order.workorderrecord_set.get(record_type="1").content
             email_title = "工单派发通知：{0}".format(work_order.title)
-            email_body = """编号为：{0} 的工单已经通过审批，申请人：{1}， 申请时间{2}，安排时间{3}，接单人{4}
+            email_body = """
+            编号为：{0} 的工单已经派发，申请人：{1}， 申请时间{2}，安排时间{3}，接单人：{4}
             -----------------------------------------------------
             联系人：{5}
             电话 ： {6}
@@ -58,10 +61,29 @@ class SendMessage(object):
             地址 ： {8}
             内容 ： {9}
             派发记录：{10}
-            ----------------------------------------------------
+            -----------------------------------------------------
+            本邮件为系统通知请务回复，工单详细内容请查询工单系统(QQ手机邮箱客户端收取本内容显示格式会乱掉)
             """.format(work_order.number, work_order.proposer, work_order.add_time, work_order.do_time, work_order.receiver,
                        work_order.customer.name, work_order.customer.phone, work_order.customer.unit, work_order.customer.address,
                        work_order.content, record)
+            email = [work_order.approver.email, work_order.proposer.email, work_order.receiver.email]
+
+        elif work_order.status == "4":
+            record = work_order.workorderrecord_set.get(record_type="2").content
+            email_title = "工单执行通知：{0}".format(work_order.title)
+            email_body = """
+            编号为：{0} 的工单已经执行，执行人：{1}
+            执行记录：{2}
+            """.format(work_order.number, work_order.receiver.name, record)
+            email = [work_order.approver.email, work_order.proposer.email, work_order.receiver.email]
+
+        elif work_order.status == "5":
+            record = work_order.workorderrecord_set.get(record_type="3").content
+            email_title = "工单确认通知：{0}".format(work_order.title)
+            email_body = """
+            编号为：{0} 的工单已经确认完成，确认人：{1}
+            确认记录：{2}
+            """.format(work_order.number, work_order.proposer.name, record)
             email = [work_order.approver.email, work_order.proposer.email, work_order.receiver.email]
 
         send_status = send_mail(email_title, email_body, EMAIL_FROM, email)

@@ -15,7 +15,21 @@
 		<div class="box-body">
           <fieldset>
             <legend>
-              <h4>创建工单</h4>
+            <div class="form-group has-feedback">
+               <div class="col-sm-8">创建工单</div>
+               <div class="btn-group col-sm-4 pull-right">
+                   <button type="button" id="btnCreateSupplier" class="btn btn-default">
+                        添加分销商
+                   </button>
+                    <button type="button" id="btnCreateCustomer" class="btn btn-default">
+                        添加客户
+                    </button>
+                    <button type="button" id="btnCreateEquipment" class="btn btn-default">
+                        添加设备
+                   </button>
+
+                </div>
+            </div>
             </legend>
             <div class="form-group has-feedback">
                 <label class="col-sm-2 control-label">工单号</label>
@@ -112,7 +126,11 @@
 				}else if (msg.status == 'fail'){
 					layer.alert(msg.work_order_form_errors, {icon: 5});
 				}else if (msg.status == 'submit'){
-					layer.alert('工单申请已提交！', {icon: 1},function(index){
+					layer.alert('工单申请已提交，邮件发送失败！', {icon: 0},function(index){
+					    parent.layer.closeAll(); //关闭所有弹窗
+                    });
+				}else if (msg.status == 'submit_send'){
+					layer.alert('工单申请已提交,邮件发送成功！', {icon: 1},function(index){
 					    parent.layer.closeAll(); //关闭所有弹窗
                     });
 				}
@@ -127,14 +145,50 @@
 
     })
 
-/*通过按钮关闭弹layer弹出的页面窗口*/
-{#    $(document).ready(function(){#}
-{#        $("#btnCancel").click(function(){#}
-{#            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引#}
-{#            parent.layer.close(index);//关闭窗口#}
-{#        });#}
-{#    });#}
+	$("#btnCreateCustomer").click(function() {
+		var div=layer.open({
+			type : 2,
+			title : '添加客户信息',
+			shadeClose : false,
+			maxmin : true,
+			area : [ '800px', '500px' ],
+			content : "{% url 'adm-bsm:customer-detail' %}",
+			end : function() {
+				//关闭时做的事情
+			}
+		});
+		layer.full(div)
+	});
 
+    $("#btnCreateSupplier").click(function() {
+		var div=layer.open({
+			type : 2,
+			title : '添加分销商信息',
+			shadeClose : false,
+			maxmin : true,
+			area : [ '800px', '480px' ],
+			content : "{% url 'adm-bsm:supplier-detail' %}",
+			end : function() {
+				//关闭时做的事情
+			}
+		});
+		layer.full(div)
+	});
+
+    $("#btnCreateEquipment").click(function() {
+	var div=layer.open({
+			type : 2,
+			title : '添加设备信息',
+			shadeClose : false,
+			maxmin : true,
+			area : [ '800px', '480px' ],
+			content : "{% url 'adm-equipment:create' %}",
+			end : function() {
+				//关闭时做的事情
+			}
+		});
+	     layer.full(div)
+	});
 /*input 时间输入选择*/
     $(".form_datetime").datetimepicker({
             language:  'zh',

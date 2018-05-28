@@ -1,0 +1,133 @@
+{% extends 'base-layer.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{%static 'plugins/select2/select2.min.css' %}">
+<link rel="stylesheet" href="{% static 'js/plugins/layer/skin/layer.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datetimepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/fileinput/fileinput.css' %}">
+
+{% endblock %}
+{% block main %}
+<div class="box box-danger">
+	<form class="form-horizontal" id="addForm" method="post">
+		{% csrf_token %}
+        <input name='work_order' value="{{ work_order.id }}" />
+        <input name='number' value="{{ work_order.number }}" />
+        <input name='name' value="{{ request.user.id }}" />
+        <input name='record_type' value="{{ record_type }}" />
+        <div class="box-body">
+          <fieldset>
+            <legend>
+              <h4>执行确认</h4>
+            </legend>
+
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">安排时间</label>
+                <div class="col-sm-8">
+                    <div class="file-loading">
+                        <input id="file_content" name="file_content" class="form-control" type="file"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <label class="col-sm-2 control-label">派发说明</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" name="content" rows="5" ></textarea>
+                </div>
+            </div>
+
+          </fieldset>
+		</div>
+		<div class="box-footer ">
+			<div class="row span7 text-center ">
+              <button type="button" id="btnCancel" class="btn btn-default margin-right " >重置</button>
+              <button type="button" id="btnSave" class="btn btn-info margin-right " >保存</button>
+			</div>
+		</div>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="{% static 'plugins/select2/select2.full.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap-datetimepicker.js' %}"></script>
+<script src="{% static 'plugins/fileinput/fileinput.js' %}"></script>
+<script src="{% static 'plugins/fileinput/zh.js' %}"></script>
+<script type="text/javascript">
+
+	$("#btnSave").click(function(){
+		var data = $("#addForm").serialize();
+		$.ajax({
+			type: $("#addForm").attr('method'),
+			url : "{% url 'personal-workorder-execute' %}",
+			data : data,
+			cache: false,
+			success : function(msg) {
+				if (msg.status == 'success'){
+					layer.alert('执行确认完毕！邮件发送异常', {icon: 0},function(index){
+					    parent.layer.closeAll(); //关闭所有弹窗
+                    });
+				}else if (msg.status == 'fail'){
+					layer.alert('请将信息填写完整！', {icon: 5});
+				}else if (msg.status == 'success_send'){
+					layer.alert('执行确认完毕，通知邮件发送成功！', {icon: 1},function(index){
+					    parent.layer.closeAll(); //关闭所有弹窗
+                    });
+				}else if (msg.status == 'ban'){
+					layer.alert(' 当前状禁止执行', {icon: 4},function(index){
+					    parent.layer.closeAll(); //关闭所有弹窗
+                    });
+				}
+				return ;
+			}
+		});
+	});
+
+	/*点取消刷新新页面*/
+    $("#btnCancel").click(function () {
+	    window.location.reload();
+
+    })
+
+
+/*input 时间输入选择*/
+    $(".form_datetime").datetimepicker({
+            language:  'zh',
+            //weekStart: 1,
+            //todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            //startView: 2,
+            forceParse: 0,
+            showMeridian: 1,
+            //format: 'yyyy-mm-dd'
+        }).on('changeDate', function (ev) {
+            $(this).datetimepicker('hide');
+    });
+
+//上传文件
+
+$(document).on('ready', function() {
+    $("#file_content").fileinput({
+        language: "zh",
+        showPreview: false,
+        showUpload: true,
+        allowedFileExtensions: ["zip"],
+        uploadUrl: '{% url "personal-workorder-execute" %}',
+        uploadExtraData: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+        maxFileCount: 1,
+        maxFilePreviewSize: 10240,
+    });
+});
+
+
+// select2
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+  });
+</script>
+
+{% endblock %}

@@ -128,15 +128,25 @@
                   <i class="fa fa-send-o"> 派发</i>
               </button>
               <button type="button" class="btn btn-primary btn-sm" title="执行反馈" id="btnWorkListExecute"
-                    onclick="doWorkListExecute({{ worklist.id }})">
+                    onclick="doWorkorderExecute({{ work_order.id }})">
                   <i class="glyphicon glyphicon-play"> 执行</i>
               </button>
               <button type="button" class="btn btn-default btn-sm" title="执行确认" id="btnWorkListFinish"
-                      onclick="doWorkListFinish({{ worklist.id }})">
+                      onclick="doWorkorderFinish({{ work_order.id }})">
                   <i class="fa fa-check"> 确认</i>
+              </button>
+
+            </div>
+            <div class="btn-group pull-right">
+                <button type="button" class="btn btn-default btn-sm" onclick="">
+                  <i class="fa fa-cloud-upload">上传项目资料</i>
+              </button>
+              <button type="button" class="btn btn-default btn-sm" onclick="doWorkListFinish({{ worklist.id }})">
+                  <i class="fa fa-cloud-upload">上传配置资料</i>
               </button>
             </div>
            </div>
+
            <form class="form-horizontal" id="WorkListDetailsForm" action="" method="post">
                 {% csrf_token %}
                 <div class="table-responsive mailbox-messages">
@@ -228,6 +238,7 @@
                     <span class="text-orange"><small>{{ record.get_record_type_display }}</small></span>
                     <small>{{ record.add_time }}</small>
                     <p class="text-muted margin-top-5">{{ record.content }}</p>
+                    <a href="/media/{{ record.file_content }}"><small class="pull-right">{{ record.file_content | cut:'file' }}</small></a>
                   </div>
                 </li>
                  {% endfor %}
@@ -262,24 +273,6 @@
             </table>
           </div>
         </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <ul class="todo-list ui-sortable">
-              {% for log in worklist_log %}
-            <li>
-                  <span class="handle ui-sortable-handle">
-                    <i class="fa fa-ellipsis-v"></i>
-                    <i class="fa fa-ellipsis-v"></i>
-                  </span>
-              <small class="label label-info"><i class="fa fa-clock-o"></i>{{ log.add_time }}</small>
-              <span class="text">{{ log.get_log_type_display }}：</span> <!--get_xxx_display获取choices类型字段数值-->
-              <span class="text">{{ log.desc }}</span>
-
-            </li>
-              {% endfor %}
-          </ul>
-        </div>
-        <!-- /.box-body -->
         <div class="box-footer clearfix no-border">
 
       </div>
@@ -404,7 +397,7 @@ function doWorkorderUpdate(id){
 		shadeClose : false,
     	maxmin : true,
 		area : [ '800px', '500px' ],
-		content : [ "{% url 'personal-workorder-update' %}"+'?id='+id, 'no' ],
+		content : [ "{% url 'personal-workorder-update' %}"+'?id='+id],
 		end : function() {
 			//oDataTable.ajax.reload();
             window.location.reload();
@@ -420,8 +413,38 @@ function doWorkorderSend(id){
 		title : '工单派发',
 		shadeClose : false,
         maxmin : true,
-		area : [ '800px', '400px' ],
+		area : [ '770px', '360px' ],
 		content : [ "{% url 'personal-workorder-send' %}"+'?id='+id, 'no' ],
+		end : function() {
+            window.location.reload();
+
+		}
+	});
+}
+
+function doWorkorderExecute(id){
+	    layer.open({
+		type : 2,
+		title : '工单执行',
+		shadeClose : false,
+        maxmin : true,
+		area : [ '770px', '360px' ],
+		content : [ "{% url 'personal-workorder-execute' %}"+'?id='+id, 'no' ],
+		end : function() {
+            window.location.reload();
+
+		}
+	});
+}
+
+function doWorkorderFinish(id){
+	    layer.open({
+		type : 2,
+		title : '工单确认',
+		shadeClose : false,
+        maxmin : true,
+		area : [ '770px', '360px' ],
+		content : [ "{% url 'personal-workorder-finish' %}"+'?id='+id, 'no' ],
 		end : function() {
             window.location.reload();
 

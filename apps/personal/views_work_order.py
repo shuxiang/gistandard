@@ -11,7 +11,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
-from .models import WorkOrder
+from .models import WorkOrder, WorkOrderRecord
 from .forms import WorkOrderCreateForm, WorkOrderUpdateForm, WorkOrderRecordForm
 from adm.models import Customer
 from rbac.models import Role
@@ -122,7 +122,7 @@ class WorkOrderDetailView(LoginRequiredMixin, View):
         ret = dict()
         if 'id' in request.GET and request.GET['id']:
             work_order = get_object_or_404(WorkOrder, pk=request.GET['id'])
-            work_order_record = work_order.workorderrecord_set.all().order_by('-add_time')
+            work_order_record = work_order.workorderrecord_set.all().order_by('add_time')
             user_list = [work_order.proposer_id, work_order.approver_id, work_order.receiver_id]
 
             # 和工单无关联的用户禁止通过手动指定ID的形式非法获取数据
@@ -214,14 +214,15 @@ class WrokOrderSendView(LoginRequiredMixin, View):
 
     def post(self, request):
         res = dict(status='fail')
-        work_order_form = WorkOrderRecordForm(request.POST)
-        if work_order_form.is_valid():
+        work_order_record_form = WorkOrderRecordForm(request.POST)
+        if work_order_record_form.is_valid():
             work_order = get_object_or_404(WorkOrder, pk=request.POST['work_order'])
             status = work_order.status
-            if status == '2':
-                work_order_form.save()
+            if status == '2' and request.user.id == work_order.approver_id:
+                work_order_record_form.save()
                 work_order.receiver_id = request.POST['receiver']
                 work_order.status = "3"
+                work_order.do_time = request.POST['do_time']
                 work_order.save()
                 res['status'] = 'success'
                 try:
@@ -233,3 +234,97 @@ class WrokOrderSendView(LoginRequiredMixin, View):
             else:
                 res['status'] = 'ban'
         return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')
+
+
+
+class WorkOrderExecuteView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        ret = dict()
+        work_order = get_object_or_404(WorkOrder, pk=request.GET['id'])
+        ret['work_order'] = work_order
+        ret['record_type'] = "2"
+        return render(request, 'personal/workorder/workorder_execute.html', ret)
+
+    def post(self, request):
+        res = dict(status='fail')
+        work_order_record_form = WorkOrderRecordForm(request.POST)
+        work_order = get_object_or_404(WorkOrder, pk=request.POST['work_order'])
+        if work_order_record_form.is_valid() and work_order.receiver_id == request.user.id:
+            status = work_order.status
+            if status == '3' and request.user.id == work_order.receiver_id:
+                work_order_record_form.save()
+                work_order.status = "4"
+                work_order.save()
+                res['status'] = 'success'
+                try:
+                    SendMessage.send_workorder_email(request.POST['number'])
+                    res['status'] = 'success_send'
+                except Exception as e:
+                    pass
+            else:
+                res['status'] = 'ban'
+        return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')
+
+
+class WorkOrderFinishView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        ret = dict()
+        work_order = get_object_or_404(WorkOrder, pk=request.GET['id'])
+        ret['work_order'] = work_order
+        ret['record_type'] = "3"
+        return render(request, 'personal/workorder/workorder_finish.html', ret)
+
+    def post(self, request):
+        res = dict(status='fail')
+        work_order_record_form = WorkOrderRecordForm(request.POST)
+        work_order = get_object_or_404(WorkOrder, pk=request.POST['work_order'])
+        if work_order_record_form.is_valid() and work_order.proposer.id == request.user.id:
+            status = work_order.status
+            if status == '4' and request.user.id == work_order.proposer_id:
+                work_order_record_form.save()
+                work_order.status = "5"
+                work_order.save()
+                res['status'] = 'success'
+                try:
+                    SendMessage.send_workorder_email(request.POST['number'])
+                    res['status'] = 'success_send'
+                except Exception as e:
+                    print(e)
+                    pass
+            else:
+                res['status'] = 'ban'
+        return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')
+
+
+# class WorkOrderUploadView(LoginRequiredMixin, View):
+#
+#     def get(self, request):
+#         ret = dict()
+#         work_order = get_object_or_404(WorkOrder, pk=request.GET['id'])
+#         ret['work_order'] = work_order
+#         ret['record_type'] = "2"
+#         return render(request, 'personal/workorder/workorder_execute.html', ret)
+#
+#     def post(self, request):
+#         res = dict(status='fail')
+#         work_order_record = get_object_or_404(WorkOrderRecord, pk=48, work_order_id=68)
+#         work_order_record_form = WorkOrderRecordForm(request.POST, request.FILES, instance=work_order_record)
+#         if work_order_record_form.is_valid():
+#             # work_order = get_object_or_404(WorkOrder, pk=request.POST['work_order'])
+#             # status = work_order.status
+#             # if status == '3' and request.user.id == work_order.receiver_id:
+#             work_order_record_form.save()
+#             #     work_order.status = "4"
+#             #     work_order.save()
+#             #     res['status'] = 'success'
+#             #     try:
+#             #         SendMessage.send_workorder_email(request.POST['number'])
+#             #         res['status'] = 'success_send'
+#             #     except Exception:
+#             #         pass
+#             #
+#             # else:
+#             #     res['status'] = 'ban'
+#         return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')

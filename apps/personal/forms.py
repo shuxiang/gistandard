@@ -20,7 +20,7 @@ class ImageUploadForm(forms.ModelForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['name', 'gender', 'birthday']
+        fields = ['name', 'gender', 'birthday', 'email']
 
 
 class WorkOrderCreateForm(forms.ModelForm):
@@ -70,5 +70,5 @@ class WorkOrderUpdateForm(forms.ModelForm):
 class WorkOrderRecordForm(forms.ModelForm):
     class Meta:
         model = WorkOrderRecord
-        fields = '__all__'
+        exclude = ['file_content', ]
 

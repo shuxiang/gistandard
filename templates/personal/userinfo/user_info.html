@@ -99,7 +99,7 @@
                 </div>
                 <label class="col-sm-2 control-label">邮箱</label>
                 <div class="col-sm-3">
-                    <input class="form-control" name="email" type="text" readonly="readonly" value="{{ user.email }}"/>
+                    <input class="form-control" name="email" type="text" value="{{ user.email }}"/>
                 </div>
             </div>
             <legend>
@@ -244,13 +244,12 @@ function doChangepasswd(){
 $(document).on('ready', function() {
     $("#input-b9").fileinput({
         showPreview: false,
-        showUpload: false,
+        showUpload: true,
         uploadExtraData: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
         language: "zh",
         elErrorContainer: '#kartik-file-errors',
         allowedFileExtensions: ["jpg", "png", "gif"],
         uploadUrl: '{% url "personal-uploadimage" %}',
-        showUpload: true,
         maxImageWidth: 500,
         maxImageHeight: 500,
 
