@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a4cc3ce-4e16-4312-a839-79df1b450ff9" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/file/2018/05/平台上传测试文件-shenzhiguo.zip" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/file/2018/05/平台上传测试文件-shenzhiguo_RY2vEnm.zip" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/file/2018/05/平台上传测试文件-sunguibiao.zip" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/file/2018/05/平台上传测试文件-sunguibiao_AxRIalY.zip" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/file/2018/05/沙盒.zip" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/templates/personal/workorder/workorder_project_upload.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/templates/personal/workorder/workorder_upload.html" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/apps/personal/forms.py" afterPath="$PROJECT_DIR$/apps/personal/forms.py" />
-      <change beforePath="$PROJECT_DIR$/apps/personal/views_work_order.py" afterPath="$PROJECT_DIR$/apps/personal/views_work_order.py" />
-      <change beforePath="$PROJECT_DIR$/apps/utils/toolkit.py" afterPath="$PROJECT_DIR$/apps/utils/toolkit.py" />
-      <change beforePath="$PROJECT_DIR$/gistandard/urls.py" afterPath="$PROJECT_DIR$/gistandard/urls.py" />
-      <change beforePath="$PROJECT_DIR$/media/file/2018/05/平台上传测试文件.zip" afterPath="$PROJECT_DIR$/media/file/2018/05/平台上传测试文件-hanhq.zip" />
-      <change beforePath="$PROJECT_DIR$/templates/page404.html" afterPath="$PROJECT_DIR$/templates/page404.html" />
-      <change beforePath="$PROJECT_DIR$/templates/personal/workorder/workorder_config_update.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/personal/workorder/workorder_detail.html" afterPath="$PROJECT_DIR$/templates/personal/workorder/workorder_detail.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -282,35 +267,6 @@
             <path>
               <item name="gistandard" type="b2602c69:ProjectViewProjectNode" />
               <item name="gistandard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gistandard" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gistandard" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gistandard" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gistandard" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="personal" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gistandard" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gistandard" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gistandard" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gistandard" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="file" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gistandard" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gistandard" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="file" type="462c0819:PsiDirectoryNode" />
-              <item name="2018" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -885,7 +841,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527485631589</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="工单增加文件上传功能">
+      <created>1527568543129</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1527568543129</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -1009,7 +972,8 @@
     <MESSAGE value="工单创建、修改、提交" />
     <MESSAGE value="工单审批派发" />
     <MESSAGE value="工单流程完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="工单流程完成" />
+    <MESSAGE value="工单增加文件上传功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="工单增加文件上传功能" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1050,6 +1014,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1170,6 +1135,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
           <caret line="53" column="64" lean-forward="false" selection-start-line="53" selection-start-column="64" selection-end-line="53" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1276,6 +1242,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="512">
           <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1324,6 +1291,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="367">
           <caret line="58" column="59" lean-forward="true" selection-start-line="58" selection-start-column="59" selection-end-line="58" selection-end-column="59" />
+          <folding />
         </state>
       </provider>
     </entry>
