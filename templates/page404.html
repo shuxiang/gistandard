@@ -1,9 +1,8 @@
-{% extends "base-left.html" %}
+{% extends "base-layer.html" %}
 {% load staticfiles %}
 
-{% block title %}Gistandard{% endblock %}
 
-{% block content %}
+{% block main %}
 
 <!-- Content Header (Page header) -->
 <section class="content-header margin-bottom">
@@ -19,13 +18,8 @@
 
           <p>&nbsp</p>
         <div class="error-content">
-          <h3><i class="fa fa-warning text-yellow"></i> 请求的页面不存在，可能原因：</h3>
+          <h3><i class="fa fa-warning text-yellow"></i> 请求的页面不存在或你无权访问该功能</h3>
 
-          <p>
-            1、你无权访问该页面&nbsp&nbsp
-            2、该功能暂未开放，页面不存在
-
-          </p>
         </div>
         <!-- /.error-content -->
       </div>
@@ -37,12 +31,4 @@
 
     <!-- /.content -->
 
-{% endblock %}
-
-{% block javascripts %}
-  <script type="text/javascript">
-	$(function() {
-		$('#index').addClass('active');
-	});
-  </script>
 {% endblock %}

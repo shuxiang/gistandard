@@ -12,7 +12,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
 from .models import WorkOrder, WorkOrderRecord
-from .forms import WorkOrderCreateForm, WorkOrderUpdateForm, WorkOrderRecordForm
+from .forms import WorkOrderCreateForm, WorkOrderUpdateForm, WorkOrderRecordForm, WorkOrderRecordUploadForm, WorkOrderProjectUploadForm
 from adm.models import Customer
 from rbac.models import Role
 
@@ -298,33 +298,41 @@ class WorkOrderFinishView(LoginRequiredMixin, View):
         return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')
 
 
-# class WorkOrderUploadView(LoginRequiredMixin, View):
-#
-#     def get(self, request):
-#         ret = dict()
-#         work_order = get_object_or_404(WorkOrder, pk=request.GET['id'])
-#         ret['work_order'] = work_order
-#         ret['record_type'] = "2"
-#         return render(request, 'personal/workorder/workorder_execute.html', ret)
-#
-#     def post(self, request):
-#         res = dict(status='fail')
-#         work_order_record = get_object_or_404(WorkOrderRecord, pk=48, work_order_id=68)
-#         work_order_record_form = WorkOrderRecordForm(request.POST, request.FILES, instance=work_order_record)
-#         if work_order_record_form.is_valid():
-#             # work_order = get_object_or_404(WorkOrder, pk=request.POST['work_order'])
-#             # status = work_order.status
-#             # if status == '3' and request.user.id == work_order.receiver_id:
-#             work_order_record_form.save()
-#             #     work_order.status = "4"
-#             #     work_order.save()
-#             #     res['status'] = 'success'
-#             #     try:
-#             #         SendMessage.send_workorder_email(request.POST['number'])
-#             #         res['status'] = 'success_send'
-#             #     except Exception:
-#             #         pass
-#             #
-#             # else:
-#             #     res['status'] = 'ban'
-#         return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')
+class WorkOrderUploadView(LoginRequiredMixin, View):
+    """
+    上传配置资料：工单执行记录配置资料上传
+    """
+    def get(self, request):
+        ret = dict()
+        work_order = get_object_or_404(WorkOrder, pk=request.GET['id'])
+        ret['work_order'] = work_order
+        return render(request, 'personal/workorder/workorder_upload.html', ret)
+
+    def post(self, request):
+        res = dict(status='fail')
+        work_order_record = get_object_or_404(WorkOrderRecord, name_id=request.user.id, work_order_id=request.POST['id'])
+        work_order_record_upload_form = WorkOrderRecordUploadForm(request.POST, request.FILES, instance=work_order_record)
+        if work_order_record_upload_form.is_valid():
+            work_order_record_upload_form.save()
+            res['status'] = 'success'
+        return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')
+
+
+class WorkOrderProjectUploadView(LoginRequiredMixin, View):
+    """
+    上传项目资料：工单内容项目资料上传
+    """
+    def get(self, request):
+        ret = dict()
+        work_order = get_object_or_404(WorkOrder, pk=request.GET['id'])
+        ret['work_order'] = work_order
+        return render(request, 'personal/workorder/workorder_project_upload.html', ret)
+
+    def post(self, request):
+        res = dict(status='fail')
+        work_order = get_object_or_404(WorkOrder, pk=request.POST['id'])
+        work_order_project_upload_form = WorkOrderProjectUploadForm(request.POST, request.FILES, instance=work_order)
+        if work_order_project_upload_form.is_valid() and request.user.id == work_order.proposer_id:
+            work_order_project_upload_form.save()
+            res['status'] = 'success'
+        return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')

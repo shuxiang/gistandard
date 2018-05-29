@@ -72,3 +72,14 @@ class WorkOrderRecordForm(forms.ModelForm):
         model = WorkOrderRecord
         exclude = ['file_content', ]
 
+
+class WorkOrderRecordUploadForm(forms.ModelForm):
+    class Meta:
+        model = WorkOrderRecord
+        fields = ['file_content']
+
+
+class WorkOrderProjectUploadForm(forms.ModelForm):
+    class Meta:
+        model = WorkOrder
+        fields = ['file_content']

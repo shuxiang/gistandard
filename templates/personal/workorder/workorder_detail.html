@@ -138,12 +138,12 @@
 
             </div>
             <div class="btn-group pull-right">
-                <button type="button" class="btn btn-default btn-sm" onclick="">
+                <button type="button" class="btn btn-default btn-sm" onclick="doWorkorderProjectUpload({{ work_order.id }})">
                   <i class="fa fa-cloud-upload">上传项目资料</i>
-              </button>
-              <button type="button" class="btn btn-default btn-sm" onclick="doWorkListFinish({{ worklist.id }})">
+                </button>
+                <button type="button" class="btn btn-default btn-sm" onclick="doWorkorderUpload({{ work_order.id }})">
                   <i class="fa fa-cloud-upload">上传配置资料</i>
-              </button>
+                </button>
             </div>
            </div>
 
@@ -224,6 +224,7 @@
                     <span class="text-orange"><small>创建</small></span>
                     <small>{{ work_order.add_time }}</small>
                     <p class="text-muted margin-top-5">{{ work_order.content }}</p>
+                     <a href="/media/{{ record.file_content }}"><small class="pull-right">{{ work_order.file_content | cut:'file' }}</small></a>
                   </div>
                 </li>
                  {% for record in work_order_record %}
@@ -413,8 +414,8 @@ function doWorkorderSend(id){
 		title : '工单派发',
 		shadeClose : false,
         maxmin : true,
-		area : [ '770px', '360px' ],
-		content : [ "{% url 'personal-workorder-send' %}"+'?id='+id, 'no' ],
+		area : [ '770px', '400px' ],
+		content : [ "{% url 'personal-workorder-send' %}"+'?id='+id],
 		end : function() {
             window.location.reload();
 
@@ -428,8 +429,8 @@ function doWorkorderExecute(id){
 		title : '工单执行',
 		shadeClose : false,
         maxmin : true,
-		area : [ '770px', '360px' ],
-		content : [ "{% url 'personal-workorder-execute' %}"+'?id='+id, 'no' ],
+		area : [ '770px', '400px' ],
+		content : [ "{% url 'personal-workorder-execute' %}"+'?id='+id],
 		end : function() {
             window.location.reload();
 
@@ -443,8 +444,38 @@ function doWorkorderFinish(id){
 		title : '工单确认',
 		shadeClose : false,
         maxmin : true,
-		area : [ '770px', '360px' ],
-		content : [ "{% url 'personal-workorder-finish' %}"+'?id='+id, 'no' ],
+		area : [ '770px', '400px' ],
+		content : [ "{% url 'personal-workorder-finish' %}"+'?id='+id],
+		end : function() {
+            window.location.reload();
+
+		}
+	});
+}
+
+function doWorkorderUpload(id){
+	    layer.open({
+		type : 2,
+		title : '文件上传',
+		shadeClose : false,
+        maxmin : true,
+		area : [ '770px', '300px' ],
+		content : [ "{% url 'personal-workorder-upload' %}"+'?id='+id],
+		end : function() {
+            window.location.reload();
+
+		}
+	});
+}
+
+function doWorkorderProjectUpload(id){
+	    layer.open({
+		type : 2,
+		title : '文件上传',
+		shadeClose : false,
+        maxmin : true,
+		area : [ '770px', '300px' ],
+		content : [ "{% url 'personal-workorder-project-upload' %}"+'?id='+id],
 		end : function() {
             window.location.reload();
 
