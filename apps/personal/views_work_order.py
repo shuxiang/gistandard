@@ -291,7 +291,6 @@ class WorkOrderFinishView(LoginRequiredMixin, View):
                     SendMessage.send_workorder_email(request.POST['number'])
                     res['status'] = 'success_send'
                 except Exception as e:
-                    print(e)
                     pass
             else:
                 res['status'] = 'ban'

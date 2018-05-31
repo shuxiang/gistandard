@@ -414,7 +414,7 @@ function doWorkorderSend(id){
 		title : '工单派发',
 		shadeClose : false,
         maxmin : true,
-		area : [ '770px', '400px' ],
+		area : [ '770px', '500px' ],
 		content : [ "{% url 'personal-workorder-send' %}"+'?id='+id],
 		end : function() {
             window.location.reload();
