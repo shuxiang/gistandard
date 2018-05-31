@@ -47,10 +47,7 @@
                     <tr valign="middle">
                         <th><input type="checkbox" id="checkAll"></th>
                         <th>ID</th>
-                        <th>资产类型</th>
-                        <th>所属</th>
-                        <th>类型级别</th>
-                        <th>状态</th>
+                        <th>类型</th>
                         <th>备注</th>
                         <th>操作</th>
                     </tr>
@@ -100,37 +97,9 @@ $(function() {
 								DATATABLES_CONSTANT.DATA_TABLES.COLUMN.CHECKBOX,
 								{
 									data : "id",
-									width : "5%",
 								},
 								{
 									data : "name",
-									width : "20%",
-								},
-								{
-									data : "parent__name",
-									width : "20%",
-								},
-								{
-									data : "level",
-									width : "10%",
-                                    render : function(data, type, row, meta) {
-										if (data==1){
-											return "一级";
-										}else if(data==2) {
-											return "二级";
-										}
-									}
-								},
-
-								{
-									data : "status",
-                                    render : function(data, type, row, meta) {
-										if (data==true){
-											return "启用";
-										}else {
-											return "禁用";
-										}
-									}
 								},
                                 {
 									data : "desc",
@@ -171,7 +140,7 @@ $(function() {
 			title : '新增',
 			shadeClose : false,
 			maxmin : true,
-			area : [ '800px', '500px' ],
+			area : [ '800px', '400px' ],
 			content : "{% url 'adm-bsm:assettype-detail' %}",
 			end : function() {
 				//关闭时做的事情
@@ -235,7 +204,7 @@ function doUpdate(id){
 		title : '编辑-详情',
 		shadeClose : false,
     	maxmin : true,
-		area : [ '800px', '500px' ],
+		area : [ '800px', '400px' ],
 		content : [ "{% url 'adm-bsm:assettype-detail' %}"+'?id='+id, 'no' ],
 		end : function() {
 			oDataTable.ajax.reload();

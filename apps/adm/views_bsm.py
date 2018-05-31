@@ -124,7 +124,7 @@ class AssetTypeListView(LoginRequiredMixin, View):
     资产类型列表
     """
     def get(self, request):
-        fields = ['id', 'name', 'parent__name', 'level', 'status', 'desc']
+        fields = ['id', 'name', 'desc']
         ret = dict(data=list(AssetType.objects.values(*fields)))
         return HttpResponse(json.dumps(ret), content_type='application/json')
 
@@ -134,7 +134,7 @@ class AssetTypeDetailView(LoginRequiredMixin, View):
     资产类型：查看、修改、新建数据
     """
     def get(self, request):
-        ret = dict(assettypes=AssetType.objects.filter(level=1))
+        ret=dict()
         if 'id' in request.GET and request.GET['id']:
             assettype = get_object_or_404(AssetType, pk=request.GET.get('id'))
             ret['assettype'] = assettype

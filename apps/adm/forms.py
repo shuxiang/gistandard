@@ -3,7 +3,7 @@
 # __data__  : 2017/12/20
 
 from django import forms
-from .models import Supplier, AssetType, Customer, EquipmentType, Equipment, ServiceInfo
+from .models import Supplier, AssetType, Customer, EquipmentType, Equipment, Asset
 
 
 class SupplierCreateForm(forms.ModelForm):
@@ -112,3 +112,22 @@ class EquipmentUpdateForm(forms.ModelForm):
             "warranty_date": {"required": "请输入质保日期"},
             "supplier": {"required": "请选择分销商"}
         }
+
+
+class AssetCreateForm(forms.ModelForm):
+    class Meta:
+        model = Asset
+        fields = '__all__'
+        error_messages = {
+            "assetNum": {"required": "资产编号不能为空"},
+            "model": {"required": "请输入资产型号"},
+            "buyDate": {"required": "请输入购买日期"},
+            "warrantyDate": {"required": "请输入质保日期"},
+            "status": {"required": "请选择资产状态"}
+        }
+
+    def clean(self):
+        cleaned_data = super(AssetCreateForm, self).clean()
+        number = cleaned_data.get("assetNum")
+        if Asset.objects.filter(assetNum=number).count():
+            raise forms.ValidationError('资产编号：{}已存在'.format(number))

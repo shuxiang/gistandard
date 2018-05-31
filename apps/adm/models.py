@@ -19,7 +19,7 @@ class Supplier(models.Model):
     add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
 
     class Meta:
-        verbose_name = "供应商管理"
+        verbose_name = "分销商管理"
         verbose_name_plural = verbose_name
 
     def __str__(self):
@@ -51,25 +51,78 @@ class AssetType(models.Model):
     """
     资产类型
     """
-    CODE_TYPE = (
-        (1, "一级"),
-        (2, "二级"),
-        (3, "三级"),
-    )
     name = models.CharField(max_length=30, verbose_name="类型名称", help_text="类型名称")
-    parent = models.ForeignKey("self", null=True, blank=True, verbose_name="所属", help_text="所属",)
-    level = models.IntegerField(choices=CODE_TYPE, verbose_name="类型级别", help_text="类型级别")
-    status = models.BooleanField(default=True, verbose_name="状态", help_text="状态")
     desc = models.TextField(blank=True, null=True, verbose_name="备注")
 
 
     class Meta:
         verbose_name = "资产类型"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
 
     def __str__(self):
         return self.name
+
+
+class Asset(models.Model):
+    asset_status = (
+        ("0", "闲置"),
+        ("1", "在用"),
+        ("2", "维修"),
+        ("3", "报废"),
+        ("4", "售出")
+    )
+    warehouse_choices = (
+        ("0", "南京"),
+        ("1", "苏州"),
+    )
+    assetNum = models.CharField(max_length=128, default="", verbose_name="资产编号")
+    assetType = models.ForeignKey(AssetType, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="资产类型")
+    brand = models.CharField(max_length=20, blank=True, null=True, verbose_name="品牌")
+    model = models.CharField(max_length=30, default="", verbose_name="型号")
+    warehouse = models.CharField(choices=warehouse_choices, default="1", max_length=20, verbose_name="仓库")
+    price = models.IntegerField(blank=True, null=True, verbose_name="价格")
+    buyDate = models.DateField(verbose_name="购买日期")
+    warrantyDate = models.DateField(verbose_name="到保日期")
+    status = models.CharField(choices=asset_status, max_length=20, default="1", verbose_name="资产状态")
+    customer = models.CharField(max_length=80, default="", blank=True, null=True, verbose_name="客户信息")
+    owner = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="使用人")
+    operator = models.CharField(max_length=20, default="", verbose_name="入库人")
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
+    desc = models.TextField(default="", blank=True, null=True, verbose_name="备注信息")
+
+    class Meta:
+        verbose_name = "资产管理"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.assetNum
+
+
+class AssetLog(models.Model):
+    asset = models.ForeignKey(Asset, verbose_name="资产")
+    operator = models.CharField(max_length=20, verbose_name="操作人")
+    desc = models.CharField(max_length=80, verbose_name="备注")
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
+
+    class Mate:
+        verbose_name = "变更记录"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.asset
+
+
+class ServiceInfo(models.Model):
+    content = models.TextField(verbose_name="记录内容")
+    writer = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="记录人")
+    is_reminding = models.BooleanField(default=False, verbose_name="邮件消息提醒")
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
+
+    class Mate:
+        verbose_name = "服务记录"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.content
 
 
 class EquipmentType(models.Model):
@@ -86,46 +139,6 @@ class EquipmentType(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Asset(models.Model):
-    asset_status = (
-        (1, "闲置"),
-        (2, "在用"),
-        (3, "维修"),
-        (4, "报废"),
-    )
-    assetNum = models.CharField(max_length=128, default="", verbose_name="资产编号")
-    assetType = models.ForeignKey(AssetType, verbose_name="资产类型")
-    brand = models.CharField(max_length=20, blank=True, null=True, verbose_name="品牌")
-    config = models.CharField(max_length=128, default="", verbose_name="配置")
-    supplier = models.ForeignKey(Supplier, verbose_name="供应商")
-    buyDate = models.DateField(verbose_name="购买日期")
-    warrantyDate = models.DateField(verbose_name="到保日期")
-    status = models.IntegerField(choices=asset_status, default=1, verbose_name="资产状态")
-    owner = models.ForeignKey(User, verbose_name="使用人")
-    desc = models.TextField(default="")
-
-    class Meta:
-        verbose_name = "资产管理"
-        verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return self.assetNum
-
-
-class ServiceInfo(models.Model):
-    content = models.TextField(verbose_name="记录内容")
-    writer = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="记录人")
-    is_reminding = models.BooleanField(default=False, verbose_name="邮件消息提醒")
-    add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
-
-    class Mate:
-        verbose_name = "服务记录"
-        verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return self.content
 
 
 class Equipment(models.Model):
