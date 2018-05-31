@@ -67,7 +67,7 @@
                         {% endfor %}
                     </select>
                </div>
-                <button type="button" id="btnEquipmentSearch" class="btn btn-default">
+                <button type="button" id="btnAssetSearch" class="btn btn-default">
                     <i class="glyphicon glyphicon-search"></i>查询
                 </button>
             </form>
@@ -128,11 +128,10 @@ $(function() {
 							ajax : {
 								"url":"{% url 'adm-asset:list' %}",
 								"data":function ( d ) {
-									{#d.select=$("#select").val();#}
-									{#d.number=$("#number").val();#}
-									{#d.equipment_type=$("#equipment_type").val();#}
-									{#d.equipment_model=$("#equipment_model").val();#}
-									{#d.customer=$("#customer").val();#}
+									d.assetNum=$("#assetNum").val();
+									d.assetType=$("#assetType").val();
+									d.model=$("#model").val();
+									d.status=$("#status").val();
 								}
 						},
 
@@ -220,7 +219,7 @@ $(function() {
 	}
 
    //刷新页面GET查询请求
-    $("#btnEquipmentSearch").click(function(){
+    $("#btnAssetSearch").click(function(){
             oDataTable.ajax.reload();
         });
 
@@ -258,10 +257,6 @@ $(function() {
            layer.full(div)
 	});
 
-	$("#btnRefresh").click(function(){
-		//oDataTable.ajax.reload();
-        window.location.reload();
-	});
 
 	//批量删除
 	$("#btnDelete").click(function() {
@@ -287,7 +282,7 @@ $(function() {
 			 	layer.close(index);
 			 	$.ajax({
 					type: "POST",
-					url : "{% url 'adm-equipment:delete' %}",
+					url : "{% url 'adm-asset:delete' %}",
 					data : {"id":sId, csrfmiddlewaretoken: '{{ csrf_token }}'},
 					cache: false,
 					success : function(msg) {
@@ -309,7 +304,7 @@ $(function() {
 });
 
 function doDetail(id){
-    window.location.href="/adm/equipment/detail?id="+id;
+    window.location.href="{% url 'adm-asset:asset-detail' %}?id="+id;
 }
 
 function doUpdate(id){
@@ -318,19 +313,20 @@ function doUpdate(id){
 		title : '修改设备信息',
 		shadeClose : false,
     	maxmin : true,
-		area : [ '800px', '500px' ],
-		content : [ "{% url 'adm-equipment:create' %}"+'?id='+id, 'no' ],
+		area : [ '800px', '580px' ],
+		content : "{% url 'adm-asset:update' %}"+'?id='+id,
 		end : function() {
 			//oDataTable.ajax.reload();
             window.location.reload();
 
 		}
 	});
+	layer.full(div)
 }
 
 //删除单个数据
 function doDelete(id){
-    layer.alert('当前组内用户也会被删除，确定删除吗？', {
+    layer.alert('确定删除吗？', {
         title:'提示'
         ,icon: 3 //0:感叹号 1：对号 2：差号 3：问号 4：小锁 5：哭脸 6：笑脸
         ,time: 0 //不自动关闭
@@ -339,7 +335,7 @@ function doDelete(id){
             layer.close(index);
             $.ajax({
                 type: "POST",
-                url : "{% url 'adm-equipment:delete' %}",
+                url : "{% url 'adm-asset:delete' %}",
                 data : {"id":id, csrfmiddlewaretoken: '{{ csrf_token }}'},  //防止post数据时报 csrf_token 403
                 cache: false,
                 success : function(msg) {

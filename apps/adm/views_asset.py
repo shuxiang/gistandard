@@ -12,7 +12,7 @@ from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
 from system.models import SystemSetup
 from .models import Asset, AssetType, AssetLog
-from .forms import AssetCreateForm
+from .forms import AssetCreateForm, AssetUpdateForm
 from rbac.models import Role
 
 
@@ -42,14 +42,14 @@ class AssetListView(LoginRequiredMixin, View):
         fields = ['id', 'assetNum', 'assetType__name', 'brand', 'model', 'warehouse', 'status', 'owner__name', 'operator', 'add_time']
         filters = dict()
 
-        # if 'number' in request.GET and request.GET['number']:
-        #     filters['number__icontains'] = request.GET['number']
-        # if 'equipment_type' in request.GET and request.GET['equipment_type']:
-        #     filters['equipment_type'] = request.GET['equipment_type']
-        # if 'equipment_model' in request.GET and request.GET['equipment_model']:
-        #     filters['equipment_model__icontains'] = request.GET['equipment_model']
-        # if 'customer' in request.GET and request.GET['customer']:
-        #     filters['customer'] = request.GET['customer']
+        if 'assetNum' in request.GET and request.GET['assetNum']:
+            filters['assetNum__icontains'] = request.GET['assetNum']
+        if 'assetType' in request.GET and request.GET['assetType']:
+            filters['assetType'] = request.GET['assetType']
+        if 'model' in request.GET and request.GET['model']:
+            filters['model__icontains'] = request.GET['model']
+        if 'status' in request.GET and request.GET['status']:
+            filters['status'] = request.GET['status']
         ret = dict(data=list(Asset.objects.filter(**filters).values(*fields)))
         return HttpResponse(json.dumps(ret, cls=DjangoJSONEncoder), content_type='application/json')
 
@@ -88,24 +88,74 @@ class AssetCreateView(LoginRequiredMixin, View):
         return HttpResponse(json.dumps(res), content_type='application/json')
 
 
-# class EquipmentDetailView(LoginRequiredMixin, View):
-#     """
-#     设备管理：详情页面
-#     """
-#     def get(self, request):
-#         ret = dict()
-#         if 'id' in request.GET and request.GET['id']:
-#             equipment = get_object_or_404(Equipment, pk=request.GET.get('id'))
-#             ret['equipment'] = equipment
-#         return render(request, 'adm/equipment/equipment_detail.html', ret)
-#
-#
-# class EquipmentDeleteView(LoginRequiredMixin, View):
-#
-#     def post(self, request):
-#         ret = dict(result=False)
-#         if 'id' in request.POST and request.POST['id']:
-#             id_list = map(int, request.POST.get('id').split(','))
-#             Equipment.objects.filter(id__in=id_list).delete()
-#             ret['result'] = True
-#         return HttpResponse(json.dumps(ret), content_type='application/json')
+class AssetUpdateView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        ret = dict()
+        status_list = []
+        if 'id' in request.GET and request.GET['id']:
+            asset = get_object_or_404(Asset, pk=request.GET['id'])
+            ret['asset'] = asset
+        for status in Asset.asset_status:
+            status_dict = dict(item=status[0], value=status[1])
+            status_list.append(status_dict)
+        asset_type = AssetType.objects.values()
+        role = get_object_or_404(Role, title="销售")
+        user_info = role.userprofile_set.all()
+        ret['asset_type'] = asset_type
+        ret['user_info'] = user_info
+        ret['status_list'] = status_list
+        return render(request, 'adm/asset/asset_update.html', ret)
+
+    def post(self, request):
+        res = dict()
+        asset = get_object_or_404(Asset, pk=request.POST['id'])
+        asset_update_form = AssetUpdateForm(request.POST, instance=asset)
+        if asset_update_form.is_valid():
+            asset_update_form.save()
+            status = asset.get_status_display()
+            asset_log = AssetLog()
+            asset_log.asset_id = asset.id
+            asset_log.operator = request.user.name
+            asset_log.desc = """
+            用户信息：{}  || 责任人：{}  || 资产状态：{}""".format(
+                asset_update_form.cleaned_data.get("customer"),
+                asset_update_form.cleaned_data.get("owner"),
+                status,
+            )
+            asset_log.save()
+            res['status'] = 'success'
+        else:
+            pattern = '<li>.*?<ul class=.*?><li>(.*?)</li>'
+            errors = str(asset_update_form.errors)
+            asset_form_errors = re.findall(pattern, errors)
+            res = {
+                'status': 'fail',
+                'asset_form_errors': asset_form_errors[0]
+            }
+
+        return HttpResponse(json.dumps(res), content_type='application/json')
+
+class AssetDetailView(LoginRequiredMixin, View):
+    """
+    设备管理：详情页面
+    """
+    def get(self, request):
+        ret = dict()
+        if 'id' in request.GET and request.GET['id']:
+            asset = get_object_or_404(Asset, pk=request.GET.get('id'))
+            asset_log = asset.assetlog_set.all()
+            ret['asset'] = asset
+            ret['asset_log'] = asset_log
+        return render(request, 'adm/Asset/Asset_detail.html', ret)
+
+
+class AssetDeleteView(LoginRequiredMixin, View):
+
+    def post(self, request):
+        ret = dict(result=False)
+        if 'id' in request.POST and request.POST['id']:
+            id_list = map(int, request.POST.get('id').split(','))
+            Asset.objects.filter(id__in=id_list).delete()
+            ret['result'] = True
+        return HttpResponse(json.dumps(ret), content_type='application/json')
