@@ -76,12 +76,13 @@
             <div class="form-group has-feedback">
                 <label class="col-sm-2 control-label">价格</label>
                 <div class="col-sm-3">
-                    <input class="form-control" name="price" type="text" value="{{ asset.price }}"/>
+                    <input class="form-control" name="price" type="text" value="{{ asset.price | default_if_none:"" }}"/>
                 </div>
                 <label class="col-sm-2 control-label">使用人</label>
                 <div class="col-sm-3">
                   <select class="form-control select2" style="width:100%;" name="owner">
                   <option value="{{ asset.owner_id }}">{{ asset.owner.name }}</option>
+                  <option value="">无</option>
                   {% for user in user_info %}
                   <option value="{{ user.id }}">{{ user.name }}</option>
                   {% endfor %}

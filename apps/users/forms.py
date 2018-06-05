@@ -125,4 +125,4 @@ class AdminPasswdChangeForm(forms.Form):
 class StructureUpdateForm(forms.ModelForm):
     class Meta:
         model = Structure
-        fields = ['type', 'title']
+        fields = ['type', 'title', 'parent']

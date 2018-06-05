@@ -61,5 +61,7 @@ urlpatterns = [
     url(r'^personal/workorder_rec/finish', order.WorkOrderFinishView.as_view(), name="personal-workorder-finish"),
     url(r'^personal/workorder_rec/upload', order.WorkOrderUploadView.as_view(), name="personal-workorder-upload"),
     url(r'^personal/workorder_Icrt/upload', order.WorkOrderProjectUploadView.as_view(), name="personal-workorder-project-upload"),
+    url(r'^personal/workorder_all/$', order.WorkOrderView.as_view(), name="personal-workorder_all"),
+
 
 ]

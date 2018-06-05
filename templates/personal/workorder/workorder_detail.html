@@ -224,7 +224,7 @@
                     <span class="text-orange"><small>创建</small></span>
                     <small>{{ work_order.add_time }}</small>
                     <p class="text-muted margin-top-5">{{ work_order.content }}</p>
-                     <a href="/media/{{ record.file_content }}"><small class="pull-right">{{ work_order.file_content | cut:'file' }}</small></a>
+                     <a href="/media/{{ work_order.file_content }}"><small class="pull-right">{{ work_order.file_content | cut:'file' }}</small></a>
                   </div>
                 </li>
                  {% for record in work_order_record %}

@@ -147,7 +147,7 @@ class AssetDetailView(LoginRequiredMixin, View):
             asset_log = asset.assetlog_set.all()
             ret['asset'] = asset
             ret['asset_log'] = asset_log
-        return render(request, 'adm/Asset/Asset_detail.html', ret)
+        return render(request, 'adm/asset/asset_detail.html', ret)
 
 
 class AssetDeleteView(LoginRequiredMixin, View):

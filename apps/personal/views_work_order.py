@@ -120,10 +120,19 @@ class WorkOrderDetailView(LoginRequiredMixin, View):
 
     def get(self, request):
         ret = dict()
+        admin_user_list = []
         if 'id' in request.GET and request.GET['id']:
             work_order = get_object_or_404(WorkOrder, pk=request.GET['id'])
             work_order_record = work_order.workorderrecord_set.all().order_by('add_time')
+            try:
+                role = Role.objects.get(title="管理")
+                admin_user_ids = role.userprofile_set.values('id')
+                for admin_user_id in admin_user_ids:
+                    admin_user_list.append(admin_user_id['id'])
+            except Exception:
+                pass
             user_list = [work_order.proposer_id, work_order.approver_id, work_order.receiver_id]
+            user_list.extend(admin_user_list)
 
             # 和工单无关联的用户禁止通过手动指定ID的形式非法获取数据
             if request.user.id in user_list:
@@ -309,7 +318,9 @@ class WorkOrderUploadView(LoginRequiredMixin, View):
 
     def post(self, request):
         res = dict(status='fail')
-        work_order_record = get_object_or_404(WorkOrderRecord, name_id=request.user.id, work_order_id=request.POST['id'])
+        #work_order_record = get_object_or_404(WorkOrderRecord, name_id=request.user.id, work_order_id=request.POST['id'])
+        filters = dict(name_id=request.user.id, work_order_id=request.POST['id'])
+        work_order_record = WorkOrderRecord.objects.filter(**filters).last()
         work_order_record_upload_form = WorkOrderRecordUploadForm(request.POST, request.FILES, instance=work_order_record)
         if work_order_record_upload_form.is_valid():
             work_order_record_upload_form.save()

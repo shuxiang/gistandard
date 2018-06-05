@@ -73,7 +73,7 @@
                         </tr>
                         <tr class="info">
                             <td><strong>价格/元</strong></td>
-                            <td>{{ asset.price }}</td>
+                            <td>{{ asset.price | default_if_none:"" }}</td>
                             <td><strong>责任人</strong></td>
                             <td>{{ asset.owner.name }}</td>
                         </tr>
@@ -85,7 +85,7 @@
                         </tr>
                         <tr class="info">
                             <td><strong>客户信息</strong></td>
-                            <td colspan="3" >{{ asset.customer }}</td>
+                            <td colspan="3" >{{ asset.customer | default_if_none:"" }}</td>
                         </tr>
                         <tr>
                             <td><strong>备注</strong></td>
