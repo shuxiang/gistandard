@@ -3,7 +3,7 @@
 # __data__  : 2017/12/20
 
 from django import forms
-from .models import Supplier, AssetType, Customer, EquipmentType, Equipment, Asset
+from .models import Supplier, AssetType, Customer, EquipmentType, Equipment, Asset, AssetFile
 
 
 class SupplierCreateForm(forms.ModelForm):
@@ -144,3 +144,9 @@ class AssetUpdateForm(forms.ModelForm):
             "warrantyDate": {"required": "请输入质保日期"},
             "status": {"required": "请选择资产状态"}
         }
+
+
+class AssetUploadForm(forms.ModelForm):
+    class Meta:
+        model = AssetFile
+        fields = '__all__'

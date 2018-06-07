@@ -97,6 +97,13 @@ class Asset(models.Model):
         return self.assetNum
 
 
+class AssetFile(models.Model):
+    asset = models.ForeignKey(Asset, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="资产")
+    upload_user = models.CharField(max_length=20, verbose_name="上传人")
+    file_content = models.ImageField(upload_to="asset_file/%Y/%m", null=True, blank=True, verbose_name="资产文件")
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name="上传时间")
+
+
 class AssetLog(models.Model):
     asset = models.ForeignKey(Asset, verbose_name="资产")
     operator = models.CharField(max_length=20, verbose_name="操作人")

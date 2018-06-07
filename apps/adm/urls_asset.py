@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^update', views_asset.AssetUpdateView.as_view(), name="update"),
     url(r'^detail', views_asset.AssetDetailView.as_view(), name="asset-detail"),
     url(r'^delete', views_asset.AssetDeleteView.as_view(), name='delete'),
+    url(r'^upload', views_asset.AssetUploadView.as_view(), name='upload'),
 ]

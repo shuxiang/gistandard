@@ -11,8 +11,8 @@ from django.core.serializers.json import DjangoJSONEncoder
 from utils.mixin_utils import LoginRequiredMixin
 from rbac.models import Menu
 from system.models import SystemSetup
-from .models import Asset, AssetType, AssetLog
-from .forms import AssetCreateForm, AssetUpdateForm
+from .models import Asset, AssetType, AssetLog, AssetFile
+from .forms import AssetCreateForm, AssetUpdateForm, AssetUploadForm
 from rbac.models import Role
 
 
@@ -138,15 +138,17 @@ class AssetUpdateView(LoginRequiredMixin, View):
 
 class AssetDetailView(LoginRequiredMixin, View):
     """
-    设备管理：详情页面
+    资产管理：详情页面
     """
     def get(self, request):
         ret = dict()
         if 'id' in request.GET and request.GET['id']:
             asset = get_object_or_404(Asset, pk=request.GET.get('id'))
             asset_log = asset.assetlog_set.all()
+            asset_file = asset.assetfile_set.all()
             ret['asset'] = asset
             ret['asset_log'] = asset_log
+            ret['asset_file'] = asset_file
         return render(request, 'adm/asset/asset_detail.html', ret)
 
 
@@ -159,3 +161,23 @@ class AssetDeleteView(LoginRequiredMixin, View):
             Asset.objects.filter(id__in=id_list).delete()
             ret['result'] = True
         return HttpResponse(json.dumps(ret), content_type='application/json')
+
+
+class AssetUploadView(LoginRequiredMixin, View):
+    """
+    上传配置资料：工单执行记录配置资料上传
+    """
+    def get(self, request):
+        ret = dict()
+        asset = get_object_or_404(Asset, pk=request.GET['id'])
+        ret['asset'] = asset
+        return render(request, 'adm/asset/asset_upload.html', ret)
+
+    def post(self, request):
+        res = dict(status='fail')
+        asset_file = AssetFile()
+        asset_upload_form = AssetUploadForm(request.POST, request.FILES, instance=asset_file)
+        if asset_upload_form.is_valid():
+            asset_upload_form.save()
+            res['status'] = 'success'
+        return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')
