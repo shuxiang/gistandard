@@ -23,14 +23,29 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
+              <h3>{{ work_order_1 }}</h3>
 
-              <p>等待审批</p>
+              <p>已保存的工单</p>
             </div>
             <div class="icon">
               <i class="fa fa-pencil"></i>
             </div>
-            <a href="#" class="small-box-footer">2018年6月</a>
+            <a href="#" class="small-box-footer">{{ start_date| date:'Y年m月' }}</a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow ">
+            <div class="inner">
+              <h3>{{ work_order_2 }}</h3>
+
+              <p>等待派发的工单</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-send-o"></i>
+            </div>
+            <a href="#" class="small-box-footer">{{ start_date| date:'Y年m月' }}</a>
           </div>
         </div>
         <!-- ./col -->
@@ -38,240 +53,176 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53</h3>
+              <h3>{{ work_order_3 }}</h3>
 
-              <p>等待执行</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-send-o"></i>
-            </div>
-            <a href="#" class="small-box-footer">2018年6月</a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>44</h3>
-
-              <p>已执行-等待确认</p>
+              <p>等待执行的工单</p>
             </div>
             <div class="icon">
               <i class="glyphicon glyphicon-play"></i>
             </div>
-            <a href="#" class="small-box-footer">2018年6月</a>
+            <a href="#" class="small-box-footer">{{ start_date| date:'Y年m月' }}</a>
           </div>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-red">
+          <div class="small-box bg-gray">
             <div class="inner">
-              <h3>65</h3>
+              <h3>{{ work_order_4 }}</h3>
 
-              <p>已完成</p>
+              <p>等待确认的工单</p>
             </div>
             <div class="icon">
               <i class="fa fa-check"></i>
             </div>
-            <a href="#" class="small-box-footer">2018年6月</a>
+            <a href="#" class="small-box-footer">{{ start_date| date:'Y年m月' }}</a>
           </div>
         </div>
         <!-- ./col -->
       </div>
       <!-- /.row -->
-      <!-- Main row -->
       <div class="row">
         <div class="col-md-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">Monthly Recap Report</h3>
+            <div class="box">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                           <div id="bar_container" style="height: 400px"></div>
+                        </div>
+                        <div class="col-md-4">
+                           <div id="pie_container" style="height: 400px"></div>
+                        </div>
+                    </div>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-wrench"></i></button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                  </ul>
                 </div>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-8">
-                  <p class="text-center">
-                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                  </p>
-
-                  <div class="chart">
-                    <!-- Sales Chart Canvas -->
-                    <canvas id="salesChart" style="height: 180px;"></canvas>
-                  </div>
-                  <!-- /.chart-responsive -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-4">
-                  <p class="text-center">
-                    <strong>Goal Completion</strong>
-                  </p>
-
-                  <div class="progress-group">
-                    <span class="progress-text">Add Products to Cart</span>
-                    <span class="progress-number"><b>160</b>/200</span>
-
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">Complete Purchase</span>
-                    <span class="progress-number"><b>310</b>/400</span>
-
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">Visit Premium Page</span>
-                    <span class="progress-number"><b>480</b>/800</span>
-
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">Send Inquiries</span>
-                    <span class="progress-number"><b>250</b>/500</span>
-
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- ./box-body -->
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                    <h5 class="description-header">$35,210.43</h5>
-                    <span class="description-text">TOTAL REVENUE</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                    <h5 class="description-header">$10,390.90</h5>
-                    <span class="description-text">TOTAL COST</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                    <h5 class="description-header">$24,813.53</h5>
-                    <span class="description-text">TOTAL PROFIT</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block">
-                    <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                    <h5 class="description-header">1200</h5>
-                    <span class="description-text">GOAL COMPLETIONS</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row (main row) -->
-
     </section>
-
-    <!-- Main content -->
-{#    <section class="invoice">#}
-{#      <!-- title row -->#}
-{#      <div class="row">#}
-{#        <div class="col-xs-12">#}
-{#          <h2 class="page-header">#}
-{#            <i class="fa fa-globe"></i> SandBox, Inc.#}
-{#          </h2>#}
-{#        </div>#}
-{#        <!-- /.col -->#}
-{#      </div>#}
-{#      <!-- info row -->#}
-{#      <div class="row invoice-info">#}
-{#        <div class="col-sm-4 invoice-col">#}
-{#          <b>公司定位</b>#}
-{#          <p>#}
-{#            <strong></strong><br>#}
-{#            致力于成为专业的信息安全服务商<br>#}
-{#            为用户提供专业、全面的安全服务<br>#}
-{#            点滴专注、值得信赖<br>#}
-{#            <strong></strong><br>#}
-{#          </p>#}
-{#        </div>#}
-{#        <!-- /.col -->#}
-{#        <div class="col-sm-4 invoice-col">#}
-{#          <b>公司文化</b>#}
-{#          <p>#}
-{#            <strong></strong><br>#}
-{#            以质量求生存，以服务促发展<br>#}
-{#            追求客户满意，是你我的责任<br>#}
-{#            强化竞争意识，营造团队精神<br>#}
-{#            <strong></strong><br>#}
-{##}
-{#          </p>#}
-{#        </div>#}
-{#        <!-- /.col -->#}
-{#        <div class="col-sm-4 invoice-col">#}
-{#          <b>通信方式</b><br>#}
-{#          <br>#}
-{#          <b>电话:</b> 17601565502<br>#}
-{#          <b>邮箱:</b> robbie_han@outlook.com<br>#}
-{#          <b>地址:</b> 江苏省南京市#}
-{#        </div>#}
-{#        <!-- /.col -->#}
-{#      </div>#}
-{#      <!-- /.row -->#}
-{#    </section>#}
-    <!-- /.content -->
 
 {% endblock %}
 
 {% block javascripts %}
+  <script type="text/javascript" src="{% static 'plugins/echarts/echarts.min.js' %}"></script>
   <script type="text/javascript">
 	$(function() {
 		$('#index').addClass('active');
 	});
+
+	//echarts
+    var bar_dom = document.getElementById("bar_container");
+    var myChart = echarts.init(bar_dom);
+    option = null;
+    option = {
+        title : {
+            text: '工单提交统计（本年度）',
+            subtext: '工单申请数量'
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['孙贵彪','马云', '李冬冬']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'孙贵彪',
+                type:'bar',
+                data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+            },
+            {
+                name:'马云',
+                type:'bar',
+                data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            },
+            {
+                name:'李冬冬',
+                type:'bar',
+                data:[4.6, 6.9, 7.0, 20.4, 22.7, 76.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                markPoint : {
+                    data : [
+                        {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
+                        {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+                    ]
+                },
+            }
+        ]
+    };
+    ;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+
+    //echarts bar
+    var pie_dom = document.getElementById("pie_container");
+    var myChart = echarts.init(pie_dom);
+    option = null;
+    option = {
+        title : {
+            text: '工单提交比例（本年度）',
+            subtext: '工单申请比例',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['孙贵彪','马云','李冬冬']
+        },
+        series : [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:335, name:'孙贵彪'},
+                    {value:310, name:'马云'},
+                    {value:234, name:'李冬冬'},
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    ;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
   </script>
 {% endblock %}
