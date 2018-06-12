@@ -51,7 +51,7 @@ class WorkOrderListView(LoginRequiredMixin, View):
             filters['proposer_id'] = request.user.id
         if 'main_url' in request.GET and request.GET['main_url'] == '/personal/workorder_app/':
             filters['approver_id'] = request.user.id
-            filters['status__gte'] = '2'  # 审批人视图只能看状态大于等于2的工单
+            filters['status__in'] = ['0', '2', '3', '4', '5']  # 审批人视图可以看到的工单状态
         if 'main_url' in request.GET and request.GET['main_url'] == '/personal/workorder_rec/':
             filters['receiver_id'] = request.user.id
         if 'number' in request.GET and request.GET['number']:
@@ -227,7 +227,7 @@ class WrokOrderSendView(LoginRequiredMixin, View):
         if work_order_record_form.is_valid():
             work_order = get_object_or_404(WorkOrder, pk=request.POST['work_order'])
             status = work_order.status
-            if status == '2' and request.user.id == work_order.approver_id:
+            if status in ['0', '2'] and request.user.id == work_order.approver_id:
                 work_order_record_form.save()
                 work_order.receiver_id = request.POST['receiver']
                 work_order.status = "3"
@@ -305,6 +305,37 @@ class WorkOrderFinishView(LoginRequiredMixin, View):
                 res['status'] = 'ban'
         return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')
 
+
+class WorkOrderReturnView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        ret = dict()
+        work_order = get_object_or_404(WorkOrder, pk=request.GET['id'])
+        ret['work_order'] = work_order
+        ret['record_type'] = "0"
+        return render(request, 'personal/workorder/workorder_return.html', ret)
+
+    def post(self, request):
+        res = dict(status='fail')
+        work_order_record_form = WorkOrderRecordForm(request.POST)
+        work_order = get_object_or_404(WorkOrder, pk=request.POST['work_order'])
+        if work_order_record_form.is_valid():
+            status = work_order.status
+            if status == '3':
+                work_order_record_form.save()
+                work_order.status = "0"
+                work_order.save()
+                res['status'] = 'success'
+                try:
+                    SendMessage.send_workorder_email(request.POST['number'])
+                    res['status'] = 'success_send'
+                except Exception as e:
+                    pass
+                work_order.receiver = None
+                work_order.save()
+            else:
+                res['status'] = 'ban'
+        return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')
 
 class WorkOrderUploadView(LoginRequiredMixin, View):
     """

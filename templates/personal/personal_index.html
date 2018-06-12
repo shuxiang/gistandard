@@ -84,6 +84,23 @@
       <div class="row">
         <div class="col-md-12">
             <div class="box">
+               <div class="box-header with-border">
+                  <h3 class="box-title">工单数据统计</h3>
+                  <div class="box-tools pull-right">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown" title="选择统计类型">
+                        <i class="fa fa-list-alt"></i></button>
+                      <ul class="dropdown-menu bg-aqua" role="menu">
+                        <li><a href="{% url 'personal' %}?value=0">工单提交统计</a></li>
+                        <li><a href="{% url 'personal' %}?value=1">工单执行统计</a></li>
+                      </ul>
+                    </div>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+               </div>
+            <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-8">
@@ -109,27 +126,26 @@
 		$('#index').addClass('active');
 	});
 
+
 	//echarts
     var bar_dom = document.getElementById("bar_container");
-    var myChart = echarts.init(bar_dom);
+    var myBarChart = echarts.init(bar_dom);
     option = null;
     option = {
         title : {
-            text: '工单提交统计（本年度）',
-            subtext: '工单申请数量'
+            text: '月度工单统计',
+            subtext: ''
         },
         tooltip : {
             trigger: 'axis'
         },
         legend: {
-            data:['孙贵彪','马云', '李冬冬']
+            data:[{% for data in month_work_order_count %}'{{ data.name }}',{% endfor %}]
         },
         toolbox: {
             show : true,
             feature : {
                 dataView : {show: true, readOnly: false},
-                magicType : {show: true, type: ['line', 'bar']},
-                restore : {show: true},
                 saveAsImage : {show: true}
             }
         },
@@ -146,69 +162,65 @@
             }
         ],
         series : [
+            {% for data in month_work_order_count %}
             {
-                name:'孙贵彪',
+                name:'{{ data.name }}',
                 type:'bar',
-                data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                data:{{ data.count }},
                 markPoint : {
                     data : [
-                        {type : 'max', name: '最大值'},
-                        {type : 'min', name: '最小值'}
+                       {type : 'max', name: '最大值'},
+                       {type : 'min', name: '最小值'}
                     ]
-                },
             },
-            {
-                name:'马云',
-                type:'bar',
-                data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-            },
-            {
-                name:'李冬冬',
-                type:'bar',
-                data:[4.6, 6.9, 7.0, 20.4, 22.7, 76.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-                markPoint : {
-                    data : [
-                        {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
-                        {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
-                    ]
-                },
-            }
+        },
+        {% endfor %}
         ]
     };
     ;
+
     if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+        myBarChart.setOption(option, true);
     }
+
+
 
     //echarts bar
     var pie_dom = document.getElementById("pie_container");
-    var myChart = echarts.init(pie_dom);
+    var myPieChart = echarts.init(pie_dom);
     option = null;
     option = {
         title : {
-            text: '工单提交比例（本年度）',
-            subtext: '工单申请比例',
+            text: '年度工单比例',
+            subtext: '',
             x:'center'
         },
         tooltip : {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
+
+        toolbox: {
+            show : true,
+            feature : {
+                saveAsImage : {show: true}
+            }
+        },
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: ['孙贵彪','马云','李冬冬']
+            data: [{% for data in year_work_order_count %}'{{ data.name }}',{% endfor %}]
         },
         series : [
             {
-                name: '访问来源',
+                name: '工单申请比例',
                 type: 'pie',
                 radius : '55%',
                 center: ['50%', '60%'],
                 data:[
-                    {value:335, name:'孙贵彪'},
-                    {value:310, name:'马云'},
-                    {value:234, name:'李冬冬'},
+                    {% for data in year_work_order_count %}
+                    {value:{{ data.count }}, name:'{{ data.name }}'},
+                    {% endfor %}
                 ],
                 itemStyle: {
                     emphasis: {
@@ -222,7 +234,7 @@
     };
     ;
     if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+        myPieChart.setOption(option, true);
     }
   </script>
 {% endblock %}

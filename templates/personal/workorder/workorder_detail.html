@@ -116,7 +116,7 @@
            <div class="mailbox-controls margin-b-10">
             <div class="btn-group margin-l-5">
               <button type="button" class="btn btn-danger btn-sm" title="退回工单" id="btnWorkListReturn"
-                      onclick="doWorkListReturn({{ worklist.id }})">
+                      onclick="doWorkOrderReturn({{ work_order.id }})">
                   <i class="fa fa-undo"> 退回</i>
               </button>
               <button type="button" class="btn btn-info btn-sm" title="编辑工单" id="btnWorkListEdit"
@@ -446,6 +446,21 @@ function doWorkorderFinish(id){
         maxmin : true,
 		area : [ '770px', '400px' ],
 		content : [ "{% url 'personal-workorder-finish' %}"+'?id='+id],
+		end : function() {
+            window.location.reload();
+
+		}
+	});
+}
+
+function doWorkOrderReturn(id){
+	    layer.open({
+		type : 2,
+		title : '工单退回',
+		shadeClose : false,
+        maxmin : true,
+		area : [ '770px', '300px' ],
+		content : [ "{% url 'personal-workorder-return' %}"+'?id='+id],
 		end : function() {
             window.location.reload();
 
