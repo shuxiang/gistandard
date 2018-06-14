@@ -83,7 +83,7 @@ class EquipmentCreateView(LoginRequiredMixin, View):
             ret['equipment'] = equipment
         equipment_type = EquipmentType.objects.values()
 
-        if request.user.department_id == 9:  # 新建设备时销售部门只能选择自己的用户信息
+        if request.user.department_id == 9:
             filters['belongs_to_id'] = request.user.id
         customer = Customer.objects.values().filter(**filters)
         suppliers = Supplier.objects.values().filter(**filters)

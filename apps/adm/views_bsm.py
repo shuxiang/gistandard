@@ -34,7 +34,7 @@ class SupplierListView(LoginRequiredMixin, View):
     """
     def get(self, request):
         filters = dict()
-        if request.user.department_id == 9:  # 销售部门只能看自己的分销商信息
+        if request.user.department_id == 9:
             filters['belongs_to_id'] = request.user.id
         ret = dict(data=list(Supplier.objects.values().filter(**filters)))
         return HttpResponse(json.dumps(ret, cls=DjangoJSONEncoder), content_type='application/json')

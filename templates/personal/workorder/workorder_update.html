@@ -105,7 +105,13 @@
 			url : "{% url 'personal-workorder-update' %}",
 			data : data,
 			cache: false,
+            beforeSend:function(){
+			    this.layerIndex = layer.load(1, {
+                    shade: [0.1,'#fff'] //0.1透明度的白色背景
+                });
+            },
 			success : function(msg) {
+			    layer.closeAll('loading');
 				if (msg.status == 'success'){
 					layer.alert('工单保存成功！', {icon: 1},function(index){
 					    parent.layer.closeAll();

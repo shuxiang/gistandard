@@ -28,7 +28,7 @@
                 <div class="form-group has-feedback">
                     <label class="col-sm-2 control-label"></label>
                     <div class="col-sm-8">
-                        <small class="text-red">文件上传格式.zip压缩文件，文件最大为10M，只有填写过执行记录才可以上传文件</small>
+                        <small class="text-red">文件上传格式.zip压缩文件，文件最大为50M，只有填写过执行记录才可以上传文件</small>
                         <small class="text-ret"><strong><p>备注：上传配置资料需先填写执行记录后再上传文件</p></strong></small>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ $(document).on('ready', function() {
             'id': '{{ work_order.id }}',
         },
         maxFileCount: 1,
-        maxFileSize: 10240,
+        maxFileSize: 51200,
     });
 });
 

@@ -118,7 +118,13 @@
 			url : "{% url 'personal-workorder-create' %}",
 			data : data,
 			cache: false,
+            beforeSend:function(){
+			    this.layerIndex = layer.load(1, {
+                    shade: [0.1,'#fff'] //0.1透明度的白色背景
+                });
+            },
 			success : function(msg) {
+			    layer.closeAll('loading');
 				if (msg.status == 'success'){
 					layer.alert('工单保存成功！', {icon: 1},function(index){
 					    parent.layer.closeAll(); //关闭所有弹窗
@@ -154,7 +160,7 @@
 			area : [ '800px', '500px' ],
 			content : "{% url 'adm-bsm:customer-detail' %}",
 			end : function() {
-				//关闭时做的事情
+				window.location.reload();
 			}
 		});
 		layer.full(div)
@@ -169,7 +175,7 @@
 			area : [ '800px', '480px' ],
 			content : "{% url 'adm-bsm:supplier-detail' %}",
 			end : function() {
-				//关闭时做的事情
+				window.location.reload();
 			}
 		});
 		layer.full(div)
@@ -184,7 +190,7 @@
 			area : [ '800px', '480px' ],
 			content : "{% url 'adm-equipment:create' %}",
 			end : function() {
-				//关闭时做的事情
+				window.location.reload();
 			}
 		});
 	     layer.full(div)

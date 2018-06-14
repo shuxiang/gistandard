@@ -149,7 +149,7 @@ class SendMessage(object):
             record = work_order.workorderrecord_set.filter(record_type="0").last()
             email_title = "工单退回通知：{0}".format(work_order.title)
             email_body = """
-            编号为：{0} 的工单已经确认完成，操作人：{1}
+            编号为：{0} 的工单已被退回，操作人：{1}
             退回说明：{2}
             本邮件为系统通知请勿回复，详情请查询工单系统：platform.js-sandbox.com:9600
             """.format(work_order.number, record.name.name, record.content)

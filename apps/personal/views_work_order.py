@@ -377,3 +377,25 @@ class WorkOrderProjectUploadView(LoginRequiredMixin, View):
             work_order_project_upload_form.save()
             res['status'] = 'success'
         return HttpResponse(json.dumps(res, cls=DjangoJSONEncoder), content_type='application/json')
+
+
+class WorkOrderDocumentView(LoginRequiredMixin, View):
+    """
+    工单文档
+    """
+
+    def get(self, request):
+        ret = Menu.getMenuByRequestUrl(url=request.path_info)
+
+        return render(request, 'personal/workorder/document.html', ret)
+
+
+class WorkOrderDocumentListView(LoginRequiredMixin, View):
+    """
+    工单文档列表
+    """
+    def get(self, request):
+        fields = ['work_order__number', 'work_order__customer__unit', 'name__name', 'add_time', 'file_content']
+        ret = dict(data=list(WorkOrderRecord.objects.filter(~Q(file_content='')).values(*fields).order_by('-add_time')))
+
+        return HttpResponse(json.dumps(ret, cls=DjangoJSONEncoder), content_type='application/json')

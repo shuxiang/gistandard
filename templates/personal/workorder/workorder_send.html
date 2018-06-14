@@ -68,7 +68,13 @@
 			url : "{% url 'personal-workorder-send' %}",
 			data : data,
 			cache: false,
+            beforeSend:function(){
+			    this.layerIndex = layer.load(1, {
+                    shade: [0.1,'#fff'] //0.1透明度的白色背景
+                });
+            },
 			success : function(msg) {
+			    layer.closeAll('loading');
 				if (msg.status == 'success'){
 					layer.alert('工已单派发！邮件发送异常', {icon: 0},function(index){
 					    parent.layer.closeAll(); //关闭所有弹窗
