@@ -200,18 +200,19 @@ $(function() {
 
 
 	$("#btnCreate").click(function() {
-		layer.open({
+		var div=layer.open({
 			type : 2,
 			title : '新增',
 			shadeClose : false,
 			maxmin : true,
-			area : [ '800px', '650px' ],
+            area : [ '800px', '720px' ],
 			content : '/system/basic/user/create',
 			end : function() {
 				//关闭时做的事情
 				oDataTable.ajax.reload();
 			}
 		});
+		layer.full(div)
 	});
 
 	$("#btnRefresh").click(function(){

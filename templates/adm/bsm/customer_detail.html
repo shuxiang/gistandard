@@ -3,7 +3,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'js/plugins/layer/skin/layer.css' %}">
-<link rel="stylesheet" href="{% static 'plugins/combo-select/combo.select.css' %}">
+<link rel="stylesheet" href="{%static 'plugins/select2/select2.min.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -50,7 +50,7 @@
                 </div>
                 <label class="col-sm-2 control-label">负责人</label>
                   <div class="col-sm-3">
-                    <select class="form-control" name="belongs_to">
+                    <select class="form-control select2" style="width:100%;" name="belongs_to">
                     <option value={{ customer.belongs_to.id| default:request.user.id }}> {{ customer.belongs_to.name| default:request.user.name }} </option>
                     {% for user in users %}
                     <option value={{ user.id }}> {{ user.name}} </option>
@@ -81,6 +81,7 @@
 
 {% block javascripts %}
 <script src="{% static 'plugins/combo-select/jquery.combo.select.js' %}"></script>
+<script src="{% static 'plugins/select2/select2.full.min.js' %}"></script>
 <script type="text/javascript">
 
 	$("#btnSave").click(function(){
@@ -111,11 +112,12 @@
 
     });
 
+// select2
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+  });
 
-/*select 支持输入检索*/
-  $(function() {
-    $('select').comboSelect();
- });
 </script>
 
 {% endblock %}

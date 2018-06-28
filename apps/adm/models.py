@@ -71,8 +71,8 @@ class Asset(models.Model):
         ("4", "售出")
     )
     warehouse_choices = (
-        ("0", "南京"),
-        ("1", "苏州"),
+        ("0", "京州"),
+        ("1", "林城"),
     )
     assetNum = models.CharField(max_length=128, default="", verbose_name="资产编号")
     assetType = models.ForeignKey(AssetType, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="资产类型")

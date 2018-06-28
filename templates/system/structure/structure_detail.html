@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'plugins/combo-select/combo.select.css' %}">
 <link rel="stylesheet" href="{% static 'js/plugins/layer/skin/layer.css' %}">
 {% endblock %}
 
@@ -36,7 +35,8 @@
                 <label class="col-sm-2 control-label">所属</label>
                 <div class="col-sm-3">
                   <select class="form-control" name="parent">
-                    <option value={{ structure.parent_id }}> {{ structure.parent.title|default:"--所属--" }} </option>
+                    <option value={{ structure.parent_id|default_if_none:"" }}> {{ structure.parent.title|default:"" }} </option>
+                    <option></option>
                     {% for s in structures %}
                     <option value={{ s.id }}> {{ s.title}} </option>
                     {% endfor %}
@@ -89,11 +89,6 @@
 	    window.location.reload();
 
     });
-
-/*select 支持输入检索*/
-  $(function() {
-    $('select').comboSelect();
- });
 
 </script>
 

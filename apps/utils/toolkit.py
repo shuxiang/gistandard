@@ -126,7 +126,7 @@ class SendMessage(object):
             email = [work_order.approver.email, work_order.proposer.email, work_order.receiver.email]
 
         elif work_order.status == "4":
-            record = work_order.workorderrecord_set.filter(record_type="1").last()
+            record = work_order.workorderrecord_set.filter(record_type="2").last()
             email_title = "工单执行通知：{0}".format(work_order.title)
             email_body = """
             编号为：{0} 的工单已经执行，执行人：{1}
@@ -136,7 +136,7 @@ class SendMessage(object):
             email = [work_order.approver.email, work_order.proposer.email, work_order.receiver.email]
 
         elif work_order.status == "5":
-            record = work_order.workorderrecord_set.filter(record_type="1").last()
+            record = work_order.workorderrecord_set.filter(record_type="3").last()
             email_title = "工单确认通知：{0}".format(work_order.title)
             email_body = """
             编号为：{0} 的工单已经确认完成，确认人：{1}

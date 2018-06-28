@@ -92,9 +92,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gistandard',
-        'HOST': '172.16.2.105',
+        'HOST': '172.168.100.12',
         'USER': 'ddadmin',
-        'PASSWORD': '1234@abcd.com',
+        'PASSWORD': 'han1236547',
         'PORT': '3306'
     }
 }
@@ -154,8 +154,8 @@ SAFE_URL = [r'^/$',
 
 # session过期时间设置
 
-SESSION_COOKIE_AGE = 60 * 20  # 20分钟过期
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # 关闭浏览器，cookie失效
+SESSION_COOKIE_AGE = 60 * 20
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_SAVE_EVERY_REQUEST = True
 
 # mail server

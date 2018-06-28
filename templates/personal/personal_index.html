@@ -8,7 +8,6 @@
     <section class="content-header">
       <h1>
         我的工作台
-        <small>江苏沙盒科技协同办公平台</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 办公平台</a></li>
@@ -236,5 +235,11 @@
     if (option && typeof option === "object") {
         myPieChart.setOption(option, true);
     }
+
+    //图表窗体自适应
+  $(window).resize(function(){
+      myBarChart.resize();
+      myPieChart.resize();
+  });
   </script>
 {% endblock %}
