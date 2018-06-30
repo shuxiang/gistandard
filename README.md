@@ -18,5 +18,5 @@ sandbox是一个基于django框架开发的轻量级办公平台，主要模块�
 ![image](https://github.com/RobbieHan/gistandard/blob/a21aa36901cc4858c7a4a420e84d6d55ac202814/media/sandbox-image/003.jpg)
 ## 1.4 设备管理
 设备管理用于登记公司销售出去的设备信息，记录设备服务记录<br>
-图 4：销售设备信息登记
+图 4：销售设备信息登记<br>
 ![image](https://github.com/RobbieHan/gistandard/blob/a21aa36901cc4858c7a4a420e84d6d55ac202814/media/sandbox-image/004-1.jpg)
