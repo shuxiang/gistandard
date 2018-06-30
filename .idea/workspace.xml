@@ -83,7 +83,7 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
-              <caret line="20" column="125" lean-forward="false" selection-start-line="20" selection-start-column="125" selection-end-line="20" selection-end-column="125" />
+              <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -632,13 +632,6 @@
       <option name="presentableId" value="Default" />
       <updated>1507769164144</updated>
     </task>
-    <task id="LOCAL-00001" summary="login">
-      <created>1524878154529</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1524878154529</updated>
-    </task>
     <task id="LOCAL-00002" summary="login">
       <created>1524896257814</created>
       <option name="number" value="00002" />
@@ -975,7 +968,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530374851198</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="README">
+      <created>1530375262212</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1530375262213</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1487,7 +1487,7 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="20" column="125" lean-forward="false" selection-start-line="20" selection-start-column="125" selection-end-line="20" selection-end-column="125" />
+          <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
           <folding />
         </state>
       </provider>
