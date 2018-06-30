@@ -2,51 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a4cc3ce-4e16-4312-a839-79df1b450ff9" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/Dockerfile" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/config/nginx.conf" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/config/sandbox.ini" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/db_tools/data/basic_data.sql" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/db_tools/data/basic_test_data.sql" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/docker-compose.yml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/media/asset_file/2018/06/fw01.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/media/asset_file/2018/06/surface.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/media/asset_file/2018/06/surface01.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/media/image/2018/06/01.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/media/image/2018/06/03.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/media/image/2018/06/04.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/media/image/2018/06/05.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/media/image/2018/06/06.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/media/image/2018/06/07.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/media/image/2018/06/timg01.jpg" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/apps/adm/models.py" afterPath="$PROJECT_DIR$/apps/adm/models.py" />
-      <change beforePath="$PROJECT_DIR$/apps/personal/tests.py" afterPath="$PROJECT_DIR$/apps/personal/tests.py" />
       <change beforePath="$PROJECT_DIR$/apps/utils/toolkit.py" afterPath="$PROJECT_DIR$/apps/utils/toolkit.py" />
-      <change beforePath="$PROJECT_DIR$/db_tools/data/customer_data.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/db_tools/data/equipment_data.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/db_tools/data/equipment_data_2.csv" afterPath="" />
       <change beforePath="$PROJECT_DIR$/gistandard/settings.py" afterPath="$PROJECT_DIR$/gistandard/settings.py" />
-      <change beforePath="$PROJECT_DIR$/media/asset_file/2018/06/名片反面.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/asset_file/2018/06/名片正面.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/asset_file/2018/06/名片正面_USVo1Bq.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/asset_file/2018/06/最新江苏沙盒科技营业执照.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/asset_file/2018/06/沙盒LOGO.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/asset_file/2018/06/软件产品证书.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/asset_file/2018/06/软件著作权.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/file/2018/06/hqh.zip" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/file/2018/06/hqh_6EGEjhv.zip" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/file/2018/06/hqh_yE6KuGo.zip" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/image/2017/10/001.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/image/2017/10/default.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/image/2018/05/IMG_20180522_104218.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/image/2018/05/timg01.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/image/2018/05/╔│║╨LOGO.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/image/2018/06/IMG_3237.JPG" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/image/image/2017/10/001.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/image/image/2017/10/default.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/image/image/2018/05/IMG_20180522_104218.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/image/image/2018/05/timg01.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/media/image/image/default.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/plugins/combo-select/combo.select.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/static/plugins/combo-select/jquery.combo.select.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/adm/adm_index.html" afterPath="$PROJECT_DIR$/templates/adm/adm_index.html" />
-      <change beforePath="$PROJECT_DIR$/templates/adm/asset/asset_create.html" afterPath="$PROJECT_DIR$/templates/adm/asset/asset_create.html" />
-      <change beforePath="$PROJECT_DIR$/templates/adm/asset/asset_update.html" afterPath="$PROJECT_DIR$/templates/adm/asset/asset_update.html" />
-      <change beforePath="$PROJECT_DIR$/templates/adm/bsm/customer_detail.html" afterPath="$PROJECT_DIR$/templates/adm/bsm/customer_detail.html" />
-      <change beforePath="$PROJECT_DIR$/templates/adm/equipment/equipment.html" afterPath="$PROJECT_DIR$/templates/adm/equipment/equipment.html" />
-      <change beforePath="$PROJECT_DIR$/templates/adm/equipment/equipment_create.html" afterPath="$PROJECT_DIR$/templates/adm/equipment/equipment_create.html" />
-      <change beforePath="$PROJECT_DIR$/templates/personal/personal_index.html" afterPath="$PROJECT_DIR$/templates/personal/personal_index.html" />
-      <change beforePath="$PROJECT_DIR$/templates/personal/workorder/document.html" afterPath="$PROJECT_DIR$/templates/personal/workorder/document.html" />
-      <change beforePath="$PROJECT_DIR$/templates/personal/workorder/workorder_create.html" afterPath="$PROJECT_DIR$/templates/personal/workorder/workorder_create.html" />
-      <change beforePath="$PROJECT_DIR$/templates/system/structure/structure_detail.html" afterPath="$PROJECT_DIR$/templates/system/structure/structure_detail.html" />
-      <change beforePath="$PROJECT_DIR$/templates/system/system_index.html" afterPath="$PROJECT_DIR$/templates/system/system_index.html" />
-      <change beforePath="$PROJECT_DIR$/templates/system/users/user-list.html" afterPath="$PROJECT_DIR$/templates/system/users/user-list.html" />
-      <change beforePath="$PROJECT_DIR$/templates/system/users/user_create.html" afterPath="$PROJECT_DIR$/templates/system/users/user_create.html" />
-      <change beforePath="$PROJECT_DIR$/templates/system/users/user_detail.html" afterPath="$PROJECT_DIR$/templates/system/users/user_detail.html" />
+      <change beforePath="$PROJECT_DIR$/requirements" afterPath="$PROJECT_DIR$/requirements" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -82,8 +57,8 @@
       <file leaf-file-name="user_create.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/system/users/user_create.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-289">
-              <caret line="22" column="38" lean-forward="true" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+            <state relative-caret-position="374">
+              <caret line="22" column="38" lean-forward="false" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
               <folding>
                 <element signature="n#style#0;n#select#0;n#div#1;n#div#5;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#select#0;n#div#1;n#div#6;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
@@ -95,18 +70,28 @@
       <file leaf-file-name="user-list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/system/users/user-list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2040">
+            <state relative-caret-position="3519">
               <caret line="207" column="34" lean-forward="false" selection-start-line="207" selection-start-column="34" selection-end-line="207" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="system_index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="system_index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/system/system_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="68" column="22" lean-forward="true" selection-start-line="68" selection-start-column="22" selection-end-line="68" selection-end-column="22" />
+            <state relative-caret-position="410">
+              <caret line="61" column="42" lean-forward="false" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gistandard/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="145">
+              <caret line="88" column="64" lean-forward="true" selection-start-line="88" selection-start-column="64" selection-end-line="88" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -115,7 +100,7 @@
       <file leaf-file-name="equipment.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/adm/equipment/equipment.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
+            <state relative-caret-position="5253">
               <caret line="309" column="5" lean-forward="false" selection-start-line="309" selection-start-column="5" selection-end-line="309" selection-end-column="20" />
               <folding />
             </state>
@@ -285,7 +270,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -297,12 +281,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="settings.github" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DSCloudPlatform" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -942,7 +927,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528978064820</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="功能优化">
+      <created>1530190949944</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1530190949944</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -964,13 +956,13 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20130576" sideWeight="0.4642857" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21436344" sideWeight="0.4936034" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1337953" sideWeight="0.4943274" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09914712" sideWeight="0.4943274" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32961783" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21002132" sideWeight="0.50567263" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17954299" sideWeight="0.43816632" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45593035" sideWeight="0.43816632" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1072,7 +1064,8 @@
     <MESSAGE value="资产管理新增图片上传" />
     <MESSAGE value="新增工单退回功能" />
     <MESSAGE value="新增工单文档管理" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增工单文档管理" />
+    <MESSAGE value="功能优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="功能优化" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1316,7 +1309,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1324,7 +1316,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="11" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1339,7 +1330,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="67" column="38" lean-forward="false" selection-start-line="67" selection-start-column="38" selection-end-line="67" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1347,7 +1337,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1355,7 +1344,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1363,9 +1351,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="602">
           <caret line="104" column="11" lean-forward="true" selection-start-line="104" selection-start-column="11" selection-end-line="104" selection-end-column="11" />
-          <folding>
-            <element signature="n#style#0;n#select#0;n#div#1;n#div#3;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1373,18 +1358,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
           <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="74" />
-          <folding>
-            <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#1;n#div#4;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gistandard/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2193">
-          <caret line="130" column="14" lean-forward="true" selection-start-line="130" selection-start-column="14" selection-end-line="130" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1392,7 +1365,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="31" lean-forward="true" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1400,7 +1372,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1408,9 +1379,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2387">
           <caret line="365" column="27" lean-forward="true" selection-start-line="365" selection-start-column="27" selection-end-line="365" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1428,17 +1396,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="76" />
-          <folding>
-            <element signature="n#style#0;n#select#0;n#div#1;n#div#4;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#select#0;n#div#1;n#div#5;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/system/users/user_create.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-289">
-          <caret line="22" column="38" lean-forward="true" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+        <state relative-caret-position="374">
+          <caret line="22" column="38" lean-forward="false" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
           <folding>
             <element signature="n#style#0;n#select#0;n#div#1;n#div#5;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#select#0;n#div#1;n#div#6;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
@@ -1448,7 +1412,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/adm/equipment/equipment.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
+        <state relative-caret-position="5253">
           <caret line="309" column="5" lean-forward="false" selection-start-line="309" selection-start-column="5" selection-end-line="309" selection-end-column="20" />
           <folding />
         </state>
@@ -1456,7 +1420,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/system/users/user-list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2040">
+        <state relative-caret-position="3519">
           <caret line="207" column="34" lean-forward="false" selection-start-line="207" selection-start-column="34" selection-end-line="207" selection-end-column="34" />
           <folding />
         </state>
@@ -1466,14 +1430,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="235" column="0" lean-forward="false" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/system/system_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="68" column="22" lean-forward="true" selection-start-line="68" selection-start-column="22" selection-end-line="68" selection-end-column="22" />
+        <state relative-caret-position="410">
+          <caret line="61" column="42" lean-forward="false" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gistandard/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="88" column="64" lean-forward="true" selection-start-line="88" selection-start-column="64" selection-end-line="88" selection-end-column="64" />
           <folding />
         </state>
       </provider>

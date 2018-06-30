@@ -1,4 +1,4 @@
-# @Time   : 2018/5/24 22:48
+﻿# @Time   : 2018/5/24 22:48
 # @Author : RobbieHan
 # @File   : toolkit.py
 
@@ -97,7 +97,7 @@ class SendMessage(object):
             地址 ： {7}
             内容 ： {8}
             -----------------------------------------------------
-            本邮件为系统通知请勿回复，详情请查询工单系统：platform.js-sandbox.com:9600
+            本邮件为系统通知请勿回复。
             """.format(work_order.proposer.name, work_order.number, work_order.add_time.strftime("%Y-%m-%d %H:%I:%S"),
                        work_order.do_time,
                        work_order.customer.name, work_order.customer.phone, work_order.customer.unit,
@@ -117,7 +117,7 @@ class SendMessage(object):
             内容 ： {9}
             派发记录：{10}
             -----------------------------------------------------
-            本邮件为系统通知请勿回复，详情请查询工单系统：platform.js-sandbox.com:9600
+            本邮件为系统通知请勿回复。
             """.format(work_order.number, work_order.proposer, work_order.add_time.strftime("%Y-%m-%d %H:%I:%S"), work_order.do_time,
                        work_order.receiver,
                        work_order.customer.name, work_order.customer.phone, work_order.customer.unit,
@@ -131,7 +131,7 @@ class SendMessage(object):
             email_body = """
             编号为：{0} 的工单已经执行，执行人：{1}
             执行记录：{2}
-            本邮件为系统通知请勿回复，详情请查询工单系统：platform.js-sandbox.com:9600
+            本邮件为系统通知请勿回复。
             """.format(work_order.number, work_order.receiver.name, record.content)
             email = [work_order.approver.email, work_order.proposer.email, work_order.receiver.email]
 
@@ -141,7 +141,7 @@ class SendMessage(object):
             email_body = """
             编号为：{0} 的工单已经确认完成，确认人：{1}
             确认记录：{2}
-            本邮件为系统通知请勿回复，详情请查询工单系统：platform.js-sandbox.com:9600
+            本邮件为系统通知请勿回复。
             """.format(work_order.number, work_order.proposer.name, record.content)
             email = [work_order.approver.email, work_order.proposer.email, work_order.receiver.email]
 
@@ -151,7 +151,7 @@ class SendMessage(object):
             email_body = """
             编号为：{0} 的工单已被退回，操作人：{1}
             退回说明：{2}
-            本邮件为系统通知请勿回复，详情请查询工单系统：platform.js-sandbox.com:9600
+            本邮件为系统通知请勿回复。
             """.format(work_order.number, record.name.name, record.content)
             email = [work_order.approver.email, work_order.proposer.email, work_order.receiver.email]
 
