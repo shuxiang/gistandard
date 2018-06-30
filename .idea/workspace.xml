@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3a4cc3ce-4e16-4312-a839-79df1b450ff9" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -954,7 +953,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530374063130</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="README">
+      <created>1530374830970</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1530374830970</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1085,7 +1091,8 @@
     <MESSAGE value="新增工单退回功能" />
     <MESSAGE value="新增工单文档管理" />
     <MESSAGE value="功能优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="功能优化" />
+    <MESSAGE value="README" />
+    <option name="LAST_COMMIT_MESSAGE" value="README" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
