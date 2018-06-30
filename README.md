@@ -43,3 +43,31 @@ sandbox是一个基于django框架开发的轻量级办公平台，主要模块�
 对于我来说这套系统是完美的，因为我是根据自己的工作需求亲手打造了它；同时它不是完美的，因为我很业余，它还很小，需要成长，许多功能不够完善，代码逻辑不够清晰。<br>
 自在知乎发布文章一周来，很多人关注sandbox，应大家要求，今天将系统开源，希望能够帮到大家，同时也希望大家能够一起完善它，优化它。
 项目地址：https://github.com/RobbieHan/gistandard
+
+# 3 安装说明
+系统运行环境 centos7 ， 系统需要安装 docker , docker-compose<br>
+下载项目文件到你的系统<br>
+$ git clone https://github.com/RobbieHan/gistandard.git<br>
+进入项目目录<br>
+$ cd gistandard <br>
+$ mkdir -p /sandbox/nginx <br>
+$ cp config/nginx.conf /sandbox/nginx/ <br>
+$ cp -r media /sandbox <br>
+$ vim /sandbox/nginx/nginx.conf <br>
+修改nginx配置文件中 server标签下的 server_name 为你系统的地址IP 或域名（sandbox安装完成通过这个地址来访问）<br>
+$ docker-compose up -d <br>
+等等等等.....<br>
+查看容器运行状态：<br>
+$ docker-compose ps <br>
+       Name                     Command               State         Ports       <br>
+--------------------------------------------------------------------------------<br>
+gistandard_mysql_1   docker-entrypoint.sh mysql ...   Up      3306/tcp          <br>
+gistandard_web_1     bash -c uwsgi config/sandb ...   Up      0.0.0.0:80->80/tcp<br>
+
+导入数据库：<br>
+$ docker cp db_tools/data/basic_data.sql gistandard_mysql_1:/tmp <br>
+$ docker-compose exec mysql bash
+$ mysql -uddadmin -p1234@abcd.com gistandard < /tmp/basic_data.sql <br>
+
+导入玩数据库就可以正常访问系统了 <br>
+http://your_ip   初始用户 admin  密码 !qaz@wsx <br>
