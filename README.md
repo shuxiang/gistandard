@@ -18,5 +18,27 @@ sandbox是一个基于django框架开发的轻量级办公平台，主要模块�
 ![image](https://github.com/RobbieHan/gistandard/blob/a21aa36901cc4858c7a4a420e84d6d55ac202814/media/sandbox-image/003.jpg)
 ## 1.4 设备管理
 设备管理用于登记公司销售出去的设备信息，记录设备服务记录<br>
-图 4：销售设备信息登记<br>
+图4：销售设备信息登记<br>
 ![image](https://github.com/RobbieHan/gistandard/blob/a21aa36901cc4858c7a4a420e84d6d55ac202814/media/sandbox-image/004-1.jpg)
+图5：服务跟踪，实时记录，有始有终，拒绝虎头蛇尾<br>
+![image](https://github.com/RobbieHan/gistandard/blob/cdfecc98a36e129af6579695e637ce6d9486dfa0/media/sandbox-image/004-1.jpg)
+## 1.5 工单流程管理
+工单流程管理目的在于建立标准化流程服务，让每一次客户服务都有迹可查，长期建立客户服务文档库，努力为客户提供更专业的服务，点滴专注，值得信赖。<br>
+图6：工单统计<br>
+![image](https://github.com/RobbieHan/gistandard/blob/cdfecc98a36e129af6579695e637ce6d9486dfa0/media/sandbox-image/005-1.jpg)
+图7：工单列表<br>
+![image](https://github.com/RobbieHan/gistandard/blob/cdfecc98a36e129af6579695e637ce6d9486dfa0/media/sandbox-image/005-2.jpg)
+图8：工单详情<br>
+![image](https://github.com/RobbieHan/gistandard/blob/cdfecc98a36e129af6579695e637ce6d9486dfa0/media/sandbox-image/005-3.jpg)
+## 1.6 工单文库管理
+工单文库用于分享工单执行过程中上传的记录文档，包括设备的安装调试记录、故障处理报告和项目方案设计文档，用于技术人员之间进行经验分享<br>
+图9：
+![image](https://github.com/RobbieHan/gistandard/blob/cdfecc98a36e129af6579695e637ce6d9486dfa0/media/sandbox-image/006.jpg)
+笔者是一名信息安全公司从业者，一名小技术工程师，写代码非我本职工作，系统虽然轻量，不过完全是根据公司流程定制开发，可满足目前工作需求。
+系统开发使用的是django框架，前端是bootstarp jquery ajax ，图表 echarts
+经历一个月的开发周期目前系统已经成功上线运行，同时小范围的提供给同样身为乙方公司的合作伙伴使用了，截至2018年6月30日部署再用共计19套。
+
+# 2 开源声明
+对于我来说这套系统是完美的，因为我是根据自己的工作需求亲手打造了它；同时它不是完美的，因为我很业余，它还很小，需要成长，许多功能不够完善，代码逻辑不够清晰。<br>
+自在知乎发布文章一周来，很多人关注sandbox，应大家要求，今天将系统开源，希望能够帮到大家，同时也希望大家能够一起完善它，优化它。
+项目地址：https://github.com/RobbieHan/gistandard
