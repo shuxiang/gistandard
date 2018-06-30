@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3a4cc3ce-4e16-4312-a839-79df1b450ff9" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change beforePath="$PROJECT_DIR$/gistandard/settings.py" afterPath="$PROJECT_DIR$/gistandard/settings.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -626,13 +624,6 @@
       <option name="presentableId" value="Default" />
       <updated>1507769164144</updated>
     </task>
-    <task id="LOCAL-00008" summary="equipment type setting">
-      <created>1525138108538</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1525138108538</updated>
-    </task>
     <task id="LOCAL-00009" summary="equipment manager">
       <created>1525169638209</created>
       <option name="number" value="00009" />
@@ -969,7 +960,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530377112674</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="README">
+      <created>1530379646120</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1530379646120</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
