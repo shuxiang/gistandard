@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a4cc3ce-4e16-4312-a839-79df1b450ff9" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/sandbox-image/001.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/sandbox-image/002.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/sandbox-image/003.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/sandbox-image/004-1.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/sandbox-image/004.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/sandbox-image/005-1.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/sandbox-image/005-2.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/sandbox-image/005-3.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/media/sandbox-image/006.jpg" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -938,7 +929,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530373298769</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="功能优化">
+      <created>1530374053568</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1530374053568</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
