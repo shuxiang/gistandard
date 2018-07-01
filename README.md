@@ -66,7 +66,7 @@ gistandard_web_1     bash -c uwsgi config/sandb ...   Up      0.0.0.0:80->80/tcp
 
 导入数据库：<br>
 $ docker cp db_tools/data/basic_data.sql gistandard_mysql_1:/tmp <br>
-$ docker-compose exec mysql bash
+$ docker-compose exec mysql bash<br>
 $ mysql -uddadmin -p1234@abcd.com gistandard < /tmp/basic_data.sql <br>
 
 导入玩数据库就可以正常访问系统了 <br>
